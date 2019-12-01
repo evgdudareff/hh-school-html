@@ -1,24 +1,37 @@
 .nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  display: none;
 
-    @media @screen-gt-s {
-        display: block;
+  @media @screen-gt-s {
+    display: block;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-left: 20px;
+
+    @media @screen-gt-m {
+      margin-left: 30px;
     }
 
-    &__item {
-        display: inline-block;
-        margin-left: 20px;
+    &_navbar {
+      margin-left: 14px;
+    }
+  }
 
-        @media @screen-gt-m {
-            margin-left: 30px;
-        }
+  &__link {
+    color: #fff;
+
+    &_navbar {
+      color: @color-primary;
+      font-size: 14px;
     }
 
-    &__link {
-        color: #fff;
+    &_city {
+      color: #666666;
     }
+  }
 }
