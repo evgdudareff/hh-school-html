@@ -1,0 +1,42 @@
+.carousel-section {
+  background-color: #f9f9f9;
+
+  &__heading {
+    margin-top: 10px;
+  }
+
+  &__button {
+    margin: 0 auto 30px auto;
+
+    @media @screen-gt-s {
+      margin: 0 0;
+    }
+  }
+}
+
+.carousel {
+  &__image {
+    width: 100%;
+  }
+}
+
+.pagination {
+  display: flex;
+  width: 40px;
+  height: 8px;
+  margin: 0 auto;
+
+  &__dot {
+    fill: #dfdedd;
+    margin-left: -5px;
+
+    &_active {
+      fill: #212122;
+    }
+  }
+}
+
+.carousel-section-button {
+  .default-button();
+  display: table;
+}

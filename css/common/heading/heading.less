@@ -1,20 +1,27 @@
 .heading {
-    font: normal 26px/36px @font-family-heading;
-    margin: 0 0 20px;
+  font: normal 26px/32px @font-family-heading;
+  margin: 0 0 20px;
+
+  @media @screen-gt-s {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  &_level-1 {
+    text-align: center;
 
     @media @screen-gt-s {
-        font-size: 36px;
-        line-height: 44px;
+      text-align: left;
     }
+  }
 
-    &_level-2 {
-        font-size: 20px;
-        line-height: 24px;
+  &_level-2 {
+    font-size: 20px;
+    line-height: 24px;
 
-        @media @screen-gt-s {
-            font-size: 30px;
-            line-height: 37px;
-        }
+    @media @screen-gt-s {
+      font-size: 30px;
+      line-height: 37px;
     }
+  }
 }
-
