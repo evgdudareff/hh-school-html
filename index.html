@@ -86,7 +86,7 @@
       <div class="columns-wrapper">
         <div class="columns-row">
           <div class="column column_s-2 column_m-3 column_l-6">
-            <h1 class="carousel-section__heading heading heading_level-1">
+            <h1 class="carousel-section__heading heading heading_level-1 heading_center">
               Мужская и женская одежда с символикой HeadHunter
             </h1>
 
@@ -358,6 +358,43 @@
 
     </div>
     </footer>
+
+    <form class="form">
+      <div class="columns-wrapper">
+        <div class="columns-row">
+            <div class="column column_s-2 column_m-5 column_l-12">
+              
+              <h1 class="heading heading_level-1">Оформление заказа</h1>
+              <h4 class="heading heading_level-4">Контактное лицо</h4>
+
+              <input class="form__input-text input-text" type="text" name="fullName"
+              placeholder="ФИО" value></input>
+              <input class="form__input-text input-text" type="text" name="email"
+              placeholder="Электронная почта" value></input>
+              
+              <div class="form__input-tel">
+                  <input class="input-tel input-tel__country-code" type="text" name="countryCode"
+                  value="+7" readonly></input>
+                  <input class="input-tel input-tel__operator-code" type="text" name="operatorCode"
+                  placeholder="Код" value></input>
+                  <input class="input-tel input-tel__number" type="text" name="telNumber"
+                  placeholder="Номер" value></input>
+              </div>
+
+              <h4 class="heading heading_level-4">Способ получения заказа</h4>
+              
+              <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
+              value="deliviryPickup" id="deliveryPickup"></input>
+              <label class="radio-button_label"  for="deliveryPickup">Самовывоз</label>
+
+              <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
+              value="selfPickup" id="selfPickup"></input>
+              <label class="radio-button_label"  for="selfPickup">Доставка</label>
+
+            </div>
+        </div>
+      </div>
+    </form>
 
     <script src="js/index.js"></script>
   </body>
