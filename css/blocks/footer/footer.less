@@ -1,0 +1,44 @@
+.footer {
+  height: 300px;
+  background-color: @color-dark;
+
+  @media @screen-gt-s {
+    height: 230px;
+  }
+
+  &__social {
+    margin-top: 40px;
+
+    @media @screen-gt-s {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__app {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    @media @screen-gt-s {
+      margin-top: 40px;
+    }
+  }
+
+  &__line {
+    opacity: 0.5;
+    margin-bottom: 20px;
+  }
+
+  &__fill {
+    flex-grow: 1;
+  }
+
+  &__logo {
+    display: none;
+    margin-top: 36px;
+
+    @media @screen-gt-m {
+      display: block;
+      float: right;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.select {
+  position: relative;
+
+  &__select-field {
+    width: 100%;
+    height: @control-height;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: @color-light-1;
+    padding: 9px 10px;
+    border: 1px solid #c5c9ca;
+    font: 14px/ (@control-height - 18px) Arial, sans-serif;
+    color: @color-dark-1;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 28px;
+    height: @control-height;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: #c5c9ca;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &:after {
+    content: "";
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #c5c9ca transparent transparent transparent;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    z-index: 1;
+    pointer-events: none;
+  }
+}

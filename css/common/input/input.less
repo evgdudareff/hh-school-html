@@ -1,0 +1,60 @@
+.default-input() {
+  box-sizing: border-box;
+  width: 100%;
+  height: @control-height;
+  display: inline-block;
+  padding: 9px 10px;
+  border: 1px solid @color-light-grey;
+  background: @color-light;
+  font: 14px/ (@control-height - 18px) Arial, sans-serif;
+  text-align: left;
+  color: @color-dark-1;
+}
+
+::-webkit-input-placeholder {
+  color: #aeb5b9; /* Chrome, Safari, Opera */
+}
+::-moz-placeholder {
+  color: #aeb5b9; /* Firefox */
+}
+:-ms-input-placeholder {
+  color: #aeb5b9; /* IE */
+}
+
+.input-text {
+  .default-input();
+
+  &:focus,
+  &:active {
+    border-color: @color-primary;
+  }
+
+  &:required {
+    border-color: @color-red;
+  }
+}
+
+.input-tel {
+  .default-input();
+
+  &__country-code {
+    width: 38px;
+  }
+
+  &__operator-code {
+    width: 62px;
+  }
+
+  &__number {
+    width: 100%;
+  }
+
+  &:focus,
+  &:active {
+    border-color: @color-primary;
+  }
+
+  &:required {
+    border-color: @color-red;
+  }
+}
