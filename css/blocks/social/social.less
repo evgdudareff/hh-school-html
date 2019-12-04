@@ -1,0 +1,36 @@
+.social {
+  display: flex;
+
+  &__button {
+    margin-right: 15px;
+  }
+}
+
+.social-button-icon {
+  width: 36px;
+  height: 36px;
+  background: no-repeat 50% 50%;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+
+  &_twitter {
+    background-image: url("twitter-icon.svg");
+  }
+
+  &_facebook {
+    background-image: url("facebook-icon.svg");
+  }
+
+  &_vk {
+    background-image: url("vk-icon.svg");
+  }
+
+  &_instagram {
+    background-image: url("instagram-icon.svg");
+  }
+}
+
+.social-button {
+  .default-button();
+}

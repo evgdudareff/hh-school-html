@@ -1,6 +1,6 @@
 .footer {
   height: 300px;
-  background-color: #212122;
+  background-color: @color-dark;
 
   @media @screen-gt-s {
     height: 230px;
@@ -40,100 +40,5 @@
       display: block;
       float: right;
     }
-  }
-}
-
-.social {
-  display: flex;
-
-  &__button {
-    margin-right: 15px;
-  }
-}
-
-.social-button-icon {
-  width: 36px;
-  height: 36px;
-  background: no-repeat 50% 50%;
-  border: 0;
-  cursor: pointer;
-
-  &_twitter {
-    background-image: url("twitter-icon.svg");
-  }
-
-  &_facebook {
-    background-image: url("facebook-icon.svg");
-  }
-
-  &_vk {
-    background-image: url("vk-icon.svg");
-  }
-
-  &_instagram {
-    background-image: url("instagram-icon.svg");
-  }
-}
-
-.social-button {
-  .default-button();
-}
-
-.app {
-  display: flex;
-
-  @media @screen-gt-s {
-    justify-content: flex-end;
-  }
-
-  &__button {
-    margin-right: 8px;
-    margin-left: 0;
-
-    @media @screen-gt-s {
-      margin-left: 8px;
-      margin-right: 0;
-    }
-  }
-}
-
-.app-button-icon {
-  width: 140px;
-  height: 40px;
-  background: no-repeat 50% 50%;
-  border: 0;
-  cursor: pointer;
-  border: 1px solid #cccccc;
-  padding: 0;
-  &_app-store {
-    background-image: url("app-store-icon.svg");
-  }
-
-  &_google-play {
-    background-image: url("google-play-icon.svg");
-  }
-}
-
-.app-button {
-  .default-button();
-}
-
-.copyright-info {
-  color: #999999;
-}
-
-.statistics-info {
-  margin: 0;
-  color: #999999;
-  font-family: Arial;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 20px;
-
-  width: 250px;
-
-  @media @screen-gt-s {
-    width: 86%;
   }
 }
