@@ -17,11 +17,10 @@
   height: 16px;
   top: 1px;
   border: 1px solid #c5c9ca;
-
   outline: none;
 
   &:checked {
-    border: 5px solid #0088f2;
+    border: 5px solid @color-primary-checked;
   }
 
   &__label {
@@ -38,12 +37,12 @@
   }
 
   &:checked + .radio-button-sqared__label {
-    background-color: #dfdedd;
+    background-color: @color-light-grey;
   }
 
   &__label {
     .label-default();
-    border: 1px solid #dfdedd;
+    border: 1px solid @color-light-grey;
     box-sizing: border-box;
     height: @control-height;
     width: 146px;

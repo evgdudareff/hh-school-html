@@ -4,11 +4,11 @@
   height: @control-height;
   display: inline-block;
   padding: 9px 10px;
-  border: 1px solid #dfdedd;
+  border: 1px solid @color-light-grey;
   background: @color-light;
   font: 14px/ (@control-height - 18px) Arial, sans-serif;
   text-align: left;
-  color: #333333;
+  color: @color-dark-1;
 }
 
 ::-webkit-input-placeholder {
@@ -30,7 +30,7 @@
   }
 
   &:required {
-    border-color: #c52929;
+    border-color: @color-red;
   }
 }
 
@@ -55,6 +55,6 @@
   }
 
   &:required {
-    border-color: #c52929;
+    border-color: @color-red;
   }
 }
