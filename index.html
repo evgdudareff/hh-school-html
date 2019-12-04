@@ -384,13 +384,13 @@
               <h4 class="heading heading_level-4">Способ получения заказа</h4>
               
               <div class="form__delivery-method">
-                <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
+                <input class="radio-button-sqared radio-button-sqared__button"  type="radio" name="deliveryMethod"
                 value="deliviryPickup" id="deliveryPickup"></input>
-                <label class="radio-button_label"  for="deliveryPickup">Самовывоз</label>
+                <label class="radio-button-sqared__label"  for="deliveryPickup">Самовывоз</label>
 
-                <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
-                value="selfPickup" id="selfPickup"></input>
-                <label class="radio-button_label"  for="selfPickup">Доставка</label>
+                <input class="radio-button-sqared radio-button-sqared__button"  type="radio" name="deliveryMethod"
+                value="selfPickup" id="selfPickup" checked></input>
+                <label class="radio-button-sqared__label"  for="selfPickup">Доставка</label>
               </div>
 
              <h4 class="heading heading_level-4">Адрес</h4>
@@ -403,7 +403,26 @@
             <textarea type="textarea" class="textarea form__textarea" 
             placeholder="Адрес" name="addressExpaned"></textarea>    
             
-                          
+            <h4 class="heading heading_level-4">Оплата</h4>
+
+            <div class="form__payment-method">
+              <input class="radio-button-circle"  type="radio" name="paymentMethod"
+              value="paymentOnline" id="paymentOnline"></input>
+              <label class="radio-button-сircle__label"  for="paymentOnline">Оплата онлайн</label>
+            </div>  
+            
+            <div class="form__payment-method">
+              <input class="radio-button-circle"  type="radio" name="paymentMethod"
+              value="paymentCash" id="paymentCash"></input>
+              <label class="radio-button-сircle__label"  for="paymentCash">Наличными</label>
+          </div>
+
+          <div class="form__payment-method">
+            <input class="radio-button-circle"  type="radio" name="paymentMethod"
+            value="paymentCard" id="paymentCard"></input>
+            <label class="radio-button-сircle__label"  for="paymentCard">Картой при получении</label>
+          </div>
+
             </div>
         </div>
       </div>
