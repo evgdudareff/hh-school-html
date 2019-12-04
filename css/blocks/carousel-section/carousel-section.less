@@ -3,6 +3,11 @@
 
   &__heading {
     margin-top: 10px;
+    text-align: center;
+
+    @media @screen-gt-s {
+      text-align: left;
+    }
 
     @media @screen-gt-s {
       margin-top: 90px;
@@ -17,7 +22,11 @@
     margin: 0 auto;
 
     @media @screen-gt-s {
-      margin: 20px 0px 15px -28px;
+      margin: 20px 0px 15px -364px;
+    }
+
+    @media @screen-gt-m {
+      margin-left: -483px;
     }
   }
 
@@ -27,6 +36,14 @@
 
     @media @screen-gt-s {
       margin: 0 0;
+    }
+  }
+
+  &__column {
+    order: -1;
+
+    @media @screen-gt-s {
+      order: 1;
     }
   }
 
@@ -45,21 +62,6 @@
   }
 }
 
-.pagination {
-  display: flex;
-  width: 40px;
-  height: 8px;
-
-  &__dot {
-    fill: #dfdedd;
-    margin-left: -5px;
-
-    &_active {
-      fill: #212122;
-    }
-  }
-}
-
 .carousel-section-button {
-  .default-button();
+  .button();
 }

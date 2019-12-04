@@ -9,6 +9,7 @@
   <body>
     <section class="navbar">
       <div class="columns-wrapper">
+          <div class="navbar__content">
           <div class="navbar__city">
             <a href="#" class="nav__link nav__link_city">Москва</a>
           </div>
@@ -28,15 +29,13 @@
                 <a href="#" class="nav__link nav__link_navbar">Самовывоз</a>
               </li>
               <li class="nav__item nav__item_navbar">
-                <a href="#" class="nav__link nav__link_navbar"
-                  >Контактная информация</a
-                >
+                <a href="#" class="nav__link nav__link_navbar">Контактная информация</a>
               </li>
             </ul>
           </div>
+          </div>
         </div>
     </section>
-
     <header class="header">
       <div class="columns-wrapper">
         <div class="header__content">
@@ -79,64 +78,37 @@
         </div>
       </div>
     </header>
-
     <section class="carousel-section">
       <div class="columns-wrapper">
         <div class="columns-row">
           <div class="column column_s-2 column_m-3 column_l-6">
-            <h1 class="carousel-section__heading heading heading_level-1 heading_center">
+            <h1 class="carousel-section__heading heading heading_level-1">
               Мужская и женская одежда с символикой HeadHunter
             </h1>
-
             <div class="carousel-section__button">
               <button class="carousel-section-button">
                 Перейти в каталог
               </button>
             </div>
           </div>
-
-          <div class="column column_s-2 column_m-3 column_l-6 column_reverse">
-            <div class="carousel-section__carousel carousel ">
+          <div class="column column_s-2 column_m-3 column_l-6 carousel-section__column">
+            <div class="carousel-section__carousel carousel">
               <img
                 class="carousel__image"
                 src="images/slide-1.png"
                 alt="Мужская и женская одежда с символикой HeadHunter"
               />
             </div>
-            <div
-              class="carousel-section__pagination pagination
-      carousel-section__pagination_dots"
-            >
-              <svg
-                class="pagination__dot pagination__dot_active"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="4" cy="4" r="4"></circle>
-              </svg>
-              <svg
-                class="pagination__dot pagination__dot"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="4" cy="4" r="4"></circle>
-              </svg>
-              <svg
-                class="pagination__dot pagination__dot"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="4" cy="4" r="4"></circle>
-              </svg>
-              <svg
-                class="pagination__dot pagination__dot"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="4" cy="4" r="4"></circle>
-              </svg>
+            <div class="carousel-section__pagination pagination" >
+              <div class="pagination__dot pagination__dot_active"></div>
+              <div class="pagination__dot"></div>
+              <div class="pagination__dot"></div>
+              <div class="pagination__dot"></div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <section class="content-section">
       <div class="columns-wrapper">
         <h2 class="heading heading_level-2">Популярные товары</h2>
@@ -236,7 +208,6 @@
         </div>
       </div>
     </section>
-
     <section class="features-section">
       <div class="columns-wrapper">
         <div class="columns-row">
