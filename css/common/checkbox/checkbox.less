@@ -4,12 +4,12 @@
     display: none;
   }
 
-  &__pseudo-box {
+  &__label {
     display: inline-block;
 
-    &:before {
+    &::before {
       content: "";
-      display: inline-block;
+      display: block;
       width: 16px;
       height: 16px;
       border: 1px solid #c5c9ca;
@@ -18,8 +18,6 @@
   }
 }
 
-.checkbox__box:checked + .checkbox__pseudo-box:before {
+.checkbox__box:checked + .checkbox__label:before {
   content: "\2713";
-  width: 16px;
-  height: 16px;
 }

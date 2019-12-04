@@ -6,13 +6,6 @@
   transition: 0.2s all linear;
 }
 
-.radio-label-default() {
-  display: inline-block;
-  font: 14px/ (@control-height - 18px) Arial, sans-serif;
-  color: #333333;
-  transition: 0.2s all linear;
-}
-
 .radio-button-circle {
   .radio-button-default();
   -webkit-appearance: none;
@@ -31,8 +24,8 @@
   }
 
   &__label {
-    .radio-label-default();
-    vertical-align: text-bottom;
+    .label();
+    transition: 0.2s all linear;
   }
 }
 
@@ -48,7 +41,7 @@
   }
 
   &__label {
-    .radio-label-default();
+    .label();
     border: 1px solid #dfdedd;
     box-sizing: border-box;
     height: @control-height;
