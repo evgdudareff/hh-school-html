@@ -1,0 +1,25 @@
+.checkbox {
+  display: inline-block;
+  &__box {
+    display: none;
+  }
+
+  &__pseudo-box {
+    display: inline-block;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #c5c9ca;
+      border-radius: 2px;
+    }
+  }
+}
+
+.checkbox__box:checked + .checkbox__pseudo-box:before {
+  content: "\2713";
+  width: 16px;
+  height: 16px;
+}
