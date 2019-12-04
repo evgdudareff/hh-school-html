@@ -1,0 +1,31 @@
+.radio-button {
+  background: @color-light;
+
+  &_button {
+    display: none;
+  }
+
+  &:checked + .radio-button_label {
+    background-color: #dfdedd;
+  }
+
+  &_label {
+    display: inline-block;
+    box-sizing: border-box;
+    height: @control-height;
+    width: 146px;
+    padding: 9px 5px;
+    border: 1px solid #dfdedd;
+    font: 14px/ (@control-height - 18px) Arial, sans-serif;
+    text-align: center;
+    color: #333333;
+
+    @media @screen-gt-s {
+      width: 146px;
+    }
+
+    @media @screen-gt-m {
+      width: 123px;
+    }
+  }
+}

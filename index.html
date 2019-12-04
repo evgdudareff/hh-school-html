@@ -359,7 +359,7 @@
     </div>
     </footer>
 
-    <form class="form">
+    <form class="form" action="/" method="post">
       <div class="columns-wrapper">
         <div class="columns-row">
             <div class="column column_s-2 column_m-5 column_l-12">
@@ -383,14 +383,25 @@
 
               <h4 class="heading heading_level-4">Способ получения заказа</h4>
               
-              <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
-              value="deliviryPickup" id="deliveryPickup"></input>
-              <label class="radio-button_label"  for="deliveryPickup">Самовывоз</label>
+              <div class="form__delivery-method">
+                <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
+                value="deliviryPickup" id="deliveryPickup"></input>
+                <label class="radio-button_label"  for="deliveryPickup">Самовывоз</label>
 
-              <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
-              value="selfPickup" id="selfPickup"></input>
-              <label class="radio-button_label"  for="selfPickup">Доставка</label>
+                <input class="radio-button radio-button_button"  type="radio" name="deliveryMethod"
+                value="selfPickup" id="selfPickup"></input>
+                <label class="radio-button_label"  for="selfPickup">Доставка</label>
+              </div>
 
+              <h4 class="heading heading_level-4">Адрес</h4>
+            
+             <div class="form__select select">
+                <select class="select__select-field" size="1" name="cityLocataion" value>
+                  <option class="select__item" value>Город</option>
+                </select>     
+             </div> 
+                          
+                          
             </div>
         </div>
       </div>
