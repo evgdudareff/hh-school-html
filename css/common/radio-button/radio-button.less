@@ -1,6 +1,7 @@
 .radio-button-default() {
   position: relative;
   display: inline-block;
+  margin: 0;
   background: @color-light;
   font: 14px/ (@control-height - 18px) Arial, sans-serif;
   transition: 0.2s all linear;
@@ -14,7 +15,7 @@
   border-radius: 12px;
   width: 16px;
   height: 16px;
-
+  top: 1px;
   border: 1px solid #c5c9ca;
 
   outline: none;
@@ -24,7 +25,7 @@
   }
 
   &__label {
-    .label();
+    .label-default();
     transition: 0.2s all linear;
   }
 }
@@ -41,13 +42,14 @@
   }
 
   &__label {
-    .label();
+    .label-default();
     border: 1px solid #dfdedd;
     box-sizing: border-box;
     height: @control-height;
     width: 146px;
     padding: 9px 5px;
     text-align: center;
+    transition: 0.2s all linear;
 
     @media @screen-gt-s {
       width: 146px;

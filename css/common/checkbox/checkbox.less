@@ -1,23 +1,28 @@
 .checkbox {
   display: inline-block;
+  position: relative;
   &__box {
     display: none;
   }
 
   &__label {
-    display: inline-block;
+    position: absolute;
+    bottom: -2px;
+    cursor: pointer;
 
-    &::before {
+    &:after {
       content: "";
       display: block;
       width: 16px;
       height: 16px;
       border: 1px solid #c5c9ca;
       border-radius: 2px;
+      line-height: 16px;
+      text-align: center;
     }
   }
 }
 
-.checkbox__box:checked + .checkbox__label:before {
-  content: "\2713";
+.checkbox__box:checked + .checkbox__label:after {
+  content: "\f00c";
 }
