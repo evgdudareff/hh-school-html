@@ -27,4 +27,36 @@
   &__payment-method {
     margin-bottom: 10px;
   }
+
+  &__button-submit {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 20px 0;
+  }
+
+  &_hide {
+    display: none;
+    @media @screen-gt-s {
+      display: block;
+    }
+  }
+}
+
+.form-pug {
+  /* Заглушка, будет popup */
+  width: 290px;
+  height: 450px;
+  background-color: black;
+  opacity: 0.1;
+  font-size: 50px;
+  float: right;
+  margin-top: 136px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+  @media @screen-gt-s {
+    display: flex;
+  }
 }
