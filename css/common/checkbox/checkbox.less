@@ -2,17 +2,18 @@
   display: inline-block;
   position: relative;
   &__box {
-    display: none;
+    clip: rect(0 0 0 0);
   }
 
   &__label {
     position: absolute;
-    bottom: -2px;
+    bottom: 1px;
     cursor: pointer;
 
     &:after {
       content: "";
       display: block;
+      background-color: @color-light;
       width: 16px;
       height: 16px;
       border: 1px solid #c5c9ca;
