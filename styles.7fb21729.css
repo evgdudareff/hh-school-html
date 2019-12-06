@@ -344,7 +344,7 @@ a:focus {
 }
 .radio-button-circle__label {
   display: inline-block;
-  font: 14px/20px Arial, sans-serif;
+  font: 14px / 38px Arial, sans-serif;
   color: #333333;
   transition: 0.2s all linear;
 }
@@ -364,13 +364,12 @@ a:focus {
 }
 .radio-button-sqared__label {
   display: inline-block;
-  font: 14px/20px Arial, sans-serif;
+  font: 14px / 38px Arial, sans-serif;
   color: #333333;
   border: 1px solid #dfdedd;
   box-sizing: border-box;
   height: 38px;
   width: 146px;
-  padding: 9px 5px;
   text-align: center;
   transition: 0.2s all linear;
 }
@@ -458,16 +457,17 @@ a:focus {
   position: relative;
 }
 .checkbox__box {
-  display: none;
+  clip: rect(0 0 0 0);
 }
 .checkbox__label {
   position: absolute;
-  bottom: -2px;
+  bottom: 1px;
   cursor: pointer;
 }
 .checkbox__label:after {
   content: "";
   display: block;
+  background-color: #ffffff;
   width: 16px;
   height: 16px;
   border: 1px solid #c5c9ca;
@@ -480,9 +480,8 @@ a:focus {
 }
 .label {
   display: inline-block;
-  font: 14px/20px Arial, sans-serif;
+  font: 14px / 38px Arial, sans-serif;
   color: #333333;
-  padding-left: 20px;
 }
 .content-section {
   padding: 30px 0;
@@ -651,7 +650,7 @@ a:focus {
 }
 .navbar__content {
   background-color: #ffffff;
-  height: 60px;
+  height: 40px;
   display: none;
   align-items: center;
 }
@@ -673,10 +672,6 @@ a:focus {
 @media (min-width: 768px) {
   .carousel-section__heading {
     text-align: left;
-  }
-}
-@media (min-width: 768px) {
-  .carousel-section__heading {
     margin-top: 90px;
   }
 }
@@ -686,25 +681,20 @@ a:focus {
   }
 }
 .carousel-section__pagination {
-  margin: 0 auto;
+  margin: 0px auto;
 }
 @media (min-width: 768px) {
   .carousel-section__pagination {
-    margin: 20px 0px 15px -364px;
-  }
-}
-@media (min-width: 1000px) {
-  .carousel-section__pagination {
-    margin-left: -483px;
+    margin: 20px auto;
   }
 }
 .carousel-section__button {
-  margin: 0 auto 30px auto;
-  display: table;
+  margin-bottom: 30px;
+  text-align: center;
 }
 @media (min-width: 768px) {
   .carousel-section__button {
-    margin: 0 0;
+    text-align: left;
   }
 }
 .carousel-section__column {
@@ -755,7 +745,7 @@ a:focus {
 }
 .features-section {
   background-color: #eeeeee;
-  padding-bottom: 20px;
+  padding: 30px 0 30px 0;
 }
 .features-section__feature {
   display: flex;
@@ -764,22 +754,20 @@ a:focus {
 }
 @media (min-width: 1000px) {
   .features-section {
-    height: 100px;
-    padding-bottom: 0;
-    padding-top: 10px;
+    padding: 40px 0 40px 0;
   }
 }
 .footer {
-  height: 300px;
+  padding: 30px 0 25px 0;
   background-color: #212122;
 }
 @media (min-width: 768px) {
   .footer {
-    height: 230px;
+    padding: 30px 0 30px 0;
   }
 }
 .footer__social {
-  margin-top: 40px;
+  margin-bottom: 30px;
 }
 @media (min-width: 768px) {
   .footer__social {
@@ -787,24 +775,17 @@ a:focus {
   }
 }
 .footer__app {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-@media (min-width: 768px) {
-  .footer__app {
-    margin-top: 40px;
-  }
+  margin-bottom: 30px;
 }
 .footer__line {
   opacity: 0.5;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .footer__fill {
   flex-grow: 1;
 }
 .footer__logo {
   display: none;
-  margin-top: 36px;
 }
 @media (min-width: 1000px) {
   .footer__logo {
@@ -887,24 +868,39 @@ a:focus {
   outline: none;
 }
 .feature__image {
-  width: 40px;
-  height: 40px;
-  padding-right: 10px;
+  width: 35px;
+  height: 35px;
+  padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .feature__image {
+    padding-right: 10px;
+  }
+}
+@media (min-width: 1000px) {
+  .feature__image {
+    padding-right: 30px;
+  }
 }
 .feature__description {
-  width: 172px;
   color: #333333;
-  font-size: 14px;
   line-height: 20px;
-  padding-top: 2px;
+  padding-right: 30px;
+}
+@media (min-width: 768px) {
+  .feature__description {
+    padding-right: 5px;
+  }
 }
 .social {
   display: flex;
+  padding-top: 5px;
 }
 .social__button {
   margin-right: 15px;
 }
 .social-button-icon {
+  display: block;
   width: 36px;
   height: 36px;
   background: no-repeat 50% 50%;
@@ -961,6 +957,7 @@ a:focus {
   }
 }
 .app-button-icon {
+  display: block;
   width: 140px;
   height: 40px;
   background: no-repeat 50% 50%;
