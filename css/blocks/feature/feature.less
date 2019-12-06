@@ -1,14 +1,24 @@
 .feature {
   &__image {
-    width: 40px;
-    height: 40px;
-    padding-right: 10px;
+    width: 35px;
+    height: 35px;
+    padding-right: 20px;
+
+    @media @screen-gt-s {
+      padding-right: 10px;
+    }
+
+    @media @screen-gt-m {
+      padding-right: 30px;
+    }
   }
   &__description {
-    width: 172px;
     color: @color-dark-1;
-    font-size: 14px;
     line-height: 20px;
-    padding-top: 2px;
+    padding-right: 30px;
+
+    @media @screen-gt-s {
+      padding-right: 5px;
+    }
   }
 }
