@@ -34,11 +34,34 @@
     margin: 20px 0 20px 0;
   }
 
+  &__close-button {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+  }
+
   &_hide {
     display: none;
     @media @screen-gt-s {
       display: block;
     }
+  }
+}
+
+.form-close-button-icon {
+  width: 40px;
+  height: 40px;
+  background: no-repeat 50% 50%;
+  border: 0;
+  cursor: pointer;
+  text-indent: -9999px;
+  background-image: url("close.svg");
+}
+
+.form-close-button {
+  &:hover,
+  &:focus {
+    outline: none;
   }
 }
 
