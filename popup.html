@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>popup</title>
+    <link rel="stylesheet" href="css/styles.less" />
+  </head>
+  <body>
+   <div class="popup">
+    <div class="popup-container-top">
+        <div class="popup-container-top__button-close">
+            <button class="button-close-icon button-close">
+              Закрыть
+            </button>
+          </div>
+      <div class="product-card">
+        <div class="product-card__image-container product-card__image-container_popup">
+          <img
+            class="product-card__image"
+            src="images/product-4.jpg"
+            alt="Футболка"
+          />
+          <div class="product-card__sale">sale</div>
+        </div>
+        <div class="product-card__name">Футболка</div>
+        <div class="product-card__price">
+          <div class="product-card__old-price">690</div>
+          390 ₽
+        </div>
+        <h4 class="product-card__description">Красная хлопоковая футболка
+            с коротким руковом</h4>
+    </div>
+    </div>
+    <div class="popup-container-bottom">
+        <div class="product-card__sizes">
+           
+            <input class="radio-button-size-item " type="radio" name="size"
+                    value="xs" id="xs"></input>
+            <label class="radio-button-size-item__label" for="xs">xs</label>
+           
+            <input class="radio-button-size-item " type="radio" name="size"
+                value="s" id="s"></input>
+            <label class="radio-button-size-item__label" for="s">s</label>
+
+            <input class="radio-button-size-item " type="radio" name="size"
+                value="m" id="m"></input>
+            <label class="radio-button-size-item__label" for="m">m</label>
+
+            <input class="radio-button-size-item " type="radio" name="size"
+                value="l" id="l"></input>
+            <label class="radio-button-size-item__label" for="l">l</label>
+
+            <input class="radio-button-size-item " type="radio" name="size"
+                value="l" id="l"></input>
+            <label class="radio-button-size-item__label" for="xl">xl</label>
+            
+            <input class="radio-button-size-item " type="radio" name="size"
+                value="xxl" id="xxl"></input>
+            <label class="radio-button-size-item__label" for="xxl">xxl</label>
+        </div>
+        <input class="button-submit product-card__button-submit" type="submit" value="Заказать"></input>
+    </div>
+    
+</div>
+  </body>
+</html>
