@@ -4,22 +4,34 @@
 
   border: 1px solid;
   margin: 40px auto;
+
+  @media @screen-gt-s {
+    width: 242px;
+  }
+
+  @media @screen-gt-m {
+    width: 330px;
+    height: 543px;
+  }
 }
 
-.popup-container-top {
+.popup-container {
   position: relative;
-  width: 212px;
+  width: 240px;
   margin: 20px auto 0 auto;
+
+  @media @screen-gt-s {
+    width: 212px;
+  }
+
+  @media @screen-gt-m {
+    width: 290px;
+  }
 
   &__button-close {
     position: absolute;
     z-index: 100;
-    right: -20px;
+    right: -10px;
     top: -10px;
   }
-}
-
-.popup-container-bottom {
-  width: 240px;
-  margin: 0 auto;
 }

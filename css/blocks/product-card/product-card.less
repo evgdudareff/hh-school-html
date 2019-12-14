@@ -13,6 +13,11 @@
       width: 212px;
       height: 212px;
       margin: 0 auto 10px auto;
+
+      @media @screen-gt-m {
+        width: 290px;
+        height: 290px;
+      }
     }
   }
 
@@ -47,7 +52,7 @@
 
   &__description {
     font: normal 14px/20px @font-family-heading;
-
+    margin-top: 10px;
     margin-bottom: 15px;
   }
 
@@ -57,7 +62,6 @@
   }
 
   &__button-submit {
-    margin-bottom: 20px;
     width: 100%;
   }
 }
@@ -67,7 +71,6 @@
 
   display: none;
   &__label {
-    width: 40px;
     text-transform: uppercase;
   }
 
