@@ -40,6 +40,18 @@
     right: 5px;
   }
 
+  &__product-card {
+    display: none;
+
+    @media @screen-gt-s {
+      display: flex;
+      flex-direction: column;
+      width: 290px;
+      margin-top: 136px;
+      float: right;
+    }
+  }
+
   &_hide {
     display: none;
     @media @screen-gt-s {
