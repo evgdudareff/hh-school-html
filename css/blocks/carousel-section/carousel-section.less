@@ -40,21 +40,23 @@
     }
   }
 
-  &__carousel {
+  &__image-container {
     margin-top: 30px;
 
     @media @screen-gt-s {
       margin-top: 70px;
     }
   }
-  &_hide {
-    display: none;
-  }
-}
 
-.carousel {
   &__image {
     width: 100%;
+  }
+
+  &__slide-part-1,
+  &__slide-part-2 {
+    &_hide {
+      display: none;
+    }
   }
 }
 
