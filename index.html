@@ -78,7 +78,7 @@
   </header>
   <section class="carousel-section">
     <div class="columns-wrapper">
-      <div class="carousel__slide">
+      <div class="carousel-section__slide">
         <div class="columns-row">
           <div class="column column_s-2 column_m-3 column_l-6">
             <h1 class="carousel-section__heading heading heading_level-1">
@@ -93,6 +93,26 @@
           <div class="column column_s-2 column_m-3 column_l-6 carousel-section__column">
             <div class="carousel-section__image-container">
               <img class="carousel-section__image" src="images/slide-1.png"
+                alt="Мужская и женская одежда с символикой HeadHunter" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-section__slide carousel-section__slide_hide">
+        <div class="columns-row">
+          <div class="column column_s-2 column_m-3 column_l-6">
+            <h1 class="carousel-section__heading heading heading_level-1">
+              Офисные принадлежности с символикой HeadHunter
+            </h1>
+            <div class="carousel-section__button">
+              <button class="carousel-section-button">
+                Перейти в каталог
+              </button>
+            </div>
+          </div>
+          <div class="column column_s-2 column_m-3 column_l-6 carousel-section__column">
+            <div class="carousel-section__image-container">
+              <img class="carousel-section__image" src="images/slide-2.png"
                 alt="Мужская и женская одежда с символикой HeadHunter" />
             </div>
           </div>
@@ -287,75 +307,103 @@
         <div class="columns-row">
           <div class="column column_s-2 column_m-3 column_l-7">
             
-            <h1 class="heading heading_level-1">Оформление заказа</h1>
-            <h4 class="heading heading_level-4">Контактное лицо</h4>
-            <input class="form__input-text input-text" type="text" name="fullName" placeholder="ФИО" value></input>
-            <input class="form__input-text input-text" type="text" name="email" placeholder="Электронная почта"
-              value></input>
-
-            <div class="form__input-tel">
-              <input class="input-tel input-tel__country-code" type="text" name="countryCode" value="+7"
-                readonly></input>
-              <input class="input-tel input-tel__operator-code" type="text" name="operatorCode" placeholder="Код"
-                value></input>
-              <input class="input-tel input-tel__number" type="text" name="telNumber" placeholder="Номер" value></input>
+            <div class="form__section">
+              <div class="form__input-main-contacts">
+                <h1 class="heading heading_level-1">Оформление заказа</h1>
+                <h4 class="heading heading_level-4">Контактное лицо</h4>
+                <input class="form__input-text input-text" type="text" name="fullName" placeholder="ФИО" value></input>
+                <input class="form__input-text input-text" type="text" name="email" placeholder="Электронная почта" value></input>
+              </div> 
+           
+              <div class="form__input-tel">
+                <input class="input-tel input-tel__country-code" type="text" name="countryCode" value="+7"
+                  readonly></input>
+                <input class="input-tel input-tel__operator-code" type="text" name="operatorCode" placeholder="Код"
+                  value></input>
+                <input class="input-tel input-tel__number" type="text" name="telNumber" placeholder="Номер" value></input>
+              </div>
             </div>
 
-            <h4 class="heading heading_level-4">Способ получения заказа</h4>
+            <div class="form__section">  
+              <h4 class="heading heading_level-4">Способ получения заказа</h4>
+              <div class="form__delivery-method">
 
-            <div class="form__delivery-method">
-              <input class="radio-button-sqared radio-button-sqared__button" type="radio" name="deliveryMethod"
-                value="deliviryPickup" id="deliveryPickup"></input>
-              <label class="radio-button-sqared__label" for="selfPickup">Самовывоз</label>
-
-              <input class="radio-button-sqared radio-button-sqared__button" type="radio" name="deliveryMethod"
-                value="selfPickup" id="selfPickup" checked></input>
-              <label class="radio-button-sqared__label" for="deliveryPickup">Доставка</label>
+                <div class="form__radio-button"> 
+                  <input class="radio-button-sqared radio-button-sqared__button" type="radio" name="deliveryMethod"
+                  value="deliviryPickup" id="deliveryPickup"></input>
+                  <label class="radio-button-sqared__label" for="selfPickup">Самовывоз</label>
+                </div>
+                
+                <div class="form__radio-button">
+                  <input class="radio-button-sqared radio-button-sqared__button" type="radio" name="deliveryMethod"
+                  value="selfPickup" id="selfPickup" checked></input>
+                  <label class="radio-button-sqared__label" for="deliveryPickup">Доставка</label>
+                </div>
+              
+              </div>
             </div>
 
-            <h4 class="heading heading_level-4">Адрес</h4>
-            <div class="form__select select">
-              <select class="select__select-field" size="1" name="cityLocataion" value>
-                <option class="select__item" value>Город</option>
-              </select>
+            <div class="form__section">
+              <div class="form__delivery-address">
+                <h4 class="heading heading_level-4">Адрес</h4>
+                <div class="select">
+                  <select class="select__select-field" size="1" name="cityLocataion" value>
+                    <option class="select__item" value>Город</option>
+                    <option class="select__item" value>Город 2</option>
+                    <option class="select__item" value>Город 3</option>
+                  </select>
+                </div>
+                <div class="form__textarea">
+                  <textarea type="textarea" class="textarea" placeholder="Адрес"
+                  name="addressExpaned"></textarea>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form__section">
+              <div class="form__payment-methods">
+                <h4 class="heading heading_level-4">Оплата</h4>
+
+                <div class="form__payment-method">
+                  <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentOnline"
+                    id="paymentOnline"></input>
+                  <label class="radio-button-сircle__label" for="paymentOnline">Оплата онлайн</label>
+                </div>
+    
+                <div class="form__payment-method">
+                  <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentCash"
+                    id="paymentCash"></input>
+                  <label class="radio-button-сircle__label" for="paymentCash">Наличными</label>
+                </div>
+    
+                <div class="form__payment-method">
+                  <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentCard"
+                    id="paymentCard"></input>
+                  <label class="radio-button-сircle__label" for="paymentCard">Картой при получении</label>
+                </div>
+    
+              </div>
+            </div>
+            
+            <div class="form__section">
+              <div class="form__notification">
+                <h4 class="heading heading_level-4">Уведомления</h4>
+
+                <div class="checkbox">
+                  <input class="checkbox__box" type="checkbox" name="smsNotification" value id="smsNotification"></input>
+                  <label class="label" for="smsNotification">Хочу получать SMS уведомления</label>
+                </div>
+
+              </div>
             </div>
 
-            <textarea type="textarea" class="textarea form__textarea" placeholder="Адрес"
-              name="addressExpaned"></textarea>
+            <input class="button-submit form__button-submit" type="submit" value="Оформить заказ"></input>
+            
+          </div>
 
-            <h4 class="heading heading_level-4">Оплата</h4>
-
-            <div class="form__payment-method">
-              <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentOnline"
-                id="paymentOnline"></input>
-              <label class="radio-button-сircle__label" for="paymentOnline">Оплата онлайн</label>
-            </div>
-
-            <div class="form__payment-method">
-              <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentCash"
-                id="paymentCash"></input>
-              <label class="radio-button-сircle__label" for="paymentCash">Наличными</label>
-            </div>
-
-            <div class="form__payment-method">
-              <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentCard"
-                id="paymentCard"></input>
-              <label class="radio-button-сircle__label" for="paymentCard">Картой при получении</label>
-            </div>
-
-            <h4 class="heading heading_level-4">Уведомления</h4>
-
-            <div class="form__checkbox checkbox">
-              <input class="checkbox__box" type="checkbox" name="smsNotification" value id="smsNotification"></input>
-              <label class="checkbox__label" for="smsNotification" Хочу получать SMS уведомления</label> </div> <label
-                class="label" for="smsNotification">Хочу получать SMS уведомления</label>
-
-              <input class="button-submit form__button-submit" type="submit" value="Оформить заказ"></input>
-
-            </div>
-
-            <div class="column column_s-2 column_m-3 column_l-5">
+          <div class="column column_s-2 column_m-3 column_l-5">
                 <div class="form__product-card">
+
                   <div class="product-card">
                     <div class="product-card__image-container product-card__image-container_form">
                       <img
@@ -365,6 +413,7 @@
                       />
                       <div class="product-card__sale">sale</div>
                     </div>
+
                     <div class="product-card__name">Футболка</div>
                     <div class="product-card__price">
                       <div class="product-card__old-price">690</div>
@@ -372,32 +421,33 @@
                     </div>
                     <h4 class="product-card__description">Красная хлопоковая футболка
                         с коротким руковом</h4>
-                </div>
-                <div class="product-card__sizes">
-                  <input class="radio-button-size-item " type="radio" name="size"
-                          value="xs" id="xs"></input>
-                  <label class="radio-button-size-item__label" for="xs">xs</label>
-                 
-                  <input class="radio-button-size-item " type="radio" name="size"
-                      value="s" id="s"></input>
-                  <label class="radio-button-size-item__label" for="s">s</label>
-      
-                  <input class="radio-button-size-item " type="radio" name="size"
-                      value="m" id="m"></input>
-                  <label class="radio-button-size-item__label" for="m">m</label>
-      
-                  <input class="radio-button-size-item " type="radio" name="size"
-                      value="l" id="l"></input>
-                  <label class="radio-button-size-item__label" for="l">l</label>
-      
-                  <input class="radio-button-size-item " type="radio" name="size"
-                      value="xl" id="xl"></input>
-                  <label class="radio-button-size-item__label" for="xl">xl</label>
+                
+                  <div class="product-card__sizes">
+                    <input class="radio-button-size-item " type="radio" name="size"
+                            value="xs" id="xs"></input>
+                    <label class="radio-button-size-item__label" for="xs">xs</label>
                   
-                  <input class="radio-button-size-item " type="radio" name="size"
-                      value="xxl" id="xxl"></input>
-                  <label class="radio-button-size-item__label" for="xxl">xxl</label>
-              </div>
+                    <input class="radio-button-size-item " type="radio" name="size"
+                        value="s" id="s"></input>
+                    <label class="radio-button-size-item__label" for="s">s</label>
+        
+                    <input class="radio-button-size-item " type="radio" name="size"
+                        value="m" id="m"></input>
+                    <label class="radio-button-size-item__label" for="m">m</label>
+        
+                    <input class="radio-button-size-item " type="radio" name="size"
+                        value="l" id="l"></input>
+                    <label class="radio-button-size-item__label" for="l">l</label>
+        
+                    <input class="radio-button-size-item " type="radio" name="size"
+                        value="xl" id="xl"></input>
+                    <label class="radio-button-size-item__label" for="xl">xl</label>
+                    
+                    <input class="radio-button-size-item " type="radio" name="size"
+                        value="xxl" id="xxl"></input>
+                    <label class="radio-button-size-item__label" for="xxl">xxl</label>
+                  </div>
+                </div>
               </div>
             </div>
           
@@ -411,52 +461,56 @@
             <button class="button-close-icon button-close">
               Закрыть
             </button>
+        </div>
+        <div class="product-card">
+          <div class="product-card__image-container product-card__image-container_popup">
+            <img
+              class="product-card__image"
+              src="images/product-4.jpg"
+              alt="Футболка"
+            />
+            <div class="product-card__sale">sale</div>
           </div>
-      <div class="product-card">
-        <div class="product-card__image-container product-card__image-container_popup">
-          <img
-            class="product-card__image"
-            src="images/product-4.jpg"
-            alt="Футболка"
-          />
-          <div class="product-card__sale">sale</div>
-        </div>
-        <div class="product-card__name">Футболка</div>
-        <div class="product-card__price">
-          <div class="product-card__old-price">690</div>
-          390 ₽
-        </div>
-        <h4 class="product-card__description">Красная хлопоковая футболка
-            с коротким руковом</h4>
-    </div>
+
+          <div class="product-card__name">Футболка</div>
+          <div class="product-card__price">
+            <div class="product-card__old-price">690</div>
+            390 ₽
+          </div>
+          <h4 class="product-card__description">Красная хлопоковая футболка
+              с коротким руковом</h4>
     
-        <div class="product-card__sizes">
-            <input class="radio-button-size-item " type="radio" name="size"
-                    value="xs" id="xs-2"></input>
-            <label class="radio-button-size-item__label" for="xs-2">xs</label>
-           
-            <input class="radio-button-size-item " type="radio" name="size"
-                value="s" id="s-2"></input>
-            <label class="radio-button-size-item__label" for="s-2">s</label>
-
-            <input class="radio-button-size-item " type="radio" name="size"
-                value="m" id="m-2"></input>
-            <label class="radio-button-size-item__label" for="m-2">m</label>
-
-            <input class="radio-button-size-item " type="radio" name="size"
-                value="l" id="l-2"></input>
-            <label class="radio-button-size-item__label" for="l-2">l</label>
-
-            <input class="radio-button-size-item " type="radio" name="size"
-                value="xl" id="xl-2"></input>
-            <label class="radio-button-size-item__label" for="xl-2">xl</label>
+          <div class="product-card__sizes">
+              <input class="radio-button-size-item " type="radio" name="size"
+                      value="xs" id="xs-2"></input>
+              <label class="radio-button-size-item__label" for="xs-2">xs</label>
             
-            <input class="radio-button-size-item " type="radio" name="size"
-                value="xxl" id="xxl-2"></input>
-            <label class="radio-button-size-item__label" for="xxl-2">xxl</label>
+              <input class="radio-button-size-item " type="radio" name="size"
+                  value="s" id="s-2"></input>
+              <label class="radio-button-size-item__label" for="s-2">s</label>
+
+              <input class="radio-button-size-item " type="radio" name="size"
+                  value="m" id="m-2"></input>
+              <label class="radio-button-size-item__label" for="m-2">m</label>
+
+              <input class="radio-button-size-item " type="radio" name="size"
+                  value="l" id="l-2"></input>
+              <label class="radio-button-size-item__label" for="l-2">l</label>
+
+              <input class="radio-button-size-item " type="radio" name="size"
+                  value="xl" id="xl-2"></input>
+              <label class="radio-button-size-item__label" for="xl-2">xl</label>
+              
+              <input class="radio-button-size-item " type="radio" name="size"
+                  value="xxl" id="xxl-2"></input>
+              <label class="radio-button-size-item__label" for="xxl-2">xxl</label>
+          </div>
         </div>
         <input class="button-submit product-card__button-submit" type="submit" value="Заказать"></input>
-      </section>
+    </div>
+
+    
+  </section>
     
 </section>
   <script src="js/index.js"></script>

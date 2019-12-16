@@ -17,39 +17,35 @@
   &__pagination {
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 56%;
+    top: 59%;
     left: 50%;
 
     @media (min-width: 360px) {
-      top: 57%;
+      top: 61%;
     }
 
     @media (min-width: 400px) {
-      top: 60%;
-    }
-
-    @media (min-width: 450px) {
       top: 63%;
     }
 
-    @media (min-width: 500px) {
+    @media (min-width: 450px) {
       top: 65%;
     }
 
+    @media (min-width: 500px) {
+      top: 66%;
+    }
+
     @media (min-width: 530px) {
-      top: 67%;
+      top: 69%;
     }
 
     @media (min-width: 580px) {
-      top: 68%;
-    }
-
-    @media (min-width: 589px) {
       top: 70%;
     }
 
     @media (min-width: 594px) {
-      top: 73%;
+      top: 75%;
     }
 
     @media @screen-gt-s {
@@ -86,6 +82,12 @@
   }
 
   &__slide {
+    padding-top: 20px;
+
+    @media @screen-gt-s {
+      padding-top: 0;
+    }
+
     &_hide {
       display: none;
     }
