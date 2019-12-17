@@ -750,7 +750,6 @@ a:focus {
   background-color: #f9f9f9;
 }
 .carousel-section__heading {
-  margin-top: 10px;
   text-align: center;
 }
 @media (min-width: 768px) {
@@ -765,11 +764,50 @@ a:focus {
   }
 }
 .carousel-section__pagination {
-  margin: 0px auto;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 59%;
+  left: 50%;
+}
+@media (min-width: 360px) {
+  .carousel-section__pagination {
+    top: 61%;
+  }
+}
+@media (min-width: 400px) {
+  .carousel-section__pagination {
+    top: 63%;
+  }
+}
+@media (min-width: 450px) {
+  .carousel-section__pagination {
+    top: 65%;
+  }
+}
+@media (min-width: 500px) {
+  .carousel-section__pagination {
+    top: 66%;
+  }
+}
+@media (min-width: 530px) {
+  .carousel-section__pagination {
+    top: 69%;
+  }
+}
+@media (min-width: 580px) {
+  .carousel-section__pagination {
+    top: 70%;
+  }
+}
+@media (min-width: 594px) {
+  .carousel-section__pagination {
+    top: 75%;
+  }
 }
 @media (min-width: 768px) {
   .carousel-section__pagination {
-    margin: 20px auto;
+    position: relative;
+    padding: 20px 0 10px 0;
   }
 }
 .carousel-section__button {
@@ -789,16 +827,24 @@ a:focus {
     order: 1;
   }
 }
-.carousel-section__carousel {
-  margin-top: 30px;
-}
 @media (min-width: 768px) {
-  .carousel-section__carousel {
+  .carousel-section__image-container {
     margin-top: 70px;
   }
 }
-.carousel__image {
+.carousel-section__image {
   width: 100%;
+}
+.carousel-section__slide {
+  padding-top: 20px;
+}
+@media (min-width: 768px) {
+  .carousel-section__slide {
+    padding-top: 0;
+  }
+}
+.carousel-section__slide_hide {
+  display: none;
 }
 .carousel-section-button {
   box-sizing: border-box;
@@ -862,7 +908,9 @@ a:focus {
   margin-bottom: 30px;
 }
 .footer__line {
-  opacity: 0.5;
+  border: none;
+  height: 1px;
+  background-color: #666666;
   margin-bottom: 30px;
 }
 .footer__fill {
@@ -878,7 +926,6 @@ a:focus {
   }
 }
 .form {
-  height: 820px;
   background-color: #ffffff;
 }
 .form__heading {
@@ -1062,9 +1109,7 @@ a:focus {
   width: 140px;
   height: 40px;
   background: no-repeat 50% 50%;
-  border: 0;
   cursor: pointer;
-  border: 1px solid #cccccc;
   padding: 0;
   outline: none;
 }
@@ -1112,7 +1157,6 @@ a:focus {
 }
 .popup {
   width: 280px;
-  height: 465px;
   border: 1px solid;
   margin: 40px auto;
 }
@@ -1124,13 +1168,12 @@ a:focus {
 @media (min-width: 1000px) {
   .popup {
     width: 330px;
-    height: 543px;
   }
 }
 .popup-container {
   position: relative;
   width: 240px;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 20px auto;
 }
 @media (min-width: 768px) {
   .popup-container {
