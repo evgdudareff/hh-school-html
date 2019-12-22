@@ -1,25 +1,64 @@
+@keyframes slide {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-100%, 0);
+  }
+}
+
 .carousel-section {
   background-color: @color-light-1;
 
   &__heading {
-    margin-top: 10px;
     text-align: center;
 
     @media @screen-gt-s {
       text-align: left;
-      margin-top: 90px;
     }
 
     @media @screen-gt-m {
-      margin-top: 140px;
+      margin-top: 60px;
     }
   }
 
   &__pagination {
-    margin: 0px auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 59%;
+    left: 50%;
+
+    @media (min-width: 360px) {
+      top: 61%;
+    }
+
+    @media (min-width: 400px) {
+      top: 63%;
+    }
+
+    @media (min-width: 450px) {
+      top: 65%;
+    }
+
+    @media (min-width: 500px) {
+      top: 66%;
+    }
+
+    @media (min-width: 530px) {
+      top: 69%;
+    }
+
+    @media (min-width: 580px) {
+      top: 70%;
+    }
+
+    @media (min-width: 594px) {
+      top: 75%;
+    }
 
     @media @screen-gt-s {
-      margin: 20px auto;
+      position: relative;
+      padding: 20px 0 10px 0;
     }
   }
 
@@ -40,19 +79,57 @@
     }
   }
 
-  &__carousel {
-    margin-top: 30px;
+  &__image {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &-container {
+      padding-top: 70%;
+      position: relative;
+    }
+  }
+
+  &__slide {
+    position: relative;
+    display: none;
+    padding-top: 20px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 100%;
 
     @media @screen-gt-s {
-      margin-top: 70px;
+      height: 270px;
+    }
+
+    @media @screen-gt-m {
+      height: 320px;
+    }
+
+    &_active {
+      display: block;
+    }
+
+    &_hide {
+      display: block;
+      animation: slide 0.5s ease-in;
+      animation-fill-mode: forwards;
+    }
+
+    &_show {
+      display: block;
+      animation: slide 0.5s ease-in;
+      animation-fill-mode: forwards;
     }
   }
 }
 
-.carousel {
-  &__image {
-    width: 100%;
-  }
+.slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .carousel-section-button {
