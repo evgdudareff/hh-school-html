@@ -22,7 +22,7 @@ export let productsData = [
     sizes: {
       xs: true,
       x: true,
-      m: true,
+      m: false,
       l: true,
       xl: true,
       xxl: true
