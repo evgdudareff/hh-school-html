@@ -1,12 +1,12 @@
 //Простой шаблон карточки продукта, основанный на интерполяции строк
 
-export let renderProductCard = productData => {
-  let productCardMainTemplate = `<div class="popup-container">
+export const productCardPopupTemplate = productData => {
+  const productCardMainTemplate = `<div class="popup-container">
   <div class="popup-container__button-close">
     <button class="button-close-icon button-close">Закрыть</button>
   </div>
   <div class="product-card">
-    <div class="product-card__image-container product-card__image-container_popup">
+    <div class="product-card__image-container">
       <img
         class="product-card__image"
         src="/${productData.image}"
@@ -29,8 +29,11 @@ export let renderProductCard = productData => {
 
     <h4 class="product-card__description">${productData.description}</h4>\n`;
 
-  let submitButtonTemplate =
-    '<input class="button-submit product-card__button-submit" type="submit" value="Заказать"></input>';
+  const submitButtonTemplate = `${
+    productData.sizes
+      ? `<input class="button-submit product-card__button-submit button-submit_disabled" type="submit" value="Заказать" disabled></input>\n`
+      : `<input class="button-submit product-card__button-submit" type="submit" value="Заказать"></input>\n`
+  }`;
 
   if (!productData.sizes) {
     //если у товар безразмерный, то возвращаем шаблон

@@ -1,3 +1,3 @@
-import "./grid";
-import "./slider";
-import "./product-card-popup";
+import "./dev/grid";
+import "./slider/slider";
+import "./popup/popup";
