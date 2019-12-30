@@ -15,8 +15,8 @@ export const getPopupShifts = () => {
   let shiftLeft = 0;
   let shiftTop = 0;
 
-  //получить текущие размеры окна
-  const screenWidth = document.documentElement.clientWidth;
+  //получить текущее разрешение экрана
+  const screenWidth = window.innerWidth;
 
   //Рассчитать смещение
 

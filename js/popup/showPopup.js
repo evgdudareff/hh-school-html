@@ -4,17 +4,19 @@ import { hidePopup } from "./hidePopup";
 import { renderPopup } from "./renderPopup";
 import { getPopupShifts } from "./getPopupShifts";
 import { getCoords } from "../common/getCoords";
+import { showOrderForm } from "../orderForm/showOrderForm";
 const screenGreaterS = 768;
 
 export const showPopup = e => {
+  //если попап уже отображается, то выйти
+  const currentPopup = document.querySelector(".popup_active");
+  if (currentPopup) {
+    return;
+  }
   let target = e.target;
 
   while (!target.classList.contains("product-card")) {
     target = target.parentNode;
-
-    if (target.classList.contains("content-section")) {
-      return;
-    }
   }
 
   //Если клик был по карточке, то получить информацию по продукту из модели
@@ -22,13 +24,13 @@ export const showPopup = e => {
     product => product.id === target.dataset.productId
   );
 
-  //Получить шаблон попап для данного продукта
+  //Получить HTML из шаблона попапа для данного продукта
   const popupHTML = productCardPopupTemplate(productData);
 
   //получить текущие размеры окна
-  const screenWidth = document.documentElement.clientWidth;
+  const screenWidth = window.innerWidth;
   //Если попап не для Mobile, то вычислить координты размещения
-  if (screenWidth > screenGreaterS) {
+  if (screenWidth >= screenGreaterS) {
     //Получить опорные координаты (img) для размещения попапа {left, top}
     var pivotCoords = getCoords(target);
 
@@ -59,7 +61,23 @@ export const showPopup = e => {
           );
           submitButton.classList.remove("button-submit_disabled");
           submitButton.disabled = false;
+
+          //сохранить выбранный пользователем размер
+          //для последующего отображения в форме
+          productData.checkedSize = size.htmlFor;
         });
       });
   }
+
+  //Назначить обработчик клика по кнопке "Заказать"
+  document
+    .querySelector(".product-card__button-submit")
+    .addEventListener("click", () => {
+      //Убрать ранее показанный попап продукта
+      const currentPopup = document.querySelector(".popup_active");
+      currentPopup.remove();
+
+      //Показать форму
+      showOrderForm(productData);
+    });
 };

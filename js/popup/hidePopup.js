@@ -16,6 +16,7 @@ export const hidePopup = e => {
   }
 
   const currentPopup = document.querySelector(".popup_active");
+
   if (currentPopup) {
     currentPopup.classList.remove("popup_active");
     setTimeout(() => {

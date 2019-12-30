@@ -20,8 +20,7 @@ export const renderPopup = (popupHTML, coords) => {
   }
 
   document.body.append(popup);
-
   setTimeout(() => {
     popup.classList.add("popup_active");
-  }, 0);
+  }, 15);
 };

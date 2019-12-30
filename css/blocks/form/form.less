@@ -1,5 +1,15 @@
 .form {
   background-color: @color-light;
+  margin: 5px auto;
+  max-width: 320px;
+
+  @media @screen-gt-s {
+    max-width: 768px;
+  }
+
+  @media @screen-gt-m {
+    max-width: 1010px;
+  }
 
   &__heading {
     margin-top: 20px;
@@ -59,21 +69,18 @@
   }
 }
 
-.form-pug {
-  /* Заглушка, будет popup */
-  width: 290px;
-  height: 450px;
-  background-color: black;
-  opacity: 0.1;
-  font-size: 50px;
-  float: right;
-  margin-top: 136px;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  display: none;
+.orderForm {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 300ms linear;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 
-  @media @screen-gt-s {
-    display: flex;
+  &_active {
+    opacity: 1;
   }
 }
