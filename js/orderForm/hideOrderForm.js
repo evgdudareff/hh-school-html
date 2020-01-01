@@ -1,16 +1,24 @@
 export const hideOrderForm = e => {
-  event.preventDefault();
   let target = e.target;
 
   while (!target.classList.contains("orderForm")) {
     target = target.parentNode;
 
+    if (target.classList.contains("form")) {
+      return;
+    }
+
+    //если клик на кнопку вне формы, то скрыть форму
+    if (target.classList.contains("orderForm")) {
+      break;
+    }
     //если клик на кнопку "Закрыть", то скрыть форму
     if (target.classList.contains("form__button-close")) {
       break;
     }
   }
 
+  event.preventDefault();
   const currentForm = document.querySelector(".orderForm_active");
 
   if (currentForm) {
