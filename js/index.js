@@ -1,6 +1,7 @@
 import "./dev/grid";
 import "./slider/slider";
 import "./popup/popup";
+
 /* 
 //функция загузки произвольных данных товаров в JSON с произвольного сервера
 let loadData = async function(url) {

@@ -3,6 +3,7 @@
 import { renderOrderForm } from "./renderOrderForm";
 import { hideOrderForm } from "./hideOrderForm";
 import { orderFormTemplate } from "../templates/orderFormTemplate";
+import { inputHandler } from "../input/inputHandler";
 
 export const showOrderForm = productData => {
   //Получить HTML из шаблона формы
@@ -18,4 +19,9 @@ export const showOrderForm = productData => {
 
   //Назначить обработчик клика по области вне формы
   document.querySelector(".orderForm").addEventListener("click", hideOrderForm);
+
+  //После рендеринга формы - обработать все input
+  document.querySelectorAll("input").forEach(input => {
+    inputHandler(input);
+  });
 };
