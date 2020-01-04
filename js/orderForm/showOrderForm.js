@@ -4,6 +4,7 @@ import { renderOrderForm } from "./renderOrderForm";
 import { hideOrderForm } from "./hideOrderForm";
 import { orderFormTemplate } from "../templates/orderFormTemplate";
 import { inputHandler } from "../input/inputHandler";
+import { textareaHandler } from "../textarea/textareaHandler";
 import { selectHandler } from "../select/selectHandler";
 
 export const showOrderForm = productData => {
@@ -29,4 +30,9 @@ export const showOrderForm = productData => {
   //Обработать селектор города
   const select = document.querySelector(".select__select-field");
   select.addEventListener("click", selectHandler);
+
+  //Обработать textarea для ввода адреса
+  document.querySelectorAll("textarea").forEach(textarea => {
+    textareaHandler(textarea);
+  });
 };

@@ -4,7 +4,7 @@
 
 export class InputValidation {
   constructor() {
-    this.validities = [this.isEmptyField];
+    this.validities = [this.isEmptyField, this.isBigString];
     this.errors = [];
   }
 
@@ -42,6 +42,13 @@ export class InputValidation {
   isEmptyField(input) {
     if (!input.value.trim()) {
       return "Поле не может быть пустым";
+    }
+  }
+
+  //Общая для всех input проверка на максимальную длину строки
+  isBigString(input) {
+    if (input.value.length > 100) {
+      return "Максимальная длина строки 100 символов";
     }
   }
 
