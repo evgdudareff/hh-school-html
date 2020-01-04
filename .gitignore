@@ -5,5 +5,5 @@ yarn-error.log
 .idea
 .cache
 .DS_Store
-
+js/dev/hhApiAreas.json
 .vscode/

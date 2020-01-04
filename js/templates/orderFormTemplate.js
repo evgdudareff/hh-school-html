@@ -53,10 +53,8 @@ export const orderFormTemplate = productData => {
               <div class="form__delivery-address">
                 <h4 class="heading heading_level-4">Адрес</h4>
                 <div class="select">
-                  <select class="select__select-field" size="1" name="cityLocataion" value>
-                    <option class="select__item" value>Город</option>
-                    <option class="select__item" value>Город 2</option>
-                    <option class="select__item" value>Город 3</option>
+                  <select class="select__select-field" name="cityLocataion" value>
+                    <option class="select-field__option" value>Город</option>
                   </select>
                 </div>
                 <div class="form__textarea">

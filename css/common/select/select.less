@@ -7,17 +7,17 @@
     display: inline-block;
     box-sizing: border-box;
     background-color: @color-light-1;
-    padding: 9px 10px;
+    padding: 9px 30px 9px 10px;
     border: 1px solid #c5c9ca;
     font: 14px/ (@control-height - 18px) Arial, sans-serif;
     color: @color-dark-1;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+  }
 
-    &:hover {
-      cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
   }
 
   &:before {
@@ -41,9 +41,46 @@
     border-width: 5px 5px 0 5px;
     border-color: #c5c9ca transparent transparent transparent;
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 10px;
     z-index: 1;
     pointer-events: none;
+  }
+}
+
+.select_active {
+  &:after {
+    transform: matrix(1, 0, 0, -1, 0, 0);
+    top: 5%;
+  }
+}
+
+.select_active > select {
+  background-color: @color-grey;
+}
+
+.select-field__option {
+  display: none;
+}
+
+.options-container {
+  padding: 23px 0px;
+  height: 290px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &__item {
+    padding: 11px 12px;
+    height: 38px;
+    line-height: 16px;
+    box-sizing: border-box;
+    font-size: 14px;
+    display: block;
+
+    &:hover {
+      background-color: @color-primary;
+      color: white;
+    }
   }
 }

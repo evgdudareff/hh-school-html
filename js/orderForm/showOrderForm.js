@@ -4,6 +4,7 @@ import { renderOrderForm } from "./renderOrderForm";
 import { hideOrderForm } from "./hideOrderForm";
 import { orderFormTemplate } from "../templates/orderFormTemplate";
 import { inputHandler } from "../input/inputHandler";
+import { selectHandler } from "../select/selectHandler";
 
 export const showOrderForm = productData => {
   //Получить HTML из шаблона формы
@@ -24,4 +25,8 @@ export const showOrderForm = productData => {
   document.querySelectorAll("input").forEach(input => {
     inputHandler(input);
   });
+
+  //Обработать селектор города
+  const select = document.querySelector(".select__select-field");
+  select.addEventListener("click", selectHandler);
 };
