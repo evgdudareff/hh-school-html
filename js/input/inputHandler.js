@@ -1,9 +1,9 @@
-import { InputValidation } from "./InputValidation";
+import { FieldValidation } from "../common/FieldValidation";
 
 //Обработчик для input
 export const inputHandler = input => {
   //присвоить необходимые для валидации общие свойства и методы для input
-  input.validation = new InputValidation();
+  input.validation = new FieldValidation();
   input.touched = false;
 
   //В зависимости от функциональной принадлежности input - добавить дополнительные проверки
