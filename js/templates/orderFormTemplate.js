@@ -17,16 +17,16 @@ export const orderFormTemplate = productData => {
               <div class="form__input-main-contacts">
                 <h1 class="heading heading_level-1">Оформление заказа</h1>
                 <h4 class="heading heading_level-4">Контактное лицо</h4>
-                <input class="form__input-text input-text" type="text" name="fullName" placeholder="ФИО" value></input>
-                <input class="form__input-text input-text" type="text" name="email" placeholder="Электронная почта" value></input>
+                <input class="form__input-text input-text js-input-required" type="text" name="fullName" placeholder="ФИО" value></input>
+                <input class="form__input-text input-text js-input-required" type="text" name="email" placeholder="Электронная почта" value></input>
               </div> 
            
               <div class="form__input-tel">
                 <input class="input-tel input-tel__country-code" type="text" name="countryCode" value="+7"
                   readonly></input>
-                <input class="input-tel input-tel__operator-code" type="text" name="operatorCode" placeholder="Код"
+                <input class="input-tel input-tel__operator-code js-input-required" type="text" name="operatorCode" placeholder="Код"
                   value></input>
-                <input class="input-tel input-tel__number" type="text" name="telNumber" placeholder="Номер" value></input>
+                <input class="input-tel input-tel__number js-input-required" type="text" name="telNumber" placeholder="Номер" value></input>
               </div>
             </div>
 
@@ -70,7 +70,7 @@ export const orderFormTemplate = productData => {
 
                 <div class="form__payment-method">
                   <input class="radio-button-circle" type="radio" name="paymentMethod" value="paymentOnline"
-                    id="paymentOnline"></input>
+                    id="paymentOnline" checked></input>
                   <label class="radio-button-сircle__label" for="paymentOnline">Онлайн-оплата</label>
                 </div>
     

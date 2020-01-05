@@ -2,6 +2,7 @@
 
 import { renderOrderForm } from "./renderOrderForm";
 import { hideOrderForm } from "./hideOrderForm";
+import { prepareToSubmit } from "./prepareToSubmit";
 import { orderFormTemplate } from "../templates/orderFormTemplate";
 import { inputHandler } from "../input/inputHandler";
 import { textareaHandler } from "../textarea/textareaHandler";
@@ -23,7 +24,8 @@ export const showOrderForm = productData => {
   document.querySelector(".orderForm").addEventListener("click", hideOrderForm);
 
   //После рендеринга формы - обработать все input
-  document.querySelectorAll("input").forEach(input => {
+  const inputs = document.querySelectorAll(".js-input-required");
+  inputs.forEach(input => {
     inputHandler(input);
   });
 
@@ -32,7 +34,13 @@ export const showOrderForm = productData => {
   select.addEventListener("click", selectHandler);
 
   //Обработать textarea для ввода адреса
-  document.querySelectorAll("textarea").forEach(textarea => {
-    textareaHandler(textarea);
+  const textarea = document.querySelector("textarea");
+  textareaHandler(textarea);
+
+  //Назначать клик на кнопку "оформить заказ"
+  const submitButton = document.querySelector(".form__button-submit");
+  submitButton.addEventListener("click", e => {
+    e.preventDefault();
+    prepareToSubmit({ inputs, textarea, productData });
   });
 };

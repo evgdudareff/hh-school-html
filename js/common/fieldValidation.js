@@ -6,6 +6,7 @@ export class FieldValidation {
   constructor() {
     this.validities = [this.isEmptyField, this.isBigString];
     this.errors = [];
+    this.isInvalid = true;
   }
 
   //Провести необходимые валидации
@@ -30,6 +31,7 @@ export class FieldValidation {
     if (!field.classList.contains(`${className}_invalid`)) {
       field.classList.add(`${className}_invalid`);
     }
+    this.isInvalid = true;
   }
 
   //Убрать класс _invalid для input
@@ -38,6 +40,7 @@ export class FieldValidation {
     if (field.classList.contains(`${className}_invalid`)) {
       field.classList.remove(`${className}_invalid`);
     }
+    this.isInvalid = false;
   }
 
   //Общая для всех field проверка на пустой ввод
