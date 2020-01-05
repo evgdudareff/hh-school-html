@@ -1,5 +1,6 @@
 import { getDataAsync } from "../common/getDataAsync";
 import { renderSelectOptions } from "./renderSelectOptions";
+import { getCoords } from "../common/getCoords";
 
 export const selectHandler = e => {
   let target = e.target;
@@ -14,6 +15,12 @@ export const selectHandler = e => {
     target = target.parentNode;
   }
 
+  //Получить координаты select-field для позиционирования контейнера option
+  let pivotCoords = getCoords(target);
+
+  //Сместить координату top на высоту select-field
+  pivotCoords.top += target.offsetHeight;
+
   target.classList.add("select_active");
 
   //Получить данные адресов для селектора
@@ -23,6 +30,10 @@ export const selectHandler = e => {
 
     //Начать рендеринг опций селектора
     const optionsContainer = renderSelectOptions(areas);
+    optionsContainer.top = pivotCoords.top + "px";
+    optionsContainer.left = pivotCoords.left + "px";
+    optionsContainer.style.width = target.offsetWidth + "px";
+
     target.append(optionsContainer);
 
     //Назначить обработчик клика по опции в селекторе

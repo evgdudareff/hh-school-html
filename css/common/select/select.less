@@ -51,7 +51,6 @@
 .select_active {
   &:after {
     transform: matrix(1, 0, 0, -1, 0, 0);
-    top: 5%;
   }
 }
 
@@ -64,8 +63,11 @@
 }
 
 .options-container {
+  position: absolute;
   padding: 23px 0px;
   height: 290px;
+  background-color: @color-light;
+  z-index: 1000;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   box-sizing: border-box;
