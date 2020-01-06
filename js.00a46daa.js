@@ -427,6 +427,20 @@ var getCoords = function getCoords(elem) {
 };
 
 exports.getCoords = getCoords;
+},{}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getDocumentHeight = void 0;
+
+var getDocumentHeight = function getDocumentHeight() {
+  var documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+  return documentHeight;
+};
+
+exports.getDocumentHeight = getDocumentHeight;
 },{}],"js/orderForm/renderOrderForm.js":[function(require,module,exports) {
 "use strict";
 
@@ -435,20 +449,28 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderOrderForm = void 0;
 
+var _getDocumentHeight = require("../common/getDocumentHeight");
+
 //Рендер формы заказа
 var renderOrderForm = function renderOrderForm(orderFormHTML) {
   var orderForm = document.createElement("div");
   orderForm.classList.add("js-orderForm");
   orderForm.classList.add("orderForm");
-  orderForm.innerHTML = orderFormHTML;
-  document.body.append(orderForm);
+  orderForm.innerHTML = orderFormHTML; //Получить и присвоить высоту документа
+
+  var documentHeight = (0, _getDocumentHeight.getDocumentHeight)();
+  orderForm.style.height = documentHeight + "px";
+  document.body.append(orderForm); //Показать форму по центру документа
+
+  var form = document.querySelector(".form");
+  form.style.top = (documentHeight - form.offsetHeight) / 2 + "px";
   setTimeout(function () {
     orderForm.classList.add("orderForm_active");
   }, 0);
 };
 
 exports.renderOrderForm = renderOrderForm;
-},{}],"js/orderForm/hideOrderForm.js":[function(require,module,exports) {
+},{"../common/getDocumentHeight":"js/common/getDocumentHeight.js"}],"js/orderForm/hideOrderForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2084,7 +2106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55171" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61364" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
