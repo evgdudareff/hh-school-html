@@ -167,19 +167,19 @@ var productsData = [{
   id: "1",
   name: "Зонт",
   description: "Красный зонт с логотипом HH",
-  image: "product-1.e0fb58ad.jpg",
+  image: "product-1.jpg",
   price: "1&nbsp;990"
 }, {
   id: "2",
   name: "Сумка",
   description: "Красная сумка с логотипом HH",
-  image: "product-2.59eda275.jpg",
+  image: "product-2.jpg",
   price: "290"
 }, {
   id: "3",
   name: "Шлепанцы",
   description: "Красные шлепанцы с логотипом HH",
-  image: "product-3.83c9f311.jpg",
+  image: "product-3.jpg",
   price: "790",
   sizes: {
     xs: true,
@@ -193,7 +193,7 @@ var productsData = [{
   id: "4",
   name: "Футболка",
   description: "Красная футболка с логотипом HH",
-  image: "product-4.9853c0ec.jpg",
+  image: "product-4.jpg",
   price: "690",
   salePrice: "390",
   sizes: {
@@ -208,7 +208,7 @@ var productsData = [{
   id: "5",
   name: "Толстовка",
   description: "Красная толстовка с логотипом HH",
-  image: "product-5.593f3620.jpg",
+  image: "product-5.jpg",
   price: "3 990",
   sizes: {
     xs: true,
@@ -222,7 +222,7 @@ var productsData = [{
   id: "6",
   name: "Подушка",
   description: "Красная подушка с логотипом HH",
-  image: "product-6.5aa0fac8.jpg",
+  image: "product-6.jpg",
   price: "990"
 }];
 exports.productsData = productsData;
@@ -2106,7 +2106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61364" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63901" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
