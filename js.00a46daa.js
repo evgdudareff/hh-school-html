@@ -238,7 +238,7 @@ exports.productCardTemplate = void 0;
 //параметр formStyle генерирует дополнительную разметку для использования в шаблоне формы
 var productCardTemplate = function productCardTemplate(productData) {
   var formStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var productCardMainTemplate = "<div class=\"product-card\">\n    ".concat(formStyle ? "<div class=\"product-card__image-container product-card__image-container_form\">\n" : "<div class=\"product-card__image-container\">\n", " \n        \n        <img\n          class=\"product-card__image\"\n          src=\"/").concat(productData.image, "\"\n          alt=\"").concat(productData.name, "\"/>\n         \n          ").concat(productData.salePrice ? '<div class="product-card__sale">sale</div>' : "", ";\n      </div>\n  \n      <div class=\"product-card__name\">").concat(productData.name, "</div>\n  \n      ").concat(productData.salePrice ? "<div class=\"product-card__price\"> <div class=\"product-card__old-price\">".concat(productData.price, " \u20BD</div>").concat(productData.salePrice, "  \u20BD</div>\n") : "<div class=\"product-card__price\"> ".concat(productData.price, " \u20BD</div>\n"), " \n  \n      <h4 class=\"product-card__description\">").concat(productData.description, "</h4>\n");
+  var productCardMainTemplate = "<div class=\"product-card\">\n    ".concat(formStyle ? "<div class=\"product-card__image-container product-card__image-container_form\">\n" : "<div class=\"product-card__image-container\">\n", " \n        \n        <img\n          class=\"product-card__image\"\n          src=\"").concat(productData.image, "\"\n          alt=\"").concat(productData.name, "\"/>\n         \n          ").concat(productData.salePrice ? '<div class="product-card__sale">sale</div>' : "", ";\n      </div>\n  \n      <div class=\"product-card__name\">").concat(productData.name, "</div>\n  \n      ").concat(productData.salePrice ? "<div class=\"product-card__price\"> <div class=\"product-card__old-price\">".concat(productData.price, " \u20BD</div>").concat(productData.salePrice, "  \u20BD</div>\n") : "<div class=\"product-card__price\"> ".concat(productData.price, " \u20BD</div>\n"), " \n  \n      <h4 class=\"product-card__description\">").concat(productData.description, "</h4>\n");
   var submitButtonTemplate = "";
 
   if (formStyle == false) {
@@ -2106,7 +2106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64323" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1819" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
