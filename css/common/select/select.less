@@ -1,25 +1,6 @@
 .select {
   position: relative;
 
-  &__select-field {
-    width: 100%;
-    height: @control-height;
-    display: inline-block;
-    box-sizing: border-box;
-    background-color: @color-light-1;
-    padding: 9px 30px 9px 10px;
-    border: 1px solid #c5c9ca;
-    font: 14px/ (@control-height - 18px) Arial, sans-serif;
-    color: @color-dark-1;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
   &:before {
     content: "";
     position: absolute;
@@ -54,18 +35,15 @@
   }
 }
 
-.select_active > select {
+.select_active > .input-select {
   background-color: @color-grey;
-}
-
-.select-field__option {
-  display: none;
 }
 
 .options-container {
   position: absolute;
   padding: 23px 0px;
   height: 290px;
+  width: 100%;
   background-color: @color-light;
   z-index: 1000;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
@@ -83,6 +61,7 @@
     &:hover {
       background-color: @color-primary;
       color: white;
+      cursor: pointer;
     }
   }
 }

@@ -64,3 +64,27 @@
     border: 1px solid #c52929;
   }
 }
+
+.input-select {
+  .default-input();
+  padding: 9px 30px 9px 10px;
+  background-color: @color-light-1;
+  caret-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  -webkit-text-fill-color: @color-dark-1;
+  opacity: 1; /* required on iOS */
+}
+
+::-webkit-input-placeholder {
+  color: @color-dark-1; /* Chrome, Safari, Opera */
+}
+::-moz-placeholder {
+  color: @color-dark-1; /* Firefox */
+}
+:-ms-input-placeholder {
+  color: @color-dark-1; /* IE */
+}

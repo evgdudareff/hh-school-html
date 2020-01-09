@@ -30,8 +30,11 @@ export const showOrderForm = productData => {
   });
 
   //Обработать селектор города
-  const select = document.querySelector(".select__select-field");
+  const select = document.querySelector(".select");
   select.addEventListener("click", selectHandler);
+  select.addEventListener("input", e => {
+    e.target.value = "";
+  });
 
   //Обработать textarea для ввода адреса
   const textarea = document.querySelector("textarea");
