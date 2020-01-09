@@ -1,4 +1,7 @@
-export const getPopupShifts = () => {
+import { getCoords } from "../common/getCoords";
+
+//Получает на вход опорный элемент, относительно которого нужно считать координаты попапа
+export const getPopupCoords = pivotElement => {
   //Common
   const popupBorderWidth = 1;
   const screenGreaterS = 768;
@@ -18,19 +21,30 @@ export const getPopupShifts = () => {
   //получить текущее разрешение экрана
   const screenWidth = window.innerWidth;
 
-  //Рассчитать смещение
+  //Если попап для Mobile, то вычислять координты не нужно
+  if (screenWidth < screenGreaterS) {
+    return null;
+  }
+  //Иначе рассчитать
+
+  //Получить опорные координаты опорного элемента для размещения попапа {left, top}
+  let pivotCoords = getCoords(pivotElement);
 
   //Tablet
   if (screenWidth >= screenGreaterS && screenWidth < screenGreaterM) {
     shiftLeft = popupBorderWidth + popupPaddingLeftTablet;
     shiftTop = popupBorderWidth + popupPaddingTopTablet;
-    return { shiftLeft, shiftTop };
   }
 
   //Desktop
   if (screenWidth >= screenGreaterM) {
     shiftLeft = popupBorderWidth + popupPaddingLeftDesktop;
     shiftTop = popupBorderWidth + popupPaddingTopDesktop;
-    return { shiftLeft, shiftTop };
   }
+
+  let popupCoords = {};
+  popupCoords.left = pivotCoords.left - shiftLeft;
+  popupCoords.top = pivotCoords.top - shiftTop;
+
+  return popupCoords;
 };

@@ -1,6 +1,6 @@
-//Рендер попапа карточки продукта
+//Возвращает элемент попапа согласно данным о продукте
 
-export const renderPopup = (popupHTML, coords) => {
+export const getPopupElem = (popupHTML, coords) => {
   const popup = document.createElement("div");
 
   popup.classList.add("js-popup");
@@ -19,8 +19,5 @@ export const renderPopup = (popupHTML, coords) => {
     popup.style.transform = "translate(-50%, -50%)";
   }
 
-  document.body.append(popup);
-  setTimeout(() => {
-    popup.classList.add("popup_active");
-  }, 15);
+  return popup;
 };
