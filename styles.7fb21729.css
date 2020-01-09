@@ -355,6 +355,7 @@ a:focus {
   color: #333333;
   padding: 9px 30px 9px 10px;
   background-color: #f9f9f9;
+  -webkit-appearance: none;
 }
 .input-select:hover {
   cursor: pointer;
