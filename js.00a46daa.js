@@ -303,22 +303,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.hidePopup = void 0;
 
-var hidePopup = function hidePopup(e) {
-  var target = e.target;
-
-  while (!target.classList.contains("body")) {
-    target = target.parentNode; //если клик по активному попапу, то ничего не делать
-
-    if (target.classList.contains("popup_active")) {
-      return;
-    } //если клик на кнопку "Закрыть", то скрыть попап
-
-
-    if (target.classList.contains("popup-container__button-close")) {
-      break;
-    }
-  }
-
+var hidePopup = function hidePopup() {
   var currentPopup = document.querySelector(".popup_active");
 
   if (currentPopup) {
@@ -326,20 +311,20 @@ var hidePopup = function hidePopup(e) {
     setTimeout(function () {
       currentPopup.remove();
     }, 300);
-  }
+  } else return;
 };
 
 exports.hidePopup = hidePopup;
-},{}],"js/popup/renderPopup.js":[function(require,module,exports) {
+},{}],"js/popup/getPopupElem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.renderPopup = void 0;
+exports.getPopupElem = void 0;
 
-//Рендер попапа карточки продукта
-var renderPopup = function renderPopup(popupHTML, coords) {
+//Возвращает элемент попапа согласно данным о продукте
+var getPopupElem = function getPopupElem(popupHTML, coords) {
   var popup = document.createElement("div");
   popup.classList.add("js-popup");
   popup.classList.add("popup");
@@ -356,59 +341,10 @@ var renderPopup = function renderPopup(popupHTML, coords) {
     popup.style.transform = "translate(-50%, -50%)";
   }
 
-  document.body.append(popup);
-  setTimeout(function () {
-    popup.classList.add("popup_active");
-  }, 15);
+  return popup;
 };
 
-exports.renderPopup = renderPopup;
-},{}],"js/popup/getPopupShifts.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getPopupShifts = void 0;
-
-var getPopupShifts = function getPopupShifts() {
-  //Common
-  var popupBorderWidth = 1;
-  var screenGreaterS = 768;
-  var screenGreaterM = 1000; //Tablet
-
-  var popupPaddingLeftTablet = 15;
-  var popupPaddingTopTablet = 20; //Desktop
-
-  var popupPaddingLeftDesktop = 20;
-  var popupPaddingTopDesktop = 20;
-  var shiftLeft = 0;
-  var shiftTop = 0; //получить текущее разрешение экрана
-
-  var screenWidth = window.innerWidth; //Рассчитать смещение
-  //Tablet
-
-  if (screenWidth >= screenGreaterS && screenWidth < screenGreaterM) {
-    shiftLeft = popupBorderWidth + popupPaddingLeftTablet;
-    shiftTop = popupBorderWidth + popupPaddingTopTablet;
-    return {
-      shiftLeft: shiftLeft,
-      shiftTop: shiftTop
-    };
-  } //Desktop
-
-
-  if (screenWidth >= screenGreaterM) {
-    shiftLeft = popupBorderWidth + popupPaddingLeftDesktop;
-    shiftTop = popupBorderWidth + popupPaddingTopDesktop;
-    return {
-      shiftLeft: shiftLeft,
-      shiftTop: shiftTop
-    };
-  }
-};
-
-exports.getPopupShifts = getPopupShifts;
+exports.getPopupElem = getPopupElem;
 },{}],"js/common/getCoords.js":[function(require,module,exports) {
 "use strict";
 
@@ -427,7 +363,60 @@ var getCoords = function getCoords(elem) {
 };
 
 exports.getCoords = getCoords;
-},{}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
+},{}],"js/popup/getPopupCoords.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getPopupCoords = void 0;
+
+var _getCoords = require("../common/getCoords");
+
+//Получает на вход опорный элемент, относительно которого нужно считать координаты попапа
+var getPopupCoords = function getPopupCoords(pivotElement) {
+  //Common
+  var popupBorderWidth = 1;
+  var screenGreaterS = 768;
+  var screenGreaterM = 1000; //Tablet
+
+  var popupPaddingLeftTablet = 15;
+  var popupPaddingTopTablet = 20; //Desktop
+
+  var popupPaddingLeftDesktop = 20;
+  var popupPaddingTopDesktop = 20;
+  var shiftLeft = 0;
+  var shiftTop = 0; //получить текущее разрешение экрана
+
+  var screenWidth = window.innerWidth; //Если попап для Mobile, то вычислять координты не нужно
+
+  if (screenWidth < screenGreaterS) {
+    return null;
+  } //Иначе рассчитать
+  //Получить опорные координаты опорного элемента для размещения попапа {left, top}
+
+
+  var pivotCoords = (0, _getCoords.getCoords)(pivotElement); //Tablet
+
+  if (screenWidth >= screenGreaterS && screenWidth < screenGreaterM) {
+    shiftLeft = popupBorderWidth + popupPaddingLeftTablet;
+    shiftTop = popupBorderWidth + popupPaddingTopTablet;
+  } //Desktop
+
+
+  if (screenWidth >= screenGreaterM) {
+    shiftLeft = popupBorderWidth + popupPaddingLeftDesktop;
+    shiftTop = popupBorderWidth + popupPaddingTopDesktop;
+  }
+
+  var popupCoords = {};
+  popupCoords.left = pivotCoords.left - shiftLeft;
+  popupCoords.top = pivotCoords.top - shiftTop;
+  return popupCoords;
+};
+
+exports.getPopupCoords = getPopupCoords;
+},{"../common/getCoords":"js/common/getCoords.js"}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1983,29 +1972,33 @@ var _productCardPopupTemplate = require("../templates/productCardPopupTemplate")
 
 var _hidePopup = require("./hidePopup");
 
-var _renderPopup = require("./renderPopup");
+var _getPopupElem = require("./getPopupElem");
 
-var _getPopupShifts = require("./getPopupShifts");
-
-var _getCoords = require("../common/getCoords");
+var _getPopupCoords = require("./getPopupCoords");
 
 var _showOrderForm = require("../orderForm/showOrderForm");
 
-var screenGreaterS = 768;
-
 var showPopup = function showPopup(e) {
-  //если попап уже отображается, то выйти
-  var currentPopup = document.querySelector(".popup_active");
+  var target = e.target; //Если клик активному попапу, то ничего не делать
 
-  if (currentPopup) {
+  if (target.closest(".popup_active")) {
     return;
-  }
+  } //Если клик кнопке закрыть, то скрыть попап
 
-  var target = e.target;
+
+  if (target.closest(".popup-container__button-close")) {
+    (0, _hidePopup.hidePopup)();
+    return;
+  } //если клик по другой карточке продукта, то скрыть текущий попап и отрисовать другой
+
+
+  if (target.closest(".product-card") && document.querySelector(".popup_active")) {
+    (0, _hidePopup.hidePopup)();
+  }
 
   while (!target.classList.contains("product-card")) {
     target = target.parentNode;
-  } //Если клик был по карточке, то получить информацию по продукту из модели
+  } //Получить информацию по продукту из модели
 
 
   var productData = _productCardModel.productsData.find(function (product) {
@@ -2013,50 +2006,42 @@ var showPopup = function showPopup(e) {
   }); //Получить HTML из шаблона попапа для данного продукта
 
 
-  var popupHTML = (0, _productCardPopupTemplate.productCardPopupTemplate)(productData); //получить текущие размеры окна
+  var popupHTML = (0, _productCardPopupTemplate.productCardPopupTemplate)(productData);
+  var popupCoords = (0, _getPopupCoords.getPopupCoords)(target); //Рендер попапа на странице
 
-  var screenWidth = window.innerWidth; //Если попап не для Mobile, то вычислить координты размещения
+  var popup = (0, _getPopupElem.getPopupElem)(popupHTML, popupCoords);
+  document.body.append(popup);
+  setTimeout(function () {
+    popup.classList.add("popup_active"); //Назначить обработчик клика по кнопке "Закрыть", чтобы скрывать попап
 
-  if (screenWidth >= screenGreaterS) {
-    //Получить опорные координаты (img) для размещения попапа {left, top}
-    var pivotCoords = (0, _getCoords.getCoords)(target); //Получить смещение координат в зависимости от размера попапа (tablet, desktop)
+    document.querySelector(".popup-container__button-close").addEventListener("click", _hidePopup.hidePopup); //Назначить обработчик клика по размеру (если товар не безразмерный)
 
-    var popupShifts = (0, _getPopupShifts.getPopupShifts)();
-    pivotCoords.left -= popupShifts.shiftLeft;
-    pivotCoords.top -= popupShifts.shiftTop;
-  } //Рендер попапа на странице
+    if (productData.sizes) {
+      document.querySelectorAll(".radio-button-size-item__label").forEach(function (size) {
+        size.addEventListener("click", function () {
+          //если выбрнан размер, то разблокировать кнопку заказа
+          var submitButton = document.querySelector(".product-card__button-submit");
+          submitButton.classList.remove("button-submit_disabled");
+          submitButton.disabled = false; //сохранить выбранный пользователем размер
+          //для последующего отображения в форме
 
-
-  (0, _renderPopup.renderPopup)(popupHTML, pivotCoords); //Назначить обработчик клика по кнопке "Закрыть", чтобы скрывать попап
-
-  document.querySelector(".popup-container__button-close").addEventListener("click", _hidePopup.hidePopup); //Назначить обработчик клика по размеру (если товар не безразмерный)
-
-  if (productData.sizes) {
-    document.querySelectorAll(".radio-button-size-item__label").forEach(function (size) {
-      size.addEventListener("click", function () {
-        //если выбрнан размер, то разблокировать кнопку заказа
-        var submitButton = document.querySelector(".product-card__button-submit");
-        submitButton.classList.remove("button-submit_disabled");
-        submitButton.disabled = false; //сохранить выбранный пользователем размер
-        //для последующего отображения в форме
-
-        productData.checkedSize = size.htmlFor;
+          productData.checkedSize = size.htmlFor;
+        });
       });
+    } //Назначить обработчик клика по кнопке "Заказать"
+
+
+    document.querySelector(".product-card__button-submit").addEventListener("click", function () {
+      //Убрать ранее показанный попап продукта
+      (0, _hidePopup.hidePopup)(); //Показать форму
+
+      (0, _showOrderForm.showOrderForm)(productData);
     });
-  } //Назначить обработчик клика по кнопке "Заказать"
-
-
-  document.querySelector(".product-card__button-submit").addEventListener("click", function () {
-    //Убрать ранее показанный попап продукта
-    var currentPopup = document.querySelector(".popup_active");
-    currentPopup.remove(); //Показать форму
-
-    (0, _showOrderForm.showOrderForm)(productData);
-  });
+  }, 300);
 };
 
 exports.showPopup = showPopup;
-},{"../models/productCardModel":"js/models/productCardModel.js","../templates/productCardPopupTemplate":"js/templates/productCardPopupTemplate.js","./hidePopup":"js/popup/hidePopup.js","./renderPopup":"js/popup/renderPopup.js","./getPopupShifts":"js/popup/getPopupShifts.js","../common/getCoords":"js/common/getCoords.js","../orderForm/showOrderForm":"js/orderForm/showOrderForm.js"}],"js/popup/popup.js":[function(require,module,exports) {
+},{"../models/productCardModel":"js/models/productCardModel.js","../templates/productCardPopupTemplate":"js/templates/productCardPopupTemplate.js","./hidePopup":"js/popup/hidePopup.js","./getPopupElem":"js/popup/getPopupElem.js","./getPopupCoords":"js/popup/getPopupCoords.js","../orderForm/showOrderForm":"js/orderForm/showOrderForm.js"}],"js/popup/popup.js":[function(require,module,exports) {
 "use strict";
 
 var _showPopup = require("./showPopup");
@@ -2067,9 +2052,17 @@ var _hidePopup = require("./hidePopup");
 document.querySelectorAll(".product-card").forEach(function (productCard) {
   productCard.addEventListener("click", _showPopup.showPopup);
 }); //Назначить обработчик клика по документу
-//(закрытие попапа при клике не по нему)
+//(закрытие попапа при клике не по нему и не по другой карточке товара)
 
-document.addEventListener("click", _hidePopup.hidePopup);
+document.addEventListener("click", function (e) {
+  var target = e.target;
+
+  if (target.closest(".popup_active")) {
+    return;
+  } else {
+    (0, _hidePopup.hidePopup)();
+  }
+});
 },{"./showPopup":"js/popup/showPopup.js","./hidePopup":"js/popup/hidePopup.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -2106,7 +2099,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1819" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "15750" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
