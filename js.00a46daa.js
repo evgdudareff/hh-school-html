@@ -589,7 +589,7 @@ var _productCardTemplate = require("./productCardTemplate");
 
 //Шаблон формы заказа продукта, основанный на интерполяции строк
 var orderFormTemplate = function orderFormTemplate(productData) {
-  var formPartOneHTML = "<form class=\"form\">\n      <div class=\"columns-wrapper\">\n        <div class=\"form__button-close\">\n          <button class=\"button-close-icon button-close\">\n            \u0417\u0430\u043A\u0440\u044B\u0442\u044C\n          </button>\n        </div>\n        <div class=\"columns-row\">\n          <div class=\"column column_s-2 column_m-3 column_l-7\">\n            \n            <div class=\"form__section\">\n              <div class=\"form__input-main-contacts\">\n                <h1 class=\"heading heading_level-1\">\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430</h1>\n                <h4 class=\"heading heading_level-4\">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E</h4>\n                <input class=\"form__input-text input-text js-input-required\" type=\"text\" name=\"fullName\" placeholder=\"\u0424\u0418\u041E\" value></input>\n                <input class=\"form__input-text input-text js-input-required\" type=\"text\" name=\"email\" placeholder=\"\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430\" value></input>\n              </div> \n           \n              <div class=\"form__input-tel\">\n                <input class=\"input-tel input-tel__country-code\" type=\"text\" name=\"countryCode\" value=\"+7\"\n                  readonly></input>\n                <input class=\"input-tel input-tel__operator-code js-input-required\" type=\"text\" name=\"operatorCode\" placeholder=\"\u041A\u043E\u0434\"\n                  value></input>\n                <input class=\"input-tel input-tel__number js-input-required\" type=\"text\" name=\"telNumber\" placeholder=\"\u041D\u043E\u043C\u0435\u0440\" value></input>\n              </div>\n            </div>\n\n            <div class=\"form__section\">  \n              <h4 class=\"heading heading_level-4\">\u0421\u043F\u043E\u0441\u043E\u0431 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430</h4>\n              <div class=\"form__delivery-method\">\n\n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"selfPickup\" id=\"selfPickup\"></input> \n                  <label class=\"radio-button-sqared__label\" for=\"selfPickup\">\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437</label>\n                </div>\n                \n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"deliviryPickup\" id=\"deliveryPickup\" checked></input>\n                  <label class=\"radio-button-sqared__label\" for=\"deliveryPickup\">\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430</label>\n                </div>\n              \n              </div>\n            </div>\n\n            <div class=\"form__section\">\n              <div class=\"form__delivery-address\">\n                <h4 class=\"heading heading_level-4\">\u0410\u0434\u0440\u0435\u0441</h4>\n                <div class=\"select\">\n                  <select class=\"select__select-field\" name=\"cityLocataion\" value>\n                    <option class=\"select-field__option\" value>\u0413\u043E\u0440\u043E\u0434</option>\n                  </select>\n                </div>\n                <div class=\"form__textarea\">\n                  <textarea type=\"textarea\" class=\"textarea\" placeholder=\"\u0410\u0434\u0440\u0435\u0441\"\n                  name=\"addressExpaned\"></textarea>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__payment-methods\">\n                <h4 class=\"heading heading_level-4\">\u041E\u043F\u043B\u0430\u0442\u0430</h4>\n\n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentOnline\"\n                    id=\"paymentOnline\" checked></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentOnline\">\u041E\u043D\u043B\u0430\u0439\u043D-\u043E\u043F\u043B\u0430\u0442\u0430</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCash\"\n                    id=\"paymentCash\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCash\">\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCard\"\n                    id=\"paymentCard\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCard\">\u041A\u0430\u0440\u0442\u043E\u0439 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438</label>\n                </div>\n    \n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__notification\">\n                <h4 class=\"heading heading_level-4\">\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</h4>\n\n                <div class=\"checkbox\">\n                  <input class=\"checkbox__box\" type=\"checkbox\" name=\"smsNotification\" value id=\"smsNotification\"></input>\n                  <label class=\"label\" for=\"smsNotification\">\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C SMS \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</label>\n                </div>\n\n              </div>\n            </div>\n\n            <input class=\"button-submit form__button-submit\" type=\"submit\" value=\"\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437\"></input>\n            \n          </div>";
+  var formPartOneHTML = "<form class=\"form\">\n      <div class=\"columns-wrapper\">\n        <div class=\"form__button-close\">\n          <button class=\"button-close-icon button-close\">\n            \u0417\u0430\u043A\u0440\u044B\u0442\u044C\n          </button>\n        </div>\n        <div class=\"columns-row\">\n          <div class=\"column column_s-2 column_m-3 column_l-7\">\n            \n            <div class=\"form__section\">\n              <div class=\"form__input-main-contacts\">\n                <h1 class=\"heading heading_level-1\">\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430</h1>\n                <h4 class=\"heading heading_level-4\">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E</h4>\n                <input class=\"form__input-text input-text js-input-required\" type=\"text\" name=\"fullName\" placeholder=\"\u0424\u0418\u041E\" value></input>\n                <input class=\"form__input-text input-text js-input-required\" type=\"text\" name=\"email\" placeholder=\"\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430\" value></input>\n              </div> \n           \n              <div class=\"form__input-tel\">\n                <input class=\"input-tel input-tel__country-code\" type=\"text\" name=\"countryCode\" value=\"+7\"\n                  readonly></input>\n                <input class=\"input-tel input-tel__operator-code js-input-required\" type=\"text\" name=\"operatorCode\" placeholder=\"\u041A\u043E\u0434\"\n                  value></input>\n                <input class=\"input-tel input-tel__number js-input-required\" type=\"text\" name=\"telNumber\" placeholder=\"\u041D\u043E\u043C\u0435\u0440\" value></input>\n              </div>\n            </div>\n\n            <div class=\"form__section\">  \n              <h4 class=\"heading heading_level-4\">\u0421\u043F\u043E\u0441\u043E\u0431 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430</h4>\n              <div class=\"form__delivery-method\">\n\n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"selfPickup\" id=\"selfPickup\"></input> \n                  <label class=\"radio-button-sqared__label\" for=\"selfPickup\">\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437</label>\n                </div>\n                \n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"deliviryPickup\" id=\"deliveryPickup\" checked></input>\n                  <label class=\"radio-button-sqared__label\" for=\"deliveryPickup\">\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430</label>\n                </div>\n              \n              </div>\n            </div>\n\n            <div class=\"form__section\">\n              <div class=\"form__delivery-address\">\n                <h4 class=\"heading heading_level-4\">\u0410\u0434\u0440\u0435\u0441</h4>\n                <div class=\"select\">\n                  <input class=\"input-select\" name=\"cityLocataion\" placeholder=\"\u0413\u043E\u0440\u043E\u0434\">\n                  </input>\n                </div>\n                <div class=\"form__textarea\">\n                  <textarea type=\"textarea\" class=\"textarea\" placeholder=\"\u0410\u0434\u0440\u0435\u0441\"\n                  name=\"addressExpaned\"></textarea>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__payment-methods\">\n                <h4 class=\"heading heading_level-4\">\u041E\u043F\u043B\u0430\u0442\u0430</h4>\n\n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentOnline\"\n                    id=\"paymentOnline\" checked></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentOnline\">\u041E\u043D\u043B\u0430\u0439\u043D-\u043E\u043F\u043B\u0430\u0442\u0430</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCash\"\n                    id=\"paymentCash\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCash\">\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCard\"\n                    id=\"paymentCard\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCard\">\u041A\u0430\u0440\u0442\u043E\u0439 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438</label>\n                </div>\n    \n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__notification\">\n                <h4 class=\"heading heading_level-4\">\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</h4>\n\n                <div class=\"checkbox\">\n                  <input class=\"checkbox__box\" type=\"checkbox\" name=\"smsNotification\" value id=\"smsNotification\"></input>\n                  <label class=\"label\" for=\"smsNotification\">\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C SMS \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</label>\n                </div>\n\n              </div>\n            </div>\n\n            <input class=\"button-submit form__button-submit\" type=\"submit\" value=\"\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437\"></input>\n            \n          </div>";
   var formPartTwoHTML = "<div class=\"column column_s-2 column_m-3 column_l-5\">\n              <div class=\"form__product-card\">";
   var productCardHTML = (0, _productCardTemplate.productCardTemplate)(productData, true);
   var formPartThreeHTML = "</div>\n           </div>         \n        </div>\n    </form> ";
@@ -1048,7 +1048,22 @@ var textareaHandler = function textareaHandler(textarea) {
 };
 
 exports.textareaHandler = textareaHandler;
-},{"../common/FieldValidation":"js/common/FieldValidation.js"}],"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+},{"../common/FieldValidation":"js/common/FieldValidation.js"}],"js/select/shutDownSelect.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.shutDownSelect = void 0;
+
+//скрывает options-container открытого селектора
+var shutDownSelect = function shutDownSelect() {
+  document.querySelector(".select").classList.remove("select_active");
+  document.querySelector(".options-container").remove();
+};
+
+exports.shutDownSelect = shutDownSelect;
+},{}],"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1843,7 +1858,45 @@ var renderSelectOptions = function renderSelectOptions(dataList) {
 };
 
 exports.renderSelectOptions = renderSelectOptions;
-},{}],"js/select/selectHandler.js":[function(require,module,exports) {
+},{}],"js/select/openUpSelect.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.openUpSelect = void 0;
+
+var _shutDownSelect = require("./shutDownSelect");
+
+var _getDataAsync = require("../common/getDataAsync");
+
+var _renderSelectOptions = require("./renderSelectOptions");
+
+//открывает options-container закрытого селектора
+var openUpSelect = function openUpSelect(selectBlock) {
+  selectBlock.classList.add("select_active"); //Получить данные адресов для селектора
+
+  (0, _getDataAsync.getDataAsync)("https://api.hh.ru/areas/113").then(function (parsedData) {
+    //Для примера берем Московскую область, 7 городов
+    var areas = parsedData.areas[21].areas.slice(0, 7); //Начать рендеринг опций селектора
+
+    var optionsContainer = (0, _renderSelectOptions.renderSelectOptions)(areas);
+    selectBlock.append(optionsContainer); //Назначить обработчик клика по опции в селекторе
+
+    document.querySelectorAll(".options-container__item").forEach(function (option) {
+      option.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var checkedArea = e.target.innerHTML;
+        document.querySelector(".input-select").placeholder = checkedArea; //Скрыть выбор опций селектора
+
+        (0, _shutDownSelect.shutDownSelect)();
+      });
+    });
+  });
+};
+
+exports.openUpSelect = openUpSelect;
+},{"./shutDownSelect":"js/select/shutDownSelect.js","../common/getDataAsync":"js/common/getDataAsync.js","./renderSelectOptions":"js/select/renderSelectOptions.js"}],"js/select/selectHandler.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1851,58 +1904,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectHandler = void 0;
 
-var _getDataAsync = require("../common/getDataAsync");
+var _shutDownSelect = require("./shutDownSelect");
 
-var _renderSelectOptions = require("./renderSelectOptions");
-
-var _getCoords = require("../common/getCoords");
+var _openUpSelect = require("./openUpSelect");
 
 var selectHandler = function selectHandler(e) {
-  var target = e.target;
+  var target = e.target; //Если клик по активному селекту, то cкрыть options-container
 
-  while (!target.classList.contains("form")) {
-    if (target.classList.contains("select_active")) {
-      target.classList.remove("select_active");
-      document.querySelector(".options-container").remove();
-      return;
+  if (target.closest(".select_active")) {
+    (0, _shutDownSelect.shutDownSelect)();
+  } else {
+    //иначе открыть
+    while (!target.classList.contains("select")) {
+      target = target.parentNode;
     }
 
-    if (target.classList.contains("select")) break;
-    target = target.parentNode;
-  } //Получить координаты select-field для позиционирования контейнера option
-
-
-  var pivotCoords = (0, _getCoords.getCoords)(target); //Сместить координату top на высоту select-field
-
-  pivotCoords.top += target.offsetHeight;
-  target.classList.add("select_active"); //Получить данные адресов для селектора
-
-  (0, _getDataAsync.getDataAsync)("https://api.hh.ru/areas/113").then(function (parsedData) {
-    //Для примера берем Московскую область, 7 городов
-    var areas = parsedData.areas[21].areas.slice(0, 7); //Начать рендеринг опций селектора
-
-    var optionsContainer = (0, _renderSelectOptions.renderSelectOptions)(areas);
-    optionsContainer.top = pivotCoords.top + "px";
-    optionsContainer.left = pivotCoords.left + "px";
-    optionsContainer.style.width = target.offsetWidth + "px";
-    target.append(optionsContainer); //Назначить обработчик клика по опции в селекторе
-
-    document.querySelectorAll(".options-container__item").forEach(function (option) {
-      option.addEventListener("click", function (e) {
-        var checkedArea = e.target.innerHTML;
-        document.querySelector(".select-field__option").innerHTML = checkedArea; //Скрыть выбор опций селектора
-
-        setTimeout(function () {
-          document.querySelector(".select").classList.remove("select_active");
-          document.querySelector(".options-container").remove();
-        }, 0);
-      });
-    });
-  });
+    (0, _openUpSelect.openUpSelect)(target);
+  }
 };
 
 exports.selectHandler = selectHandler;
-},{"../common/getDataAsync":"js/common/getDataAsync.js","./renderSelectOptions":"js/select/renderSelectOptions.js","../common/getCoords":"js/common/getCoords.js"}],"js/orderForm/showOrderForm.js":[function(require,module,exports) {
+},{"./shutDownSelect":"js/select/shutDownSelect.js","./openUpSelect":"js/select/openUpSelect.js"}],"js/orderForm/showOrderForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1940,7 +1962,7 @@ var showOrderForm = function showOrderForm(productData) {
     (0, _inputHandler.inputHandler)(input);
   }); //Обработать селектор города
 
-  var select = document.querySelector(".select__select-field");
+  var select = document.querySelector(".select");
   select.addEventListener("click", _selectHandler.selectHandler); //Обработать textarea для ввода адреса
 
   var textarea = document.querySelector("textarea");
@@ -2099,7 +2121,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "15750" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27491" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
