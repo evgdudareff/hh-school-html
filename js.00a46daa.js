@@ -1852,7 +1852,12 @@ var renderSelectOptions = function renderSelectOptions(dataList) {
   var optionsContainer = document.createElement("div");
   optionsContainer.classList.add("options-container");
   dataList.forEach(function (dataItem) {
-    optionsContainer.innerHTML += "<option class=\"options-container__item\" value=".concat(dataItem.name, ">").concat(dataItem.name, "</option>\n");
+    //optionsContainer.innerHTML += `<option class="options-container__item" value=${dataItem.name}>${dataItem.name}</option>\n`;
+    var option = document.createElement("option");
+    option.classList.add("options-container__item");
+    option.value = dataItem.name;
+    option.innerHTML = dataItem.name;
+    optionsContainer.append(option);
   });
   return optionsContainer;
 };
@@ -2121,7 +2126,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27491" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38056" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
