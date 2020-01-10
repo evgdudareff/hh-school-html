@@ -355,15 +355,13 @@ a:focus {
   color: #333333;
   padding: 9px 30px 9px 10px;
   background-color: #f9f9f9;
+  caret-color: transparent;
   -webkit-text-fill-color: #333333;
   opacity: 1;
   /* required on iOS */
 }
 .input-select:hover {
   cursor: pointer;
-}
-.input-select:focus {
-  color: transparent;
 }
 ::-webkit-input-placeholder {
   color: #333333;

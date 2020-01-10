@@ -1059,6 +1059,7 @@ exports.shutDownSelect = void 0;
 //скрывает options-container открытого селектора
 var shutDownSelect = function shutDownSelect() {
   document.querySelector(".select").classList.remove("select_active");
+  document.querySelector(".input-select").disabled = "";
   document.querySelector(".options-container").remove();
 };
 
@@ -1874,7 +1875,8 @@ var _renderSelectOptions = require("./renderSelectOptions");
 
 //открывает options-container закрытого селектора
 var openUpSelect = function openUpSelect(selectBlock) {
-  selectBlock.classList.add("select_active"); //Получить данные адресов для селектора
+  selectBlock.classList.add("select_active");
+  document.querySelector(".input-select").disabled = "disabled"; //Получить данные адресов для селектора
 
   (0, _getDataAsync.getDataAsync)("https://api.hh.ru/areas/113").then(function (parsedData) {
     //Для примера берем Московскую область, 7 городов
@@ -1913,6 +1915,7 @@ var selectHandler = function selectHandler(e) {
 
   if (target.closest(".select_active")) {
     (0, _shutDownSelect.shutDownSelect)();
+    document.querySelector(".input-select").disabled = "";
   } else {
     //иначе открыть
     while (!target.classList.contains("select")) {
@@ -1963,7 +1966,10 @@ var showOrderForm = function showOrderForm(productData) {
   }); //Обработать селектор города
 
   var select = document.querySelector(".select");
-  select.addEventListener("click", _selectHandler.selectHandler); //Обработать textarea для ввода адреса
+  select.addEventListener("click", _selectHandler.selectHandler);
+  select.addEventListener("input", function (e) {
+    e.target.value = "";
+  }); //Обработать textarea для ввода адреса
 
   var textarea = document.querySelector("textarea");
   (0, _textareaHandler.textareaHandler)(textarea); //Назначать клик на кнопку "оформить заказ"
@@ -2121,7 +2127,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45686" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49002" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
