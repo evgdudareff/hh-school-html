@@ -238,7 +238,7 @@ exports.productCardTemplate = void 0;
 //параметр formStyle генерирует дополнительную разметку для использования в шаблоне формы
 var productCardTemplate = function productCardTemplate(productData) {
   var formStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var productCardMainTemplate = "<div class=\"product-card\">\n    ".concat(formStyle ? "<div class=\"product-card__image-container product-card__image-container_form\">\n" : "<div class=\"product-card__image-container\">\n", " \n        \n        <img\n          class=\"product-card__image\"\n          src=\"").concat(productData.image, "\"\n          alt=\"").concat(productData.name, "\"/>\n         \n          ").concat(productData.salePrice ? '<div class="product-card__sale">sale</div>' : "", ";\n      </div>\n  \n      <div class=\"product-card__name\">").concat(productData.name, "</div>\n  \n      ").concat(productData.salePrice ? "<div class=\"product-card__price\"> <div class=\"product-card__old-price\">".concat(productData.price, " \u20BD</div>").concat(productData.salePrice, "  \u20BD</div>\n") : "<div class=\"product-card__price\"> ".concat(productData.price, " \u20BD</div>\n"), " \n  \n      <h4 class=\"product-card__description\">").concat(productData.description, "</h4>\n");
+  var productCardMainTemplate = "<div class=\"product-card\" data-product-id=\"".concat(productData.id, "\">\n    ").concat(formStyle ? "<div class=\"product-card__image-container product-card__image-container_form\">\n" : "<div class=\"product-card__image-container\">\n", " \n        \n        <img\n          class=\"product-card__image\"\n          src=\"").concat(productData.image, "\"\n          alt=\"").concat(productData.name, "\"/>\n         \n          ").concat(productData.salePrice ? '<div class="product-card__sale">sale</div>' : "", ";\n      </div>\n  \n      <div class=\"product-card__name\">").concat(productData.name, "</div>\n  \n      ").concat(productData.salePrice ? "<div class=\"product-card__price\"> <div class=\"product-card__old-price\">".concat(productData.price, " \u20BD</div>").concat(productData.salePrice, "  \u20BD</div>\n") : "<div class=\"product-card__price\"> ".concat(productData.price, " \u20BD</div>\n"), " \n  \n      <h4 class=\"product-card__description\">").concat(productData.description, "</h4>\n");
   var submitButtonTemplate = "";
 
   if (formStyle == false) {
@@ -315,36 +315,41 @@ var hidePopup = function hidePopup() {
 };
 
 exports.hidePopup = hidePopup;
-},{}],"js/popup/getPopupElem.js":[function(require,module,exports) {
+},{}],"js/popup/renderPopupElem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPopupElem = void 0;
+exports.renderPopupElem = void 0;
 
-//Возвращает элемент попапа согласно данным о продукте
-var getPopupElem = function getPopupElem(popupHTML, coords) {
+//Рендерит и возвращает элемент попапа согласно данным о продукте
+var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) {
   var popup = document.createElement("div");
   popup.classList.add("js-popup");
   popup.classList.add("popup");
-  popup.innerHTML = popupHTML; //Если есть координаты, значит Tablet/Desktop
+  popup.innerHTML = popupHTML; //Если есть coords, значит Tablet/Desktop
 
   if (coords) {
+    insertTarget.append(popup);
     popup.style.left = coords.left + "px";
     popup.style.top = coords.top + "px";
+    popup.size = "tablet-desktop";
   } else {
-    //если нет координат, значит Mobile - центрируем попап
-    popup.style.position = "fixed";
-    popup.style.left = "50%";
-    popup.style.top = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
+    //Иначе Mobile
+    document.body.append(popup); //получить высоту и ширину окна
+
+    var windowHeight = document.documentElement.clientHeight;
+    var windowWidth = document.documentElement.clientWidth;
+    popup.style.left = (windowWidth - popup.offsetWidth) / 2 + "px";
+    popup.style.top = (windowHeight - popup.offsetHeight) / 2 + window.pageYOffset + "px";
+    popup.size = "mobile";
   }
 
   return popup;
 };
 
-exports.getPopupElem = getPopupElem;
+exports.renderPopupElem = renderPopupElem;
 },{}],"js/common/getCoords.js":[function(require,module,exports) {
 "use strict";
 
@@ -373,8 +378,8 @@ exports.getPopupCoords = void 0;
 
 var _getCoords = require("../common/getCoords");
 
-//Получает на вход опорный элемент, относительно которого нужно считать координаты попапа
-var getPopupCoords = function getPopupCoords(pivotElement) {
+//Рассчитывает координаты попапа
+var getPopupCoords = function getPopupCoords() {
   //Common
   var popupBorderWidth = 1;
   var screenGreaterS = 768;
@@ -388,30 +393,27 @@ var getPopupCoords = function getPopupCoords(pivotElement) {
   var shiftLeft = 0;
   var shiftTop = 0; //получить текущее разрешение экрана
 
-  var screenWidth = window.innerWidth; //Если попап для Mobile, то вычислять координты не нужно
+  var screenWidth = window.innerWidth; //Если попап для Mobile, то координаты не возвращаем
 
   if (screenWidth < screenGreaterS) {
     return null;
-  } //Иначе рассчитать
-  //Получить опорные координаты опорного элемента для размещения попапа {left, top}
+  } //Tablet
 
-
-  var pivotCoords = (0, _getCoords.getCoords)(pivotElement); //Tablet
 
   if (screenWidth >= screenGreaterS && screenWidth < screenGreaterM) {
-    shiftLeft = popupBorderWidth + popupPaddingLeftTablet;
-    shiftTop = popupBorderWidth + popupPaddingTopTablet;
+    shiftLeft = -(popupBorderWidth + popupPaddingLeftTablet);
+    shiftTop = -(popupBorderWidth + popupPaddingTopTablet);
   } //Desktop
 
 
   if (screenWidth >= screenGreaterM) {
-    shiftLeft = popupBorderWidth + popupPaddingLeftDesktop;
-    shiftTop = popupBorderWidth + popupPaddingTopDesktop;
+    shiftLeft = -(popupBorderWidth + popupPaddingLeftDesktop);
+    shiftTop = -(popupBorderWidth + popupPaddingTopDesktop);
   }
 
   var popupCoords = {};
-  popupCoords.left = pivotCoords.left - shiftLeft;
-  popupCoords.top = pivotCoords.top - shiftTop;
+  popupCoords.left = shiftLeft;
+  popupCoords.top = shiftTop;
   return popupCoords;
 };
 
@@ -1986,7 +1988,45 @@ var showOrderForm = function showOrderForm(productData) {
 };
 
 exports.showOrderForm = showOrderForm;
-},{"./renderOrderForm":"js/orderForm/renderOrderForm.js","./hideOrderForm":"js/orderForm/hideOrderForm.js","./prepareToSubmit":"js/orderForm/prepareToSubmit.js","../templates/orderFormTemplate":"js/templates/orderFormTemplate.js","../input/inputHandler":"js/input/inputHandler.js","../textarea/textareaHandler":"js/textarea/textareaHandler.js","../select/selectHandler":"js/select/selectHandler.js"}],"js/popup/showPopup.js":[function(require,module,exports) {
+},{"./renderOrderForm":"js/orderForm/renderOrderForm.js","./hideOrderForm":"js/orderForm/hideOrderForm.js","./prepareToSubmit":"js/orderForm/prepareToSubmit.js","../templates/orderFormTemplate":"js/templates/orderFormTemplate.js","../input/inputHandler":"js/input/inputHandler.js","../textarea/textareaHandler":"js/textarea/textareaHandler.js","../select/selectHandler":"js/select/selectHandler.js"}],"js/popup/relocatePopup.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.relocatePopup = void 0;
+
+var _showPopup = require("./showPopup");
+
+var _hidePopup = require("./hidePopup");
+
+//обработчик события resize window
+var relocatePopup = function relocatePopup() {
+  //получить текущее разрешение экрана
+  var screenWidth = window.innerWidth;
+  var screenGreaterS = 768;
+  var activePopup = document.querySelector(".popup_active"); //Перерисовать popup только при пересечении граничных условий:
+  //если попап отображался для Mobile и разрешение стало больше Mobile или
+  //попап отображался для Tablet/Desktop и разрешение стало меньше Mobile
+
+  if (activePopup && screenWidth >= screenGreaterS && activePopup.size === "mobile" || activePopup && screenWidth < screenGreaterS && activePopup.size === "tablet-desktop") {
+    //перерисовать попап
+    var productId = document.querySelector(".popup_active .product-card").dataset.productId;
+    (0, _hidePopup.hidePopup)();
+    var target = document.querySelector(".product-card[data-product-id=\"".concat(productId, "\"]"));
+    (0, _showPopup.showPopup)(null, target);
+  } //При изменение размера окна для Mobile изменять положение динамически
+
+
+  if (activePopup && screenWidth < screenGreaterS && activePopup.size === "mobile") {
+    //получить ширину окна
+    var windowWidth = document.documentElement.clientWidth;
+    activePopup.style.left = (windowWidth - activePopup.offsetWidth) / 2 + "px";
+  }
+};
+
+exports.relocatePopup = relocatePopup;
+},{"./showPopup":"js/popup/showPopup.js","./hidePopup":"js/popup/hidePopup.js"}],"js/popup/showPopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2000,32 +2040,43 @@ var _productCardPopupTemplate = require("../templates/productCardPopupTemplate")
 
 var _hidePopup = require("./hidePopup");
 
-var _getPopupElem = require("./getPopupElem");
+var _renderPopupElem = require("./renderPopupElem");
 
 var _getPopupCoords = require("./getPopupCoords");
 
 var _showOrderForm = require("../orderForm/showOrderForm");
 
-var showPopup = function showPopup(e) {
-  var target = e.target; //Если клик активному попапу, то ничего не делать
+var _relocatePopup = require("./relocatePopup");
 
-  if (target.closest(".popup_active")) {
-    return;
-  } //Если клик кнопке закрыть, то скрыть попап
+//показать попап
+var showPopup = function showPopup(e, targetFromRelocate) {
+  //если событие "клик", то target из event
+  //иначе был resize и получаем target как targetFromRelocate
+  var target;
+
+  if (e) {
+    target = e.target; //Если клик активному попапу, то ничего не делать
+
+    if (target.closest(".popup_active")) {
+      return;
+    } //Если клик кнопке закрыть, то скрыть попап
 
 
-  if (target.closest(".popup-container__button-close")) {
-    (0, _hidePopup.hidePopup)();
-    return;
-  } //если клик по другой карточке продукта, то скрыть текущий попап и отрисовать другой
+    if (target.closest(".popup-container__button-close")) {
+      (0, _hidePopup.hidePopup)();
+      return;
+    } //если клик по другой карточке продукта, то скрыть текущий попап и отрисовать другой
 
 
-  if (target.closest(".product-card") && document.querySelector(".popup_active")) {
-    (0, _hidePopup.hidePopup)();
-  }
+    if (target.closest(".product-card") && document.querySelector(".popup_active")) {
+      (0, _hidePopup.hidePopup)();
+    }
 
-  while (!target.classList.contains("product-card")) {
-    target = target.parentNode;
+    while (!target.classList.contains("product-card")) {
+      target = target.parentNode;
+    }
+  } else {
+    target = targetFromRelocate;
   } //Получить информацию по продукту из модели
 
 
@@ -2034,11 +2085,13 @@ var showPopup = function showPopup(e) {
   }); //Получить HTML из шаблона попапа для данного продукта
 
 
-  var popupHTML = (0, _productCardPopupTemplate.productCardPopupTemplate)(productData);
-  var popupCoords = (0, _getPopupCoords.getPopupCoords)(target); //Рендер попапа на странице
+  var popupHTML = (0, _productCardPopupTemplate.productCardPopupTemplate)(productData); //Получить координаты попапа
 
-  var popup = (0, _getPopupElem.getPopupElem)(popupHTML, popupCoords);
-  document.body.append(popup);
+  var popupCoords = (0, _getPopupCoords.getPopupCoords)(); //Рендер попапа на странице
+
+  var popup = (0, _renderPopupElem.renderPopupElem)(popupHTML, popupCoords, target); //Повесить обработчик на resize
+
+  window.addEventListener("resize", _relocatePopup.relocatePopup);
   setTimeout(function () {
     popup.classList.add("popup_active"); //Назначить обработчик клика по кнопке "Закрыть", чтобы скрывать попап
 
@@ -2069,7 +2122,7 @@ var showPopup = function showPopup(e) {
 };
 
 exports.showPopup = showPopup;
-},{"../models/productCardModel":"js/models/productCardModel.js","../templates/productCardPopupTemplate":"js/templates/productCardPopupTemplate.js","./hidePopup":"js/popup/hidePopup.js","./getPopupElem":"js/popup/getPopupElem.js","./getPopupCoords":"js/popup/getPopupCoords.js","../orderForm/showOrderForm":"js/orderForm/showOrderForm.js"}],"js/popup/popup.js":[function(require,module,exports) {
+},{"../models/productCardModel":"js/models/productCardModel.js","../templates/productCardPopupTemplate":"js/templates/productCardPopupTemplate.js","./hidePopup":"js/popup/hidePopup.js","./renderPopupElem":"js/popup/renderPopupElem.js","./getPopupCoords":"js/popup/getPopupCoords.js","../orderForm/showOrderForm":"js/orderForm/showOrderForm.js","./relocatePopup":"js/popup/relocatePopup.js"}],"js/popup/popup.js":[function(require,module,exports) {
 "use strict";
 
 var _showPopup = require("./showPopup");
@@ -2127,7 +2180,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52312" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "20198" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
