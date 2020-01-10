@@ -362,6 +362,9 @@ a:focus {
 .input-select:hover {
   cursor: pointer;
 }
+.input-select:focus {
+  color: transparent;
+}
 ::-webkit-input-placeholder {
   color: #333333;
   /* Chrome, Safari, Opera */
@@ -491,6 +494,7 @@ a:focus {
 .options-container__item:hover {
   background-color: #0f8fee;
   color: white;
+  cursor: pointer;
 }
 .textarea {
   width: 100%;
