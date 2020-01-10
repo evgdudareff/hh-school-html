@@ -410,7 +410,8 @@ a:focus {
   transition: 0.2s all linear;
 }
 .radio-button-sqared__button {
-  display: none;
+  position: absolute;
+  clip: rect(0 0 0 0);
 }
 .radio-button-sqared:checked + .radio-button-sqared__label {
   background-color: #dfdedd;
@@ -755,7 +756,8 @@ a:focus {
   display: none;
 }
 .radio-button-size-item__button {
-  display: none;
+  position: absolute;
+  clip: rect(0 0 0 0);
 }
 .radio-button-size-item:checked + .radio-button-sqared__label {
   background-color: #dfdedd;
