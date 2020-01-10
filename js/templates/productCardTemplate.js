@@ -2,7 +2,9 @@
 //параметр formStyle генерирует дополнительную разметку для использования в шаблоне формы
 
 export const productCardTemplate = (productData, formStyle = false) => {
-  const productCardMainTemplate = `<div class="product-card">
+  const productCardMainTemplate = `<div class="product-card" data-product-id="${
+    productData.id
+  }">
     ${
       formStyle
         ? `<div class="product-card__image-container product-card__image-container_form">\n`

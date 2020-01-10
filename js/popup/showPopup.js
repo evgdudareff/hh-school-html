@@ -1,34 +1,43 @@
 import { productsData } from "../models/productCardModel";
 import { productCardPopupTemplate } from "../templates/productCardPopupTemplate";
 import { hidePopup } from "./hidePopup";
-import { getPopupElem } from "./getPopupElem";
+import { renderPopupElem } from "./renderPopupElem";
 import { getPopupCoords } from "./getPopupCoords";
 import { showOrderForm } from "../orderForm/showOrderForm";
+import { relocatePopup } from "./relocatePopup";
 
-export const showPopup = e => {
-  let target = e.target;
+//показать попап
+export const showPopup = (e, targetFromRelocate) => {
+  //если событие "клик", то target из event
+  //иначе был resize и получаем target как targetFromRelocate
+  let target;
 
-  //Если клик активному попапу, то ничего не делать
-  if (target.closest(".popup_active")) {
-    return;
-  }
+  if (e) {
+    target = e.target;
+    //Если клик активному попапу, то ничего не делать
+    if (target.closest(".popup_active")) {
+      return;
+    }
 
-  //Если клик кнопке закрыть, то скрыть попап
-  if (target.closest(".popup-container__button-close")) {
-    hidePopup();
-    return;
-  }
+    //Если клик кнопке закрыть, то скрыть попап
+    if (target.closest(".popup-container__button-close")) {
+      hidePopup();
+      return;
+    }
 
-  //если клик по другой карточке продукта, то скрыть текущий попап и отрисовать другой
-  if (
-    target.closest(".product-card") &&
-    document.querySelector(".popup_active")
-  ) {
-    hidePopup();
-  }
+    //если клик по другой карточке продукта, то скрыть текущий попап и отрисовать другой
+    if (
+      target.closest(".product-card") &&
+      document.querySelector(".popup_active")
+    ) {
+      hidePopup();
+    }
 
-  while (!target.classList.contains("product-card")) {
-    target = target.parentNode;
+    while (!target.classList.contains("product-card")) {
+      target = target.parentNode;
+    }
+  } else {
+    target = targetFromRelocate;
   }
 
   //Получить информацию по продукту из модели
@@ -39,11 +48,15 @@ export const showPopup = e => {
   //Получить HTML из шаблона попапа для данного продукта
   const popupHTML = productCardPopupTemplate(productData);
 
-  const popupCoords = getPopupCoords(target);
+  //Получить координаты попапа
+  const popupCoords = getPopupCoords();
 
   //Рендер попапа на странице
-  const popup = getPopupElem(popupHTML, popupCoords);
-  document.body.append(popup);
+  const popup = renderPopupElem(popupHTML, popupCoords, target);
+
+  //Повесить обработчик на resize
+  window.addEventListener("resize", relocatePopup);
+
   setTimeout(() => {
     popup.classList.add("popup_active");
 
