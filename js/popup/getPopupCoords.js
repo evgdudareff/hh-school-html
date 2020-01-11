@@ -1,5 +1,3 @@
-import { getCoords } from "../common/getCoords";
-
 //Рассчитывает координаты попапа
 export const getPopupCoords = () => {
   //Common
