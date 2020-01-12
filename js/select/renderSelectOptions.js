@@ -3,7 +3,7 @@ export const renderSelectOptions = dataList => {
   optionsContainer.classList.add("options-container");
 
   dataList.forEach(dataItem => {
-    optionsContainer.innerHTML += `<option class="options-container__item" value=${dataItem.name}>${dataItem.name}</option>\n`;
+    optionsContainer.innerHTML += `<div class="options-container__item" value='${dataItem.name}'>${dataItem.name}</div>\n`;
   });
 
   return optionsContainer;

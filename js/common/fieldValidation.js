@@ -1,6 +1,7 @@
 //Класс валидации для field.
 //Содержит массив validaties, в который помещаются необходимые проверки,
 //а также общие для field методы
+import { showValidationError } from "./validationError";
 
 export class FieldValidation {
   constructor() {
@@ -12,13 +13,13 @@ export class FieldValidation {
   //Провести необходимые валидации
   checkValidities(field) {
     if (field.touched) {
-      for (var i = 0; i < this.validities.length; i++) {
-        const error = this.validities[i](field);
+      this.validities.forEach(validity => {
+        const error = validity(field);
 
         //Текущие ошибки храним в this.errors
         //(может понадобиться, если потребуется выводить информация пользователю)
         if (error) this.errors.push(error);
-      }
+      });
 
       //Обработать ошибки
       field.validation.handleErrors(field);
@@ -27,7 +28,7 @@ export class FieldValidation {
 
   //Выставить класс _invalid для field
   setInvalid(field) {
-    const className = field.tagName.toLowerCase();
+    const className = getClassName(field);
     if (!field.classList.contains(`${className}_invalid`)) {
       field.classList.add(`${className}_invalid`);
     }
@@ -36,7 +37,7 @@ export class FieldValidation {
 
   //Убрать класс _invalid для input
   removeInvalid(field) {
-    const className = field.tagName.toLowerCase();
+    const className = getClassName(field);
     if (field.classList.contains(`${className}_invalid`)) {
       field.classList.remove(`${className}_invalid`);
     }
@@ -61,8 +62,8 @@ export class FieldValidation {
   handleErrors(field) {
     if (this.errors.length) {
       this.setInvalid(field);
-      //Отладочная функция showErrors выводит ошибки в консль
-      this.showErrors();
+      showValidationError(field, this.errors);
+      this.errors = [];
     } else {
       this.removeInvalid(field);
     }
@@ -71,10 +72,18 @@ export class FieldValidation {
   //Отладочная функция - выводит текущие ошибки в консоль
   showErrors() {
     if (this.errors.length) {
-      for (var i = 0; i < this.errors.length; i++) {
+      for (let i = 0; i < this.errors.length; i++) {
         console.log(this.errors[i]);
       }
       this.errors = [];
     }
+  }
+}
+
+function getClassName(elem) {
+  if (elem.className.match(/input/)) {
+    return "input";
+  } else if (elem.className.match(/textarea/)) {
+    return "textarea";
   }
 }

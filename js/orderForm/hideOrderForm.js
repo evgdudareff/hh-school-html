@@ -1,14 +1,16 @@
 export const hideOrderForm = e => {
   let target = e.target;
 
-  while (!target.classList.contains("orderForm")) {
-    target = target.parentNode;
-
+  while (
+    !target.classList.contains("orderForm") ||
+    e.type !== "successSubmitForm"
+  ) {
+    //если клик по форме, то ничего не делать
     if (target.classList.contains("form")) {
       return;
     }
 
-    //если клик на кнопку вне формы, то скрыть форму
+    //если клик вне формы, то скрыть форму
     if (target.classList.contains("orderForm")) {
       break;
     }
@@ -16,6 +18,8 @@ export const hideOrderForm = e => {
     if (target.classList.contains("form__button-close")) {
       break;
     }
+
+    target = target.parentNode;
   }
 
   event.preventDefault();

@@ -4,7 +4,7 @@ import { productCardTemplate } from "./productCardTemplate";
 export const productCardPopupTemplate = productData => {
   const productCardPopupHTML = `<div class="popup-container">
   <div class="popup-container__button-close">
-    <button class="button-close-icon button-close">Закрыть</button>
+    <button class="button-close-icon">Закрыть</button>
   </div> `;
   const productCardHTML = productCardTemplate(productData);
 
