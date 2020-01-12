@@ -238,7 +238,7 @@ exports.productCardTemplate = void 0;
 //параметр formStyle генерирует дополнительную разметку для использования в шаблоне формы
 var productCardTemplate = function productCardTemplate(productData) {
   var formStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var productCardMainTemplate = "<div class=\"product-card\" data-product-id=\"".concat(productData.id, "\">\n    ").concat(formStyle ? "<div class=\"product-card__image-container product-card__image-container_form\">\n" : "<div class=\"product-card__image-container\">\n", " \n        \n        <img\n          class=\"product-card__image\"\n          src=\"").concat(productData.image, "\"\n          alt=\"").concat(productData.name, "\"/>\n         \n          ").concat(productData.salePrice ? '<div class="product-card__sale">sale</div>' : "", ";\n      </div>\n  \n      <div class=\"product-card__name\">").concat(productData.name, "</div>\n  \n      ").concat(productData.salePrice ? "<div class=\"product-card__price\"> <div class=\"product-card__old-price\">".concat(productData.price, " \u20BD</div>").concat(productData.salePrice, "  \u20BD</div>\n") : "<div class=\"product-card__price\"> ".concat(productData.price, " \u20BD</div>\n"), " \n  \n      <h4 class=\"product-card__description\">").concat(productData.description, "</h4>\n");
+  var productCardMainTemplate = "".concat(formStyle ? "<div class=\"product-card\">" : "<div class=\"product-card\" data-product-id=\"".concat(productData.id, "\">"), "  \n    ").concat(formStyle ? "<div class=\"product-card__image-container product-card__image-container_form\">\n" : "<div class=\"product-card__image-container\">\n", " \n        \n        <img\n          class=\"product-card__image\"\n          src=\"").concat(productData.image, "\"\n          alt=\"").concat(productData.name, "\"/>\n         \n          ").concat(productData.salePrice ? '<div class="product-card__sale">sale</div>' : "", ";\n      </div>\n  \n      <div class=\"product-card__name\">").concat(productData.name, "</div>\n  \n      ").concat(productData.salePrice ? "<div class=\"product-card__price\"> <div class=\"product-card__old-price\">".concat(productData.price, " \u20BD</div>").concat(productData.salePrice, "  \u20BD</div>\n") : "<div class=\"product-card__price\"> ".concat(productData.price, " \u20BD</div>\n"), " \n  \n      <h4 class=\"product-card__description\">").concat(productData.description, "</h4>\n");
   var submitButtonTemplate = "";
 
   if (formStyle == false) {
@@ -289,7 +289,7 @@ var _productCardTemplate = require("./productCardTemplate");
 
 //Простой шаблон попапа карточки продукта, основанный на интерполяции строк
 var productCardPopupTemplate = function productCardPopupTemplate(productData) {
-  var productCardPopupHTML = "<div class=\"popup-container\">\n  <div class=\"popup-container__button-close\">\n    <button class=\"button-close-icon button-close\">\u0417\u0430\u043A\u0440\u044B\u0442\u044C</button>\n  </div> ";
+  var productCardPopupHTML = "<div class=\"popup-container\">\n  <div class=\"popup-container__button-close\">\n    <button class=\"button-close-icon\">\u0417\u0430\u043A\u0440\u044B\u0442\u044C</button>\n  </div> ";
   var productCardHTML = (0, _productCardTemplate.productCardTemplate)(productData);
   return productCardPopupHTML + productCardHTML + "</div>\n";
 };
@@ -350,24 +350,6 @@ var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) 
 };
 
 exports.renderPopupElem = renderPopupElem;
-},{}],"js/common/getCoords.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getCoords = void 0;
-
-// получаем координаты элемента в контексте документа
-var getCoords = function getCoords(elem) {
-  var box = elem.getBoundingClientRect();
-  return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
-  };
-};
-
-exports.getCoords = getCoords;
 },{}],"js/popup/getPopupCoords.js":[function(require,module,exports) {
 "use strict";
 
@@ -375,8 +357,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getPopupCoords = void 0;
-
-var _getCoords = require("../common/getCoords");
 
 //Рассчитывает координаты попапа
 var getPopupCoords = function getPopupCoords() {
@@ -418,7 +398,7 @@ var getPopupCoords = function getPopupCoords() {
 };
 
 exports.getPopupCoords = getPopupCoords;
-},{"../common/getCoords":"js/common/getCoords.js"}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
+},{}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -461,7 +441,48 @@ var renderOrderForm = function renderOrderForm(orderFormHTML) {
 };
 
 exports.renderOrderForm = renderOrderForm;
-},{"../common/getDocumentHeight":"js/common/getDocumentHeight.js"}],"js/orderForm/hideOrderForm.js":[function(require,module,exports) {
+},{"../common/getDocumentHeight":"js/common/getDocumentHeight.js"}],"js/templates/orderFormTemplate.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.orderFormTemplate = void 0;
+
+var _productCardTemplate = require("./productCardTemplate");
+
+//Шаблон формы заказа продукта, основанный на интерполяции строк
+var orderFormTemplate = function orderFormTemplate(productData) {
+  var formPartOneHTML = "<form class=\"form\">\n      <div class=\"columns-wrapper\">\n        <div class=\"form__button-close\">\n          <button class=\"button-close-icon\">\n            \u0417\u0430\u043A\u0440\u044B\u0442\u044C\n          </button>\n        </div>\n        <div class=\"columns-row\">\n          <div class=\"column column_s-2 column_m-3 column_l-7\">\n            \n            <div class=\"form__section\">\n              <div class=\"form__input-main-contacts\">\n                <h1 class=\"heading heading_level-1\">\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430</h1>\n                <h4 class=\"heading heading_level-4\">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E</h4>\n                <div class=\"form__input-text\">\n                  <input class=\"input-text js-input-required\" type=\"text\" name=\"fullName\" placeholder=\"\u0424\u0418\u041E\" value></input>\n                </div>\n                <div class=\"form__input-text\">\n                  <input class=\"input-text js-input-required\" type=\"text\" name=\"email\" placeholder=\"\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430\" value></input>\n                </div>\n              </div> \n           \n              <div class=\"form__input-tel\">\n                <input class=\"input-tel input-tel_country-code\" type=\"text\" name=\"countryCode\" value=\"+7\"\n                  readonly></input>\n                <input class=\"input-tel input-tel_operator-code js-input-required\" type=\"text\" name=\"operatorCode\" placeholder=\"\u041A\u043E\u0434\"></input>\n                <input class=\"input-tel input-tel_number js-input-required\" type=\"text\" name=\"telNumber\" placeholder=\"\u041D\u043E\u043C\u0435\u0440\"></input>\n              </div>\n            </div>\n\n            <div class=\"form__section\">  \n              <h4 class=\"heading heading_level-4\">\u0421\u043F\u043E\u0441\u043E\u0431 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430</h4>\n              <div class=\"form__delivery-method\">\n\n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"selfPickup\" id=\"selfPickup\"></input> \n                  <label class=\"radio-button-sqared__label\" for=\"selfPickup\">\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437</label>\n                </div>\n                \n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"deliviryPickup\" id=\"deliveryPickup\" checked></input>\n                  <label class=\"radio-button-sqared__label\" for=\"deliveryPickup\">\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430</label>\n                </div>\n              \n              </div>\n            </div>\n\n            <div class=\"form__section\">\n              <div class=\"form__delivery-address\">\n                <h4 class=\"heading heading_level-4\">\u0410\u0434\u0440\u0435\u0441</h4>\n                <div class=\"select\">\n                  <input class=\"input-select\" name=\"cityLocataion\" placeholder=\"\u0413\u043E\u0440\u043E\u0434\" inputmode=\"none\" type=\"text\">\n                  </input>\n                </div>\n                <div class=\"form__textarea\">\n                  <textarea type=\"textarea\" class=\"textarea\" placeholder=\"\u0410\u0434\u0440\u0435\u0441\"\n                  name=\"addressExpaned\"></textarea>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__payment-methods\">\n                <h4 class=\"heading heading_level-4\">\u041E\u043F\u043B\u0430\u0442\u0430</h4>\n\n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentOnline\"\n                    id=\"paymentOnline\" checked></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentOnline\">\u041E\u043D\u043B\u0430\u0439\u043D-\u043E\u043F\u043B\u0430\u0442\u0430</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCash\"\n                    id=\"paymentCash\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCash\">\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCard\"\n                    id=\"paymentCard\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCard\">\u041A\u0430\u0440\u0442\u043E\u0439 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438</label>\n                </div>\n    \n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__notification\">\n                <h4 class=\"heading heading_level-4\">\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</h4>\n\n                <div class=\"checkbox\">\n                  <input class=\"checkbox__box\" type=\"checkbox\" name=\"smsNotification\" value id=\"smsNotification\"></input>\n                  <label class=\"label\" for=\"smsNotification\">\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C SMS \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</label>\n                </div>\n\n              </div>\n            </div>\n\n            <input class=\"button-submit form__button-submit\" type=\"submit\" value=\"\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437\"></input>\n            \n          </div>";
+  var formPartTwoHTML = "<div class=\"column column_s-2 column_m-3 column_l-5\">\n              <div class=\"form__product-card\">";
+  var productCardHTML = (0, _productCardTemplate.productCardTemplate)(productData, true);
+  var formPartThreeHTML = "</div>\n           </div>         \n        </div>\n    </form> ";
+  return formPartOneHTML + formPartTwoHTML + productCardHTML + formPartThreeHTML;
+};
+
+exports.orderFormTemplate = orderFormTemplate;
+},{"./productCardTemplate":"js/templates/productCardTemplate.js"}],"js/orderForm/showOrderForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.showOrderForm = void 0;
+
+var _renderOrderForm = require("./renderOrderForm");
+
+var _orderFormTemplate = require("../templates/orderFormTemplate");
+
+//Показ и работа с формой заказа
+var showOrderForm = function showOrderForm(productData) {
+  //Получить HTML из шаблона формы
+  var orderFormHTML = (0, _orderFormTemplate.orderFormTemplate)(productData); //Рендер формы
+
+  (0, _renderOrderForm.renderOrderForm)(orderFormHTML);
+};
+
+exports.showOrderForm = showOrderForm;
+},{"./renderOrderForm":"js/orderForm/renderOrderForm.js","../templates/orderFormTemplate":"js/templates/orderFormTemplate.js"}],"js/orderForm/hideOrderForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -472,12 +493,11 @@ exports.hideOrderForm = void 0;
 var hideOrderForm = function hideOrderForm(e) {
   var target = e.target;
 
-  while (!target.classList.contains("orderForm")) {
-    target = target.parentNode;
-
+  while (!target.classList.contains("orderForm") || e.type !== "successSubmitForm") {
+    //если клик по форме, то ничего не делать
     if (target.classList.contains("form")) {
       return;
-    } //если клик на кнопку вне формы, то скрыть форму
+    } //если клик вне формы, то скрыть форму
 
 
     if (target.classList.contains("orderForm")) {
@@ -488,6 +508,8 @@ var hideOrderForm = function hideOrderForm(e) {
     if (target.classList.contains("form__button-close")) {
       break;
     }
+
+    target = target.parentNode;
   }
 
   event.preventDefault();
@@ -502,555 +524,7 @@ var hideOrderForm = function hideOrderForm(e) {
 };
 
 exports.hideOrderForm = hideOrderForm;
-},{}],"js/orderForm/prepareToSubmit.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.prepareToSubmit = void 0;
-
-var prepareToSubmit = function prepareToSubmit(optData) {
-  var productData = optData.productData,
-      inputs = optData.inputs,
-      textarea = optData.textarea; //Контакная информация и расширенный адрес - обязательные поля.
-  //проверить, все ли требуемые элементы прошли валидацию
-
-  for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].validation.isInvalid) {
-      //Указать на первое поле, которое не валидно
-      inputs[i].touched = true;
-      inputs[i].validation.checkValidities(inputs[i]);
-      return;
-    }
-  }
-
-  if (textarea.validation.isInvalid) {
-    //Указать, что расширенный адрес не прошёл валидацию
-    textarea.touched = true;
-    textarea.validation.checkValidities(textarea);
-    return;
-  } //Если всё ОК, то подготовить данные для отправки
-  //Способ получения
-
-
-  var deliveryMethod = document.querySelector("input[name=deliveryMethod]:checked").value; //Город
-
-  var cityLocataion = document.querySelector(".select-field__option").innerHTML; //Способ оплаты
-
-  var paymentMethod = document.querySelector("input[name=paymentMethod]:checked").value; //СМС уведомления
-
-  var smsNotification = false;
-
-  if (document.querySelector("input[name=smsNotification]:checked")) {
-    smsNotification = true;
-  } //Пользователь может изменить размер в форме.
-  //На случай изменений, сохранить последний выбор
-
-
-  var checkedSize = document.querySelector(".radio-button-size-item:checked");
-
-  if (checkedSize) {
-    productData.checkedSize = checkedSize.value;
-  } //Данные формы
-
-
-  var formData = {};
-  formData.contactInfo = {};
-
-  for (var _i = 0; _i < inputs.length; _i++) {
-    formData.contactInfo[inputs[_i].name] = inputs[_i].value;
-  }
-
-  formData.contactInfo[textarea.name] = textarea.value;
-  formData.deliveryMethod = deliveryMethod;
-  formData.cityLocataion = cityLocataion;
-  formData.paymentMethod = paymentMethod;
-  formData.smsNotification = smsNotification;
-  formData.productData = productData;
-  console.log(formData);
-  console.log("Спасибо!"); //Скрыть форму
-
-  var currentForm = document.querySelector(".orderForm_active");
-  currentForm.classList.remove("orderForm_active");
-  setTimeout(function () {
-    currentForm.remove();
-  }, 300);
-};
-
-exports.prepareToSubmit = prepareToSubmit;
-},{}],"js/templates/orderFormTemplate.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.orderFormTemplate = void 0;
-
-var _productCardTemplate = require("./productCardTemplate");
-
-//Шаблон формы заказа продукта, основанный на интерполяции строк
-var orderFormTemplate = function orderFormTemplate(productData) {
-  var formPartOneHTML = "<form class=\"form\">\n      <div class=\"columns-wrapper\">\n        <div class=\"form__button-close\">\n          <button class=\"button-close-icon button-close\">\n            \u0417\u0430\u043A\u0440\u044B\u0442\u044C\n          </button>\n        </div>\n        <div class=\"columns-row\">\n          <div class=\"column column_s-2 column_m-3 column_l-7\">\n            \n            <div class=\"form__section\">\n              <div class=\"form__input-main-contacts\">\n                <h1 class=\"heading heading_level-1\">\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430</h1>\n                <h4 class=\"heading heading_level-4\">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E</h4>\n                <input class=\"form__input-text input-text js-input-required\" type=\"text\" name=\"fullName\" placeholder=\"\u0424\u0418\u041E\" value></input>\n                <input class=\"form__input-text input-text js-input-required\" type=\"text\" name=\"email\" placeholder=\"\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430\" value></input>\n              </div> \n           \n              <div class=\"form__input-tel\">\n                <input class=\"input-tel input-tel__country-code\" type=\"text\" name=\"countryCode\" value=\"+7\"\n                  readonly></input>\n                <input class=\"input-tel input-tel__operator-code js-input-required\" type=\"text\" name=\"operatorCode\" placeholder=\"\u041A\u043E\u0434\"\n                  value></input>\n                <input class=\"input-tel input-tel__number js-input-required\" type=\"text\" name=\"telNumber\" placeholder=\"\u041D\u043E\u043C\u0435\u0440\" value></input>\n              </div>\n            </div>\n\n            <div class=\"form__section\">  \n              <h4 class=\"heading heading_level-4\">\u0421\u043F\u043E\u0441\u043E\u0431 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430</h4>\n              <div class=\"form__delivery-method\">\n\n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"selfPickup\" id=\"selfPickup\"></input> \n                  <label class=\"radio-button-sqared__label\" for=\"selfPickup\">\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437</label>\n                </div>\n                \n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"deliviryPickup\" id=\"deliveryPickup\" checked></input>\n                  <label class=\"radio-button-sqared__label\" for=\"deliveryPickup\">\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430</label>\n                </div>\n              \n              </div>\n            </div>\n\n            <div class=\"form__section\">\n              <div class=\"form__delivery-address\">\n                <h4 class=\"heading heading_level-4\">\u0410\u0434\u0440\u0435\u0441</h4>\n                <div class=\"select\">\n                  <input class=\"input-select\" name=\"cityLocataion\" placeholder=\"\u0413\u043E\u0440\u043E\u0434\" inputmode=\"none\">\n                  </input>\n                </div>\n                <div class=\"form__textarea\">\n                  <textarea type=\"textarea\" class=\"textarea\" placeholder=\"\u0410\u0434\u0440\u0435\u0441\"\n                  name=\"addressExpaned\"></textarea>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__payment-methods\">\n                <h4 class=\"heading heading_level-4\">\u041E\u043F\u043B\u0430\u0442\u0430</h4>\n\n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentOnline\"\n                    id=\"paymentOnline\" checked></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentOnline\">\u041E\u043D\u043B\u0430\u0439\u043D-\u043E\u043F\u043B\u0430\u0442\u0430</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCash\"\n                    id=\"paymentCash\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCash\">\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCard\"\n                    id=\"paymentCard\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCard\">\u041A\u0430\u0440\u0442\u043E\u0439 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438</label>\n                </div>\n    \n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__notification\">\n                <h4 class=\"heading heading_level-4\">\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</h4>\n\n                <div class=\"checkbox\">\n                  <input class=\"checkbox__box\" type=\"checkbox\" name=\"smsNotification\" value id=\"smsNotification\"></input>\n                  <label class=\"label\" for=\"smsNotification\">\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C SMS \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</label>\n                </div>\n\n              </div>\n            </div>\n\n            <input class=\"button-submit form__button-submit\" type=\"submit\" value=\"\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437\"></input>\n            \n          </div>";
-  var formPartTwoHTML = "<div class=\"column column_s-2 column_m-3 column_l-5\">\n              <div class=\"form__product-card\">";
-  var productCardHTML = (0, _productCardTemplate.productCardTemplate)(productData, true);
-  var formPartThreeHTML = "</div>\n           </div>         \n        </div>\n    </form> ";
-  return formPartOneHTML + formPartTwoHTML + productCardHTML + formPartThreeHTML;
-};
-
-exports.orderFormTemplate = orderFormTemplate;
-},{"./productCardTemplate":"js/templates/productCardTemplate.js"}],"node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js":[function(require,module,exports) {
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-module.exports = _classCallCheck;
-},{}],"node_modules/core-js/library/modules/_global.js":[function(require,module,exports) {
-
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self
-  // eslint-disable-next-line no-new-func
-  : Function('return this')();
-if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
-
-},{}],"node_modules/core-js/library/modules/_core.js":[function(require,module,exports) {
-var core = module.exports = { version: '2.6.11' };
-if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-},{}],"node_modules/core-js/library/modules/_a-function.js":[function(require,module,exports) {
-module.exports = function (it) {
-  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
-  return it;
-};
-
-},{}],"node_modules/core-js/library/modules/_ctx.js":[function(require,module,exports) {
-// optional / simple context binding
-var aFunction = require('./_a-function');
-module.exports = function (fn, that, length) {
-  aFunction(fn);
-  if (that === undefined) return fn;
-  switch (length) {
-    case 1: return function (a) {
-      return fn.call(that, a);
-    };
-    case 2: return function (a, b) {
-      return fn.call(that, a, b);
-    };
-    case 3: return function (a, b, c) {
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function (/* ...args */) {
-    return fn.apply(that, arguments);
-  };
-};
-
-},{"./_a-function":"node_modules/core-js/library/modules/_a-function.js"}],"node_modules/core-js/library/modules/_is-object.js":[function(require,module,exports) {
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-},{}],"node_modules/core-js/library/modules/_an-object.js":[function(require,module,exports) {
-var isObject = require('./_is-object');
-module.exports = function (it) {
-  if (!isObject(it)) throw TypeError(it + ' is not an object!');
-  return it;
-};
-
-},{"./_is-object":"node_modules/core-js/library/modules/_is-object.js"}],"node_modules/core-js/library/modules/_fails.js":[function(require,module,exports) {
-module.exports = function (exec) {
-  try {
-    return !!exec();
-  } catch (e) {
-    return true;
-  }
-};
-
-},{}],"node_modules/core-js/library/modules/_descriptors.js":[function(require,module,exports) {
-// Thank's IE8 for his funny defineProperty
-module.exports = !require('./_fails')(function () {
-  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
-});
-
-},{"./_fails":"node_modules/core-js/library/modules/_fails.js"}],"node_modules/core-js/library/modules/_dom-create.js":[function(require,module,exports) {
-var isObject = require('./_is-object');
-var document = require('./_global').document;
-// typeof document.createElement is 'object' in old IE
-var is = isObject(document) && isObject(document.createElement);
-module.exports = function (it) {
-  return is ? document.createElement(it) : {};
-};
-
-},{"./_is-object":"node_modules/core-js/library/modules/_is-object.js","./_global":"node_modules/core-js/library/modules/_global.js"}],"node_modules/core-js/library/modules/_ie8-dom-define.js":[function(require,module,exports) {
-module.exports = !require('./_descriptors') && !require('./_fails')(function () {
-  return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
-});
-
-},{"./_descriptors":"node_modules/core-js/library/modules/_descriptors.js","./_fails":"node_modules/core-js/library/modules/_fails.js","./_dom-create":"node_modules/core-js/library/modules/_dom-create.js"}],"node_modules/core-js/library/modules/_to-primitive.js":[function(require,module,exports) {
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = require('./_is-object');
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function (it, S) {
-  if (!isObject(it)) return it;
-  var fn, val;
-  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-},{"./_is-object":"node_modules/core-js/library/modules/_is-object.js"}],"node_modules/core-js/library/modules/_object-dp.js":[function(require,module,exports) {
-var anObject = require('./_an-object');
-var IE8_DOM_DEFINE = require('./_ie8-dom-define');
-var toPrimitive = require('./_to-primitive');
-var dP = Object.defineProperty;
-
-exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return dP(O, P, Attributes);
-  } catch (e) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-
-},{"./_an-object":"node_modules/core-js/library/modules/_an-object.js","./_ie8-dom-define":"node_modules/core-js/library/modules/_ie8-dom-define.js","./_to-primitive":"node_modules/core-js/library/modules/_to-primitive.js","./_descriptors":"node_modules/core-js/library/modules/_descriptors.js"}],"node_modules/core-js/library/modules/_property-desc.js":[function(require,module,exports) {
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-},{}],"node_modules/core-js/library/modules/_hide.js":[function(require,module,exports) {
-var dP = require('./_object-dp');
-var createDesc = require('./_property-desc');
-module.exports = require('./_descriptors') ? function (object, key, value) {
-  return dP.f(object, key, createDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-},{"./_object-dp":"node_modules/core-js/library/modules/_object-dp.js","./_property-desc":"node_modules/core-js/library/modules/_property-desc.js","./_descriptors":"node_modules/core-js/library/modules/_descriptors.js"}],"node_modules/core-js/library/modules/_has.js":[function(require,module,exports) {
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-},{}],"node_modules/core-js/library/modules/_export.js":[function(require,module,exports) {
-
-var global = require('./_global');
-var core = require('./_core');
-var ctx = require('./_ctx');
-var hide = require('./_hide');
-var has = require('./_has');
-var PROTOTYPE = 'prototype';
-
-var $export = function (type, name, source) {
-  var IS_FORCED = type & $export.F;
-  var IS_GLOBAL = type & $export.G;
-  var IS_STATIC = type & $export.S;
-  var IS_PROTO = type & $export.P;
-  var IS_BIND = type & $export.B;
-  var IS_WRAP = type & $export.W;
-  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
-  var expProto = exports[PROTOTYPE];
-  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
-  var key, own, out;
-  if (IS_GLOBAL) source = name;
-  for (key in source) {
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    if (own && has(exports, key)) continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
-    // bind timers to global for call from export context
-    : IS_BIND && own ? ctx(out, global)
-    // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function (C) {
-      var F = function (a, b, c) {
-        if (this instanceof C) {
-          switch (arguments.length) {
-            case 0: return new C();
-            case 1: return new C(a);
-            case 2: return new C(a, b);
-          } return new C(a, b, c);
-        } return C.apply(this, arguments);
-      };
-      F[PROTOTYPE] = C[PROTOTYPE];
-      return F;
-    // make static versions for prototype methods
-    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if (IS_PROTO) {
-      (exports.virtual || (exports.virtual = {}))[key] = out;
-      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
-    }
-  }
-};
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library`
-module.exports = $export;
-
-},{"./_global":"node_modules/core-js/library/modules/_global.js","./_core":"node_modules/core-js/library/modules/_core.js","./_ctx":"node_modules/core-js/library/modules/_ctx.js","./_hide":"node_modules/core-js/library/modules/_hide.js","./_has":"node_modules/core-js/library/modules/_has.js"}],"node_modules/core-js/library/modules/es6.object.define-property.js":[function(require,module,exports) {
-var $export = require('./_export');
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !require('./_descriptors'), 'Object', { defineProperty: require('./_object-dp').f });
-
-},{"./_export":"node_modules/core-js/library/modules/_export.js","./_descriptors":"node_modules/core-js/library/modules/_descriptors.js","./_object-dp":"node_modules/core-js/library/modules/_object-dp.js"}],"node_modules/core-js/library/fn/object/define-property.js":[function(require,module,exports) {
-require('../../modules/es6.object.define-property');
-var $Object = require('../../modules/_core').Object;
-module.exports = function defineProperty(it, key, desc) {
-  return $Object.defineProperty(it, key, desc);
-};
-
-},{"../../modules/es6.object.define-property":"node_modules/core-js/library/modules/es6.object.define-property.js","../../modules/_core":"node_modules/core-js/library/modules/_core.js"}],"node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":[function(require,module,exports) {
-module.exports = require("core-js/library/fn/object/define-property");
-},{"core-js/library/fn/object/define-property":"node_modules/core-js/library/fn/object/define-property.js"}],"node_modules/@babel/runtime-corejs2/helpers/createClass.js":[function(require,module,exports) {
-var _Object$defineProperty = require("../core-js/object/define-property");
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-
-    _Object$defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-},{"../core-js/object/define-property":"node_modules/@babel/runtime-corejs2/core-js/object/define-property.js"}],"js/common/FieldValidation.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.FieldValidation = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//Класс валидации для field.
-//Содержит массив validaties, в который помещаются необходимые проверки,
-//а также общие для field методы
-var FieldValidation =
-/*#__PURE__*/
-function () {
-  function FieldValidation() {
-    (0, _classCallCheck2.default)(this, FieldValidation);
-    this.validities = [this.isEmptyField, this.isBigString];
-    this.errors = [];
-    this.isInvalid = true;
-  } //Провести необходимые валидации
-
-
-  (0, _createClass2.default)(FieldValidation, [{
-    key: "checkValidities",
-    value: function checkValidities(field) {
-      if (field.touched) {
-        for (var i = 0; i < this.validities.length; i++) {
-          var error = this.validities[i](field); //Текущие ошибки храним в this.errors
-          //(может понадобиться, если потребуется выводить информация пользователю)
-
-          if (error) this.errors.push(error);
-        } //Обработать ошибки
-
-
-        field.validation.handleErrors(field);
-      }
-    } //Выставить класс _invalid для field
-
-  }, {
-    key: "setInvalid",
-    value: function setInvalid(field) {
-      var className = field.tagName.toLowerCase();
-
-      if (!field.classList.contains("".concat(className, "_invalid"))) {
-        field.classList.add("".concat(className, "_invalid"));
-      }
-
-      this.isInvalid = true;
-    } //Убрать класс _invalid для input
-
-  }, {
-    key: "removeInvalid",
-    value: function removeInvalid(field) {
-      var className = field.tagName.toLowerCase();
-
-      if (field.classList.contains("".concat(className, "_invalid"))) {
-        field.classList.remove("".concat(className, "_invalid"));
-      }
-
-      this.isInvalid = false;
-    } //Общая для всех field проверка на пустой ввод
-
-  }, {
-    key: "isEmptyField",
-    value: function isEmptyField(field) {
-      if (!field.value.trim()) {
-        return "Поле не может быть пустым";
-      }
-    } //Общая для всех field проверка на максимальную длину строки
-
-  }, {
-    key: "isBigString",
-    value: function isBigString(field) {
-      if (field.value.length > 100) {
-        return "Максимальная длина строки 100 символов";
-      }
-    } //Обработать текущие ошибки валидации
-
-  }, {
-    key: "handleErrors",
-    value: function handleErrors(field) {
-      if (this.errors.length) {
-        this.setInvalid(field); //Отладочная функция showErrors выводит ошибки в консль
-
-        this.showErrors();
-      } else {
-        this.removeInvalid(field);
-      }
-    } //Отладочная функция - выводит текущие ошибки в консоль
-
-  }, {
-    key: "showErrors",
-    value: function showErrors() {
-      if (this.errors.length) {
-        for (var i = 0; i < this.errors.length; i++) {
-          console.log(this.errors[i]);
-        }
-
-        this.errors = [];
-      }
-    }
-  }]);
-  return FieldValidation;
-}();
-
-exports.FieldValidation = FieldValidation;
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"node_modules/@babel/runtime-corejs2/helpers/createClass.js"}],"js/input/inputHandler.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.inputHandler = void 0;
-
-var _FieldValidation = require("../common/FieldValidation");
-
-//Обработчик для input
-var inputHandler = function inputHandler(input) {
-  //присвоить необходимые для валидации общие свойства и методы для input
-  input.validation = new _FieldValidation.FieldValidation();
-  input.touched = false; //В зависимости от функциональной принадлежности input - добавить дополнительные проверки
-
-  if (input.name === "email") input.validation.validities.push(isEmailInvalid);
-  if (input.name === "operatorCode") input.validation.validities.push(isOperatorCodeInvalid);
-  if (input.name === "telNumber") input.validation.validities.push(isTelNumberInvalid); //Назначить обработчик нажатия на клавиатуру внутри поля input
-
-  input.addEventListener("keyup", function (e) {
-    //Если переключение при помощи Tab, то не обрабатывать
-    if (e.code === "Tab") return; //отметить, что с текущим input уже работали
-
-    if (!input.touched) {
-      input.touched = true;
-    } //Провести проверку вводимого пользователем значения
-
-
-    input.validation.checkValidities(input);
-  });
-}; ///////
-//Проверка валидности ввода email адреса
-
-
-exports.inputHandler = inputHandler;
-
-function isEmailInvalid(input) {
-  var match = input.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-  if (!match) {
-    return "Введите корректный email-адрес";
-  }
-} //Проверка валидности ввода кода оператор телефона
-
-
-function isOperatorCodeInvalid(input) {
-  var match = input.value.match(/\b\d{3}\b/);
-
-  if (!match) {
-    return "Введите валидный цифровой код оператора длиной 3 символа";
-  }
-} //Проверка валидности ввода номера телефона
-
-
-function isTelNumberInvalid(input) {
-  var match = input.value.match(/\b\d{7}\b/);
-
-  if (!match) {
-    return "Введите валидный номер телефона длиной 7 символов";
-  }
-} ///////
-},{"../common/FieldValidation":"js/common/FieldValidation.js"}],"js/textarea/textareaHandler.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.textareaHandler = void 0;
-
-var _FieldValidation = require("../common/FieldValidation");
-
-//обработчик для textarea
-var textareaHandler = function textareaHandler(textarea) {
-  textarea.validation = new _FieldValidation.FieldValidation();
-  textarea.touched = false; //Назначить обработчик нажатия на клавиатуру внутри поля input
-
-  textarea.addEventListener("keyup", function (e) {
-    //Если переключение при помощи Tab, то не обрабатывать
-    if (e.code === "Tab") return; //отметить, что с текущим textarea уже работали
-
-    if (!textarea.touched) {
-      textarea.touched = true;
-    } //Провести проверку вводимого пользователем значения
-
-
-    textarea.validation.checkValidities(textarea);
-  });
-};
-
-exports.textareaHandler = textareaHandler;
-},{"../common/FieldValidation":"js/common/FieldValidation.js"}],"js/select/shutDownSelect.js":[function(require,module,exports) {
+},{}],"js/select/shutDownSelect.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1809,7 +1283,7 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regene
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//функция загузки произвольных данных в JSON с произвольного сервера
+//функция загрузки произвольных данных в JSON с произвольного сервера
 var getDataAsync = function getDataAsync(url) {
   var response, parsedData;
   return _regenerator.default.async(function getDataAsync$(_context) {
@@ -1891,7 +1365,9 @@ var openUpSelect = function openUpSelect(selectBlock) {
       option.addEventListener("click", function (e) {
         e.stopPropagation();
         var checkedArea = e.target.innerHTML;
-        document.querySelector(".input-select").placeholder = checkedArea; //Скрыть выбор опций селектора
+        var inputSelect = document.querySelector(".input-select");
+        inputSelect.placeholder = checkedArea;
+        inputSelect.value = checkedArea; //Скрыть выбор опций селектора
 
         (0, _shutDownSelect.shutDownSelect)();
       });
@@ -1929,66 +1405,733 @@ var selectHandler = function selectHandler(e) {
 };
 
 exports.selectHandler = selectHandler;
-},{"./shutDownSelect":"js/select/shutDownSelect.js","./openUpSelect":"js/select/openUpSelect.js"}],"js/orderForm/showOrderForm.js":[function(require,module,exports) {
+},{"./shutDownSelect":"js/select/shutDownSelect.js","./openUpSelect":"js/select/openUpSelect.js"}],"js/select/selectTowns.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.showOrderForm = void 0;
+exports.selectTowns = void 0;
 
-var _renderOrderForm = require("./renderOrderForm");
+var _selectHandler = require("./selectHandler");
+
+//Возвращает обработанный select для выбора городов
+var selectTowns = function selectTowns() {
+  //Обработать селектор города
+  var select = document.querySelector(".select");
+
+  if (select) {
+    select.addEventListener("click", _selectHandler.selectHandler);
+    select.addEventListener("input", function (e) {
+      e.target.value = "";
+    });
+    return select;
+  }
+};
+
+exports.selectTowns = selectTowns;
+},{"./selectHandler":"js/select/selectHandler.js"}],"node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js":[function(require,module,exports) {
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+},{}],"node_modules/core-js/library/modules/_global.js":[function(require,module,exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
+},{}],"node_modules/core-js/library/modules/_core.js":[function(require,module,exports) {
+var core = module.exports = { version: '2.6.11' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+},{}],"node_modules/core-js/library/modules/_a-function.js":[function(require,module,exports) {
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+},{}],"node_modules/core-js/library/modules/_ctx.js":[function(require,module,exports) {
+// optional / simple context binding
+var aFunction = require('./_a-function');
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+},{"./_a-function":"node_modules/core-js/library/modules/_a-function.js"}],"node_modules/core-js/library/modules/_is-object.js":[function(require,module,exports) {
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+},{}],"node_modules/core-js/library/modules/_an-object.js":[function(require,module,exports) {
+var isObject = require('./_is-object');
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+},{"./_is-object":"node_modules/core-js/library/modules/_is-object.js"}],"node_modules/core-js/library/modules/_fails.js":[function(require,module,exports) {
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
+
+},{}],"node_modules/core-js/library/modules/_descriptors.js":[function(require,module,exports) {
+// Thank's IE8 for his funny defineProperty
+module.exports = !require('./_fails')(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+},{"./_fails":"node_modules/core-js/library/modules/_fails.js"}],"node_modules/core-js/library/modules/_dom-create.js":[function(require,module,exports) {
+var isObject = require('./_is-object');
+var document = require('./_global').document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
+},{"./_is-object":"node_modules/core-js/library/modules/_is-object.js","./_global":"node_modules/core-js/library/modules/_global.js"}],"node_modules/core-js/library/modules/_ie8-dom-define.js":[function(require,module,exports) {
+module.exports = !require('./_descriptors') && !require('./_fails')(function () {
+  return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
+});
+
+},{"./_descriptors":"node_modules/core-js/library/modules/_descriptors.js","./_fails":"node_modules/core-js/library/modules/_fails.js","./_dom-create":"node_modules/core-js/library/modules/_dom-create.js"}],"node_modules/core-js/library/modules/_to-primitive.js":[function(require,module,exports) {
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = require('./_is-object');
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+},{"./_is-object":"node_modules/core-js/library/modules/_is-object.js"}],"node_modules/core-js/library/modules/_object-dp.js":[function(require,module,exports) {
+var anObject = require('./_an-object');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var toPrimitive = require('./_to-primitive');
+var dP = Object.defineProperty;
+
+exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+},{"./_an-object":"node_modules/core-js/library/modules/_an-object.js","./_ie8-dom-define":"node_modules/core-js/library/modules/_ie8-dom-define.js","./_to-primitive":"node_modules/core-js/library/modules/_to-primitive.js","./_descriptors":"node_modules/core-js/library/modules/_descriptors.js"}],"node_modules/core-js/library/modules/_property-desc.js":[function(require,module,exports) {
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+},{}],"node_modules/core-js/library/modules/_hide.js":[function(require,module,exports) {
+var dP = require('./_object-dp');
+var createDesc = require('./_property-desc');
+module.exports = require('./_descriptors') ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+},{"./_object-dp":"node_modules/core-js/library/modules/_object-dp.js","./_property-desc":"node_modules/core-js/library/modules/_property-desc.js","./_descriptors":"node_modules/core-js/library/modules/_descriptors.js"}],"node_modules/core-js/library/modules/_has.js":[function(require,module,exports) {
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+},{}],"node_modules/core-js/library/modules/_export.js":[function(require,module,exports) {
+
+var global = require('./_global');
+var core = require('./_core');
+var ctx = require('./_ctx');
+var hide = require('./_hide');
+var has = require('./_has');
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+},{"./_global":"node_modules/core-js/library/modules/_global.js","./_core":"node_modules/core-js/library/modules/_core.js","./_ctx":"node_modules/core-js/library/modules/_ctx.js","./_hide":"node_modules/core-js/library/modules/_hide.js","./_has":"node_modules/core-js/library/modules/_has.js"}],"node_modules/core-js/library/modules/es6.object.define-property.js":[function(require,module,exports) {
+var $export = require('./_export');
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !require('./_descriptors'), 'Object', { defineProperty: require('./_object-dp').f });
+
+},{"./_export":"node_modules/core-js/library/modules/_export.js","./_descriptors":"node_modules/core-js/library/modules/_descriptors.js","./_object-dp":"node_modules/core-js/library/modules/_object-dp.js"}],"node_modules/core-js/library/fn/object/define-property.js":[function(require,module,exports) {
+require('../../modules/es6.object.define-property');
+var $Object = require('../../modules/_core').Object;
+module.exports = function defineProperty(it, key, desc) {
+  return $Object.defineProperty(it, key, desc);
+};
+
+},{"../../modules/es6.object.define-property":"node_modules/core-js/library/modules/es6.object.define-property.js","../../modules/_core":"node_modules/core-js/library/modules/_core.js"}],"node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/define-property");
+},{"core-js/library/fn/object/define-property":"node_modules/core-js/library/fn/object/define-property.js"}],"node_modules/@babel/runtime-corejs2/helpers/createClass.js":[function(require,module,exports) {
+var _Object$defineProperty = require("../core-js/object/define-property");
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+
+    _Object$defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+},{"../core-js/object/define-property":"node_modules/@babel/runtime-corejs2/core-js/object/define-property.js"}],"js/common/validationError.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeValidationError = exports.showValidationError = void 0;
+
+//показывает ошибки валидации пользователю
+var showValidationError = function showValidationError(target, errors) {
+  //если уже показывается ошибка, то выйти
+  if (document.querySelector(".js-error.form-error-block[data-target-name=\"".concat(target.name, "\"]"))) {
+    return;
+  }
+
+  var errorBlock = document.createElement("ul");
+  errorBlock.classList.add("js-error");
+  errorBlock.classList.add("form-error-block");
+  errorBlock.setAttribute("data-target-name", "".concat(target.name));
+  errors.forEach(function (error) {
+    errorBlock.innerHTML += "<li class='form-error-block__item'>".concat(error, "</li>");
+  });
+  errorBlock.style.top = target.offsetHeight + "px";
+  target = target.parentNode;
+  target.appendChild(errorBlock);
+}; //убирает попап с текущими ошибками для поля
+
+
+exports.showValidationError = showValidationError;
+
+var removeValidationError = function removeValidationError(target) {
+  var currentErrorBlock = document.querySelector(".js-error.form-error-block[data-target-name=\"".concat(target.name, "\"]"));
+
+  if (currentErrorBlock) {
+    currentErrorBlock.remove();
+  }
+};
+
+exports.removeValidationError = removeValidationError;
+},{}],"js/common/FieldValidation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FieldValidation = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _validationError = require("./validationError");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//Класс валидации для field.
+//Содержит массив validaties, в который помещаются необходимые проверки,
+//а также общие для field методы
+var FieldValidation =
+/*#__PURE__*/
+function () {
+  function FieldValidation() {
+    (0, _classCallCheck2.default)(this, FieldValidation);
+    this.validities = [this.isEmptyField, this.isBigString];
+    this.errors = [];
+    this.isInvalid = true;
+  } //Провести необходимые валидации
+
+
+  (0, _createClass2.default)(FieldValidation, [{
+    key: "checkValidities",
+    value: function checkValidities(field) {
+      var _this = this;
+
+      if (field.touched) {
+        this.validities.forEach(function (validity) {
+          var error = validity(field); //Текущие ошибки храним в this.errors
+          //(может понадобиться, если потребуется выводить информация пользователю)
+
+          if (error) _this.errors.push(error);
+        }); //Обработать ошибки
+
+        field.validation.handleErrors(field);
+      }
+    } //Выставить класс _invalid для field
+
+  }, {
+    key: "setInvalid",
+    value: function setInvalid(field) {
+      var className = getClassName(field);
+
+      if (!field.classList.contains("".concat(className, "_invalid"))) {
+        field.classList.add("".concat(className, "_invalid"));
+      }
+
+      this.isInvalid = true;
+    } //Убрать класс _invalid для input
+
+  }, {
+    key: "removeInvalid",
+    value: function removeInvalid(field) {
+      var className = getClassName(field);
+
+      if (field.classList.contains("".concat(className, "_invalid"))) {
+        field.classList.remove("".concat(className, "_invalid"));
+      }
+
+      this.isInvalid = false;
+    } //Общая для всех field проверка на пустой ввод
+
+  }, {
+    key: "isEmptyField",
+    value: function isEmptyField(field) {
+      if (!field.value.trim()) {
+        return "Поле не может быть пустым";
+      }
+    } //Общая для всех field проверка на максимальную длину строки
+
+  }, {
+    key: "isBigString",
+    value: function isBigString(field) {
+      if (field.value.length > 100) {
+        return "Максимальная длина строки 100 символов";
+      }
+    } //Обработать текущие ошибки валидации
+
+  }, {
+    key: "handleErrors",
+    value: function handleErrors(field) {
+      if (this.errors.length) {
+        this.setInvalid(field);
+        (0, _validationError.showValidationError)(field, this.errors);
+        this.errors = [];
+      } else {
+        this.removeInvalid(field);
+      }
+    } //Отладочная функция - выводит текущие ошибки в консоль
+
+  }, {
+    key: "showErrors",
+    value: function showErrors() {
+      if (this.errors.length) {
+        for (var i = 0; i < this.errors.length; i++) {
+          console.log(this.errors[i]);
+        }
+
+        this.errors = [];
+      }
+    }
+  }]);
+  return FieldValidation;
+}();
+
+exports.FieldValidation = FieldValidation;
+
+function getClassName(elem) {
+  if (elem.className.match(/input/)) {
+    return "input";
+  } else if (elem.className.match(/textarea/)) {
+    return "textarea";
+  }
+}
+},{"@babel/runtime-corejs2/helpers/classCallCheck":"node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"node_modules/@babel/runtime-corejs2/helpers/createClass.js","./validationError":"js/common/validationError.js"}],"js/input/inputValidationFunction.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isTelNumberInvalid = exports.isOperatorCodeInvalid = exports.isEmailInvalid = void 0;
+
+//содержит необходимые для валидации input функции
+//Проверка валидности ввода email адреса
+var isEmailInvalid = function isEmailInvalid(input) {
+  var match = input.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+  if (!match) {
+    return "Введите корректный email-адрес";
+  }
+}; //Проверка валидности ввода кода оператор телефона
+
+
+exports.isEmailInvalid = isEmailInvalid;
+
+var isOperatorCodeInvalid = function isOperatorCodeInvalid(input) {
+  var match = input.value.match(/\b\d{3}\b/);
+
+  if (!match) {
+    return "Введите валидный цифровой код оператора длиной 3 символа";
+  }
+}; //Проверка валидности ввода номера телефона
+
+
+exports.isOperatorCodeInvalid = isOperatorCodeInvalid;
+
+var isTelNumberInvalid = function isTelNumberInvalid(input) {
+  var match = input.value.match(/\b\d{7}\b/);
+
+  if (!match) {
+    return "Введите валидный номер телефона длиной 7 символов";
+  }
+};
+
+exports.isTelNumberInvalid = isTelNumberInvalid;
+},{}],"js/input/inputHandler.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.inputHandler = void 0;
+
+var _FieldValidation = require("../common/FieldValidation");
+
+var _validationError = require("../common/validationError");
+
+var _inputValidationFunction = require("./inputValidationFunction");
+
+//Обработчик для input
+var inputHandler = function inputHandler(input) {
+  //присвоить необходимые для валидации общие свойства и методы для input
+  input.validation = new _FieldValidation.FieldValidation();
+  input.touched = false; //В зависимости от функциональной принадлежности input - добавить дополнительные проверки
+
+  if (input.name === "email") input.validation.validities.push(_inputValidationFunction.isEmailInvalid);
+  if (input.name === "operatorCode") input.validation.validities.push(_inputValidationFunction.isOperatorCodeInvalid);
+  if (input.name === "telNumber") input.validation.validities.push(_inputValidationFunction.isTelNumberInvalid);
+  input.addEventListener("keyup", function (e) {
+    //Если переключение при помощи Tab, то не обрабатывать
+    if (e.code === "Tab") return; //иначе отметить, что с текущим input уже работали
+
+    if (!input.touched) {
+      input.touched = true;
+    } //убрать ошибки валидации при очередном наборе
+
+
+    (0, _validationError.removeValidationError)(input);
+  }); //Назначить обработчик ухода с поля input
+
+  input.addEventListener("blur", function (e) {
+    //если с полем уже работали, то при уходе проверить поле на ошибки и отобразить их пользователю
+    if (input.touched) {
+      input.validation.checkValidities(input);
+    }
+  });
+};
+
+exports.inputHandler = inputHandler;
+},{"../common/FieldValidation":"js/common/FieldValidation.js","../common/validationError":"js/common/validationError.js","./inputValidationFunction":"js/input/inputValidationFunction.js"}],"js/input/inputsOrderForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.inputsOrderForm = void 0;
+
+var _inputHandler = require("./inputHandler");
+
+//Обработать и получить обязательные к заполнению inputs на форме заказа
+var inputsOrderForm = function inputsOrderForm() {
+  var inputs = document.querySelectorAll(".js-input-required");
+
+  if (inputs) {
+    inputs.forEach(function (input) {
+      (0, _inputHandler.inputHandler)(input);
+    });
+    return inputs;
+  }
+};
+
+exports.inputsOrderForm = inputsOrderForm;
+},{"./inputHandler":"js/input/inputHandler.js"}],"js/textarea/textareaHandler.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.textareaHandler = void 0;
+
+var _FieldValidation = require("../common/FieldValidation");
+
+var _validationError = require("../common/validationError");
+
+//обработчик для textarea
+var textareaHandler = function textareaHandler(textarea) {
+  textarea.validation = new _FieldValidation.FieldValidation();
+  textarea.touched = false; //Назначить обработчик нажатия на клавиатуру внутри поля input
+
+  textarea.addEventListener("keyup", function (e) {
+    //Если переключение при помощи Tab, то не обрабатывать
+    if (e.code === "Tab") return; //отметить, что с текущим textarea уже работали
+
+    if (!textarea.touched) {
+      textarea.touched = true;
+    } //Провести проверку вводимого пользователем значения
+
+
+    textarea.validation.checkValidities(textarea); //если были показаны ошибки валидации,то убрать при очередном наборе
+
+    (0, _validationError.removeValidationError)(textarea);
+  }); //Назначить обработчик ухода с поля textarea
+
+  textarea.addEventListener("blur", function (e) {
+    //если с полем уже работали, то при уходе проверить поле на ошибки и отобразить их пользователю
+    if (textarea.touched) {
+      textarea.validation.checkValidities(textarea);
+    }
+  });
+};
+
+exports.textareaHandler = textareaHandler;
+},{"../common/FieldValidation":"js/common/FieldValidation.js","../common/validationError":"js/common/validationError.js"}],"js/textarea/textareaOrderForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.textareaOrderForm = void 0;
+
+var _textareaHandler = require("./textareaHandler");
+
+//Обработать и получить обязательное к заполнению textarea на форме заказа
+var textareaOrderForm = function textareaOrderForm() {
+  var textarea = document.querySelector("textarea");
+
+  if (textarea) {
+    (0, _textareaHandler.textareaHandler)(textarea);
+    return textarea;
+  }
+};
+
+exports.textareaOrderForm = textareaOrderForm;
+},{"./textareaHandler":"js/textarea/textareaHandler.js"}],"js/orderForm/prepareToSubmit.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.prepareToSubmit = void 0;
+
+var _orderForm = require("./orderForm");
+
+var prepareToSubmit = function prepareToSubmit(optData) {
+  var productData = optData.productData,
+      inputs = optData.inputs,
+      textarea = optData.textarea; //Контакная информация и расширенный адрес - обязательные поля.
+  //проверить, все ли требуемые элементы прошли валидацию
+
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].validation.isInvalid) {
+      //Указать на первое поле, которое не валидно
+      inputs[i].touched = true;
+      inputs[i].validation.checkValidities(inputs[i]);
+      return;
+    }
+  }
+
+  if (textarea.validation.isInvalid) {
+    //Указать, что расширенный адрес не прошёл валидацию
+    textarea.touched = true;
+    textarea.validation.checkValidities(textarea);
+    return;
+  } //Если всё ОК, то подготовить данные для отправки
+
+
+  var formData = {}; //Сохранить значения всех inputs
+
+  var allInputs = document.querySelectorAll("input");
+  [].forEach.call(allInputs, function (input) {
+    if (input.type === "text" || input.type === "radio" && input.checked) {
+      formData[input.name] = input.value;
+    } else if (input.type === "checkbox") {
+      formData[input.name] = input.checked ? true : false;
+    }
+  }); //Сохранить значения textarea
+
+  formData[textarea.name] = textarea.value; //Пользователь может изменить размер в форме.
+  //На случай изменений, сохранить последний выбор
+
+  var checkedSize = document.querySelector(".radio-button-size-item:checked");
+
+  if (checkedSize) {
+    productData.checkedSize = checkedSize.value;
+  } //Добавить данные по выбранному товару
+
+
+  formData.productData = productData;
+  console.log(formData);
+  console.log("Спасибо!");
+  return true;
+};
+
+exports.prepareToSubmit = prepareToSubmit;
+},{"./orderForm":"js/orderForm/orderForm.js"}],"js/orderForm/orderForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.orderForm = exports.successSubmitForm = void 0;
+
+var _showOrderForm = require("./showOrderForm");
 
 var _hideOrderForm = require("./hideOrderForm");
 
+var _selectTowns = require("../select/selectTowns");
+
+var _inputsOrderForm = require("../input/inputsOrderForm");
+
+var _textareaOrderForm = require("../textarea/textareaOrderForm");
+
 var _prepareToSubmit = require("./prepareToSubmit");
 
-var _orderFormTemplate = require("../templates/orderFormTemplate");
+//Событие успешной отправки формы
+var successSubmitForm = new CustomEvent("successSubmitForm", {
+  bubbles: true
+}); //Работа с формой заказа
 
-var _inputHandler = require("../input/inputHandler");
+exports.successSubmitForm = successSubmitForm;
 
-var _textareaHandler = require("../textarea/textareaHandler");
+var orderForm = function orderForm(productData) {
+  //показать форму заказа
+  (0, _showOrderForm.showOrderForm)(productData); //назначить обработчик клика по области вне формы
 
-var _selectHandler = require("../select/selectHandler");
+  var orderForm = document.querySelector(".orderForm");
+  orderForm.addEventListener("click", _hideOrderForm.hideOrderForm); //назначить обработчик клика по кнопке "Закрыть", чтобы скрывать форму
 
-//Показ и работа с формой заказа
-var showOrderForm = function showOrderForm(productData) {
-  //Получить HTML из шаблона формы
-  var orderFormHTML = (0, _orderFormTemplate.orderFormTemplate)(productData); //Рендер формы
+  document.querySelector(".button-close-icon").addEventListener("click", _hideOrderForm.hideOrderForm); //назначить обработчик события успешной отправки формы
 
-  (0, _renderOrderForm.renderOrderForm)(orderFormHTML); //Назначить обработчик клика по кнопке "Закрыть", чтобы скрывать форму
+  document.addEventListener("successSubmitForm", _hideOrderForm.hideOrderForm); //обработать и получить select выбора городов
 
-  document.querySelector(".button-close-icon").addEventListener("click", _hideOrderForm.hideOrderForm); //Назначить обработчик клика по области вне формы
+  var select = (0, _selectTowns.selectTowns)(); //обработать и получить все необходимые для формы inputs
 
-  document.querySelector(".orderForm").addEventListener("click", _hideOrderForm.hideOrderForm); //После рендеринга формы - обработать все input
+  var inputs = (0, _inputsOrderForm.inputsOrderForm)(); //обработать и получить обязательное к заполнению textarea для ввода адреса
 
-  var inputs = document.querySelectorAll(".js-input-required");
-  inputs.forEach(function (input) {
-    (0, _inputHandler.inputHandler)(input);
-  }); //Обработать селектор города
-
-  var select = document.querySelector(".select");
-  select.addEventListener("click", _selectHandler.selectHandler);
-  select.addEventListener("input", function (e) {
-    e.target.value = "";
-  }); //Обработать textarea для ввода адреса
-
-  var textarea = document.querySelector("textarea");
-  (0, _textareaHandler.textareaHandler)(textarea); //Назначать клик на кнопку "оформить заказ"
+  var textarea = (0, _textareaOrderForm.textareaOrderForm)(); //назначать обработчик клика на кнопку "оформить заказ"
 
   var submitButton = document.querySelector(".form__button-submit");
   submitButton.addEventListener("click", function (e) {
     e.preventDefault();
-    (0, _prepareToSubmit.prepareToSubmit)({
+    var result = (0, _prepareToSubmit.prepareToSubmit)({
       inputs: inputs,
       textarea: textarea,
       productData: productData
     });
+
+    if (result) {
+      //если форма отправлена успешна, то генерировать событие
+      orderForm.dispatchEvent(successSubmitForm);
+    }
   });
 };
 
-exports.showOrderForm = showOrderForm;
-},{"./renderOrderForm":"js/orderForm/renderOrderForm.js","./hideOrderForm":"js/orderForm/hideOrderForm.js","./prepareToSubmit":"js/orderForm/prepareToSubmit.js","../templates/orderFormTemplate":"js/templates/orderFormTemplate.js","../input/inputHandler":"js/input/inputHandler.js","../textarea/textareaHandler":"js/textarea/textareaHandler.js","../select/selectHandler":"js/select/selectHandler.js"}],"js/popup/relocatePopup.js":[function(require,module,exports) {
+exports.orderForm = orderForm;
+},{"./showOrderForm":"js/orderForm/showOrderForm.js","./hideOrderForm":"js/orderForm/hideOrderForm.js","../select/selectTowns":"js/select/selectTowns.js","../input/inputsOrderForm":"js/input/inputsOrderForm.js","../textarea/textareaOrderForm":"js/textarea/textareaOrderForm.js","./prepareToSubmit":"js/orderForm/prepareToSubmit.js"}],"js/popup/relocatePopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2044,7 +2187,7 @@ var _renderPopupElem = require("./renderPopupElem");
 
 var _getPopupCoords = require("./getPopupCoords");
 
-var _showOrderForm = require("../orderForm/showOrderForm");
+var _orderForm = require("../orderForm/orderForm");
 
 var _relocatePopup = require("./relocatePopup");
 
@@ -2116,13 +2259,13 @@ var showPopup = function showPopup(e, targetFromRelocate) {
       //Убрать ранее показанный попап продукта
       (0, _hidePopup.hidePopup)(); //Показать форму
 
-      (0, _showOrderForm.showOrderForm)(productData);
+      (0, _orderForm.orderForm)(productData);
     });
   }, 300);
 };
 
 exports.showPopup = showPopup;
-},{"../models/productCardModel":"js/models/productCardModel.js","../templates/productCardPopupTemplate":"js/templates/productCardPopupTemplate.js","./hidePopup":"js/popup/hidePopup.js","./renderPopupElem":"js/popup/renderPopupElem.js","./getPopupCoords":"js/popup/getPopupCoords.js","../orderForm/showOrderForm":"js/orderForm/showOrderForm.js","./relocatePopup":"js/popup/relocatePopup.js"}],"js/popup/popup.js":[function(require,module,exports) {
+},{"../models/productCardModel":"js/models/productCardModel.js","../templates/productCardPopupTemplate":"js/templates/productCardPopupTemplate.js","./hidePopup":"js/popup/hidePopup.js","./renderPopupElem":"js/popup/renderPopupElem.js","./getPopupCoords":"js/popup/getPopupCoords.js","../orderForm/orderForm":"js/orderForm/orderForm.js","./relocatePopup":"js/popup/relocatePopup.js"}],"js/popup/popup.js":[function(require,module,exports) {
 "use strict";
 
 var _showPopup = require("./showPopup");
@@ -2180,7 +2323,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27471" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40233" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

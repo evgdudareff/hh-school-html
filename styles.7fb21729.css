@@ -97,8 +97,8 @@ a:focus {
   text-indent: -9999px;
   background-image: url("close.8b9ac6e1.svg");
 }
-.button-close:hover,
-.button-close:focus {
+.button-close-icon:hover,
+.button-close-icon:focus {
   outline: none;
 }
 .columns-wrapper {
@@ -323,13 +323,13 @@ a:focus {
   text-align: left;
   color: #333333;
 }
-.input-tel__country-code {
+.input-tel_country-code {
   width: 38px;
 }
-.input-tel__operator-code {
+.input-tel_operator-code {
   width: 62px;
 }
-.input-tel__number {
+.input-tel_number {
   width: 100%;
 }
 .input-tel:focus,
@@ -340,7 +340,7 @@ a:focus {
   border-color: #c52929;
 }
 .input_invalid {
-  border: 1px solid #c52929;
+  border-color: #c52929;
 }
 .input-select {
   box-sizing: border-box;
@@ -1038,16 +1038,19 @@ a:focus {
   text-align: left;
 }
 .form__input-text {
+  position: relative;
   margin: 10px 0;
 }
 .form__input-tel {
   display: flex;
   margin-top: 5px;
+  position: relative;
 }
 .form__delivery-method {
   display: flex;
 }
 .form__textarea {
+  position: relative;
   margin-top: 10px;
 }
 .form__payment-method {
@@ -1095,6 +1098,25 @@ a:focus {
 }
 .orderForm_active {
   opacity: 1;
+}
+.form-error-block {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 10px 5px 5px;
+  margin: 0;
+  color: #212122;
+  background-color: #ffffff;
+  border: 1px solid #dfdedd;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  box-sizing: border-box;
+  font: 14px/20px Arial, sans-serif;
+  text-align: left;
+}
+.form-error-block__item {
+  list-style: none;
 }
 .pagination {
   display: flex;
