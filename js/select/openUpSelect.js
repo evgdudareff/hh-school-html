@@ -22,7 +22,9 @@ export const openUpSelect = selectBlock => {
       option.addEventListener("click", e => {
         e.stopPropagation();
         const checkedArea = e.target.innerHTML;
-        document.querySelector(".input-select").placeholder = checkedArea;
+        const inputSelect = document.querySelector(".input-select");
+        inputSelect.placeholder = checkedArea;
+        inputSelect.value = checkedArea;
 
         //Скрыть выбор опций селектора
         shutDownSelect();

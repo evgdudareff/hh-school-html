@@ -5,18 +5,27 @@ import { inputsOrderForm } from "../input/inputsOrderForm";
 import { textareaOrderForm } from "../textarea/textareaOrderForm";
 import { prepareToSubmit } from "./prepareToSubmit";
 
+//Событие успешной отправки формы
+export const successSubmitForm = new CustomEvent("successSubmitForm", {
+  bubbles: true
+});
+
 //Работа с формой заказа
 export const orderForm = productData => {
   //показать форму заказа
   showOrderForm(productData);
 
   //назначить обработчик клика по области вне формы
-  document.querySelector(".orderForm").addEventListener("click", hideOrderForm);
+  const orderForm = document.querySelector(".orderForm");
+  orderForm.addEventListener("click", hideOrderForm);
 
   //назначить обработчик клика по кнопке "Закрыть", чтобы скрывать форму
   document
     .querySelector(".button-close-icon")
     .addEventListener("click", hideOrderForm);
+
+  //назначить обработчик события успешной отправки формы
+  document.addEventListener("successSubmitForm", hideOrderForm);
 
   //обработать и получить select выбора городов
   const select = selectTowns();
@@ -31,6 +40,10 @@ export const orderForm = productData => {
   const submitButton = document.querySelector(".form__button-submit");
   submitButton.addEventListener("click", e => {
     e.preventDefault();
-    prepareToSubmit({ inputs, textarea, productData });
+    const result = prepareToSubmit({ inputs, textarea, productData });
+    if (result) {
+      //если форма отправлена успешна, то генерировать событие
+      orderForm.dispatchEvent(successSubmitForm);
+    }
   });
 };

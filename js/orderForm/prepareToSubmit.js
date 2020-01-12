@@ -1,3 +1,5 @@
+import { successSubmitForm } from "./orderForm";
+
 export const prepareToSubmit = optData => {
   const { productData, inputs, textarea } = optData;
 
@@ -19,25 +21,19 @@ export const prepareToSubmit = optData => {
   }
 
   //Если всё ОК, то подготовить данные для отправки
-  //Способ получения
-  const deliveryMethod = document.querySelector(
-    "input[name=deliveryMethod]:checked"
-  ).value;
+  let formData = {};
+  //Сохранить значения всех inputs
+  const allInputs = document.querySelectorAll("input");
+  [].forEach.call(allInputs, input => {
+    if (input.type === "text" || (input.type === "radio" && input.checked)) {
+      formData[input.name] = input.value;
+    } else if (input.type === "checkbox") {
+      formData[input.name] = input.checked ? true : false;
+    }
+  });
 
-  //Город
-  const cityLocataion = document.querySelector(".select-field__option")
-    .innerHTML;
-
-  //Способ оплаты
-  const paymentMethod = document.querySelector(
-    "input[name=paymentMethod]:checked"
-  ).value;
-
-  //СМС уведомления
-  let smsNotification = false;
-  if (document.querySelector("input[name=smsNotification]:checked")) {
-    smsNotification = true;
-  }
+  //Сохранить значения textarea
+  formData[textarea.name] = textarea.value;
 
   //Пользователь может изменить размер в форме.
   //На случай изменений, сохранить последний выбор
@@ -46,26 +42,11 @@ export const prepareToSubmit = optData => {
     productData.checkedSize = checkedSize.value;
   }
 
-  //Данные формы
-  let formData = {};
-  formData.contactInfo = {};
-  for (let i = 0; i < inputs.length; i++) {
-    formData.contactInfo[inputs[i].name] = inputs[i].value;
-  }
-  formData.contactInfo[textarea.name] = textarea.value;
-  formData.deliveryMethod = deliveryMethod;
-  formData.cityLocataion = cityLocataion;
-  formData.paymentMethod = paymentMethod;
-  formData.smsNotification = smsNotification;
+  //Добавить данные по выбранному товару
   formData.productData = productData;
 
   console.log(formData);
   console.log("Спасибо!");
 
-  //Скрыть форму
-  const currentForm = document.querySelector(".orderForm_active");
-  currentForm.classList.remove("orderForm_active");
-  setTimeout(() => {
-    currentForm.remove();
-  }, 300);
+  return true;
 };

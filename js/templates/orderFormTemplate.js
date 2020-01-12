@@ -56,7 +56,7 @@ export const orderFormTemplate = productData => {
               <div class="form__delivery-address">
                 <h4 class="heading heading_level-4">Адрес</h4>
                 <div class="select">
-                  <input class="input-select" name="cityLocataion" placeholder="Город" inputmode="none">
+                  <input class="input-select" name="cityLocataion" placeholder="Город" inputmode="none" type="text">
                   </input>
                 </div>
                 <div class="form__textarea">
