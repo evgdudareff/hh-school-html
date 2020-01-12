@@ -3,7 +3,7 @@ import { productCardPopupTemplate } from "../templates/productCardPopupTemplate"
 import { hidePopup } from "./hidePopup";
 import { renderPopupElem } from "./renderPopupElem";
 import { getPopupCoords } from "./getPopupCoords";
-import { showOrderForm } from "../orderForm/showOrderForm";
+import { orderForm } from "../orderForm/orderForm";
 import { relocatePopup } from "./relocatePopup";
 
 //показать попап
@@ -93,7 +93,7 @@ export const showPopup = (e, targetFromRelocate) => {
         hidePopup();
 
         //Показать форму
-        showOrderForm(productData);
+        orderForm(productData);
       });
   }, 300);
 };

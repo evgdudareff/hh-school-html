@@ -8,7 +8,7 @@ export const hideOrderForm = e => {
       return;
     }
 
-    //если клик на кнопку вне формы, то скрыть форму
+    //если клик вне формы, то скрыть форму
     if (target.classList.contains("orderForm")) {
       break;
     }

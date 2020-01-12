@@ -1,6 +1,14 @@
 //показывает ошибки валидации пользователю
 export const showValidationError = (target, errors) => {
-  //2.рендер попапа с ошибками
+  //если уже показывается ошибка, то выйти
+  if (
+    document.querySelector(
+      `.js-error.form-error-block[data-target-name="${target.name}"]`
+    )
+  ) {
+    return;
+  }
+
   let errorBlock = document.createElement("ul");
   errorBlock.classList.add("js-error");
   errorBlock.classList.add("form-error-block");

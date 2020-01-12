@@ -1,7 +1,7 @@
 //Класс валидации для field.
 //Содержит массив validaties, в который помещаются необходимые проверки,
 //а также общие для field методы
-import { showValidationError, removeValidationError } from "./validationError";
+import { showValidationError } from "./validationError";
 
 export class FieldValidation {
   constructor() {
@@ -28,7 +28,7 @@ export class FieldValidation {
 
   //Выставить класс _invalid для field
   setInvalid(field) {
-    const className = field.tagName.toLowerCase();
+    const className = getClassName(field);
     if (!field.classList.contains(`${className}_invalid`)) {
       field.classList.add(`${className}_invalid`);
     }
@@ -37,7 +37,7 @@ export class FieldValidation {
 
   //Убрать класс _invalid для input
   removeInvalid(field) {
-    const className = field.tagName.toLowerCase();
+    const className = getClassName(field);
     if (field.classList.contains(`${className}_invalid`)) {
       field.classList.remove(`${className}_invalid`);
     }
@@ -77,5 +77,13 @@ export class FieldValidation {
       }
       this.errors = [];
     }
+  }
+}
+
+function getClassName(elem) {
+  if (elem.className.match(/input/)) {
+    return "input";
+  } else if (elem.className.match(/textarea/)) {
+    return "textarea";
   }
 }
