@@ -1,7 +1,7 @@
 //Класс валидации для field.
 //Содержит массив validaties, в который помещаются необходимые проверки,
 //а также общие для field методы
-import { showValidationError } from "./validationError";
+import { showValidationError, removeValidationError } from "./validationError";
 
 export class FieldValidation {
   constructor() {
@@ -66,6 +66,7 @@ export class FieldValidation {
       this.errors = [];
     } else {
       this.removeInvalid(field);
+      removeValidationError(field);
     }
   }
 

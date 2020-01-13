@@ -1,6 +1,7 @@
 import { showOrderForm } from "./showOrderForm";
 import { hideOrderForm } from "./hideOrderForm";
 import { selectTowns } from "../select/selectTowns";
+import { shutDownSelect } from "../select/shutDownSelect";
 import { inputsOrderForm } from "../input/inputsOrderForm";
 import { textareaOrderForm } from "../textarea/textareaOrderForm";
 import { prepareToSubmit } from "./prepareToSubmit";
@@ -18,6 +19,7 @@ export const orderForm = productData => {
   //назначить обработчик клика по области вне формы
   const orderForm = document.querySelector(".orderForm");
   orderForm.addEventListener("click", hideOrderForm);
+  orderForm.addEventListener("click", shutDownSelect);
 
   //назначить обработчик клика по кнопке "Закрыть", чтобы скрывать форму
   document

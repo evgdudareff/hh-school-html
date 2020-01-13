@@ -30,15 +30,12 @@ export const inputHandler = input => {
       input.touched = true;
     }
 
-    //убрать ошибки валидации при очередном наборе
-    removeValidationError(input);
+    input.validation.checkValidities(input);
   });
 
   //Назначить обработчик ухода с поля input
   input.addEventListener("blur", e => {
-    //если с полем уже работали, то при уходе проверить поле на ошибки и отобразить их пользователю
-    if (input.touched) {
-      input.validation.checkValidities(input);
-    }
+    //убрать ошибки валидации при фокусе
+    removeValidationError(input);
   });
 };

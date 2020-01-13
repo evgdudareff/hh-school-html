@@ -18,18 +18,18 @@ export const orderFormTemplate = productData => {
                 <h1 class="heading heading_level-1">Оформление заказа</h1>
                 <h4 class="heading heading_level-4">Контактное лицо</h4>
                 <div class="form__input-text">
-                  <input class="input-text js-input-required" type="text" name="fullName" placeholder="ФИО" value></input>
+                  <input class="input-text js-input-required" type="text" name="fullName" placeholder="ФИО" autocomplete="off" value></input>
                 </div>
                 <div class="form__input-text">
-                  <input class="input-text js-input-required" type="text" name="email" placeholder="Электронная почта" value></input>
+                  <input class="input-text js-input-required" type="text" name="email" placeholder="Электронная почта" autocomplete="off" value></input>
                 </div>
               </div> 
            
               <div class="form__input-tel">
                 <input class="input-tel input-tel_country-code" type="text" name="countryCode" value="+7"
                   readonly></input>
-                <input class="input-tel input-tel_operator-code js-input-required" type="text" name="operatorCode" placeholder="Код"></input>
-                <input class="input-tel input-tel_number js-input-required" type="text" name="telNumber" placeholder="Номер"></input>
+                <input class="input-tel input-tel_operator-code js-input-required" type="text" name="operatorCode" placeholder="Код" autocomplete="off"></input>
+                <input class="input-tel input-tel_number js-input-required" type="text" name="telNumber" placeholder="Номер" autocomplete="off"></input>
               </div>
             </div>
 
@@ -56,7 +56,7 @@ export const orderFormTemplate = productData => {
               <div class="form__delivery-address">
                 <h4 class="heading heading_level-4">Адрес</h4>
                 <div class="select">
-                  <input class="input-select" name="cityLocataion" placeholder="Город" inputmode="none" type="text">
+                  <input class="input-select" name="cityLocataion" placeholder="Город" inputmode="none" type="text" autocomplete="off">
                   </input>
                 </div>
                 <div class="form__textarea">
