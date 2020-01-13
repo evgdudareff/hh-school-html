@@ -40,6 +40,9 @@ body {
   font: 14px/1.43 Arial, sans-serif;
   color: #333;
 }
+::-webkit-scrollbar {
+  width: 0px;
+}
 a {
   color: #609fcf;
   text-decoration: none;
