@@ -2200,7 +2200,7 @@ var showPopup = function showPopup(e, targetFromRelocate) {
   if (e) {
     target = e.target; //Если клик активному попапу, то ничего не делать
 
-    if (target.closest(".popup_active")) {
+    if (target.closest(".popup_active") || target.closest(".product-card__button-submit")) {
       return;
     } //Если клик кнопке закрыть, то скрыть попап
 
@@ -2323,7 +2323,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40233" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34998" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
