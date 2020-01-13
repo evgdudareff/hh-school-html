@@ -13,7 +13,14 @@ export const prepareToSubmit = optData => {
       return;
     }
   }
-  if (textarea.validation.isInvalid) {
+
+  const deliveryAddressSection = document.querySelector(
+    ".form__delivery-address"
+  );
+  if (
+    !deliveryAddressSection.classList.contains("form__delivery-address_hide") &&
+    textarea.validation.isInvalid
+  ) {
     //Указать, что расширенный адрес не прошёл валидацию
     textarea.touched = true;
     textarea.validation.checkValidities(textarea);

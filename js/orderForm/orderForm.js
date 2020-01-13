@@ -4,6 +4,7 @@ import { selectTowns } from "../select/selectTowns";
 import { shutDownSelect } from "../select/shutDownSelect";
 import { inputsOrderForm } from "../input/inputsOrderForm";
 import { textareaOrderForm } from "../textarea/textareaOrderForm";
+import { radioOrderForm } from "../radio/radioOrderForm";
 import { prepareToSubmit } from "./prepareToSubmit";
 
 //Событие успешной отправки формы
@@ -16,7 +17,7 @@ export const orderForm = productData => {
   //показать форму заказа
   showOrderForm(productData);
 
-  //назначить обработчик клика по области вне формы
+  //назначить обработчик клика по области формы
   const orderForm = document.querySelector(".orderForm");
   orderForm.addEventListener("click", hideOrderForm);
   orderForm.addEventListener("click", shutDownSelect);
@@ -34,6 +35,9 @@ export const orderForm = productData => {
 
   //обработать и получить все необходимые для формы inputs
   const inputs = inputsOrderForm();
+
+  //обработать требуемые radio button
+  radioOrderForm();
 
   //обработать и получить обязательное к заполнению textarea для ввода адреса
   const textarea = textareaOrderForm();
