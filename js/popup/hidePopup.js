@@ -3,6 +3,13 @@ export const hidePopup = () => {
 
   if (currentPopup) {
     currentPopup.classList.remove("popup_active");
+
+    const mobileOuter = document.querySelector(".js-mobile-outer");
+    if (mobileOuter) {
+      mobileOuter.remove();
+      document.body.style.overflow = "";
+    }
+
     setTimeout(() => {
       currentPopup.remove();
     }, 300);

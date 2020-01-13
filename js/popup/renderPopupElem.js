@@ -15,15 +15,21 @@ export const renderPopupElem = (popupHTML, coords, insertTarget) => {
     popup.size = "tablet-desktop";
   } else {
     //Иначе Mobile
-    document.body.append(popup);
+    let mobileOuter = document.createElement("div");
+    mobileOuter.classList.add("js-mobile-outer");
+    mobileOuter.style.top = window.pageYOffset + "px";
+    mobileOuter.append(popup);
+    document.body.append(mobileOuter);
+
     //получить высоту и ширину окна
     const windowHeight = document.documentElement.clientHeight;
     const windowWidth = document.documentElement.clientWidth;
 
     popup.style.left = (windowWidth - popup.offsetWidth) / 2 + "px";
-    popup.style.top =
-      (windowHeight - popup.offsetHeight) / 2 + window.pageYOffset + "px";
+    popup.style.top = (windowHeight - popup.offsetHeight) / 2 + "px";
     popup.size = "mobile";
+
+    document.body.style.overflow = "hidden";
   }
 
   return popup;
