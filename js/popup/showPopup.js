@@ -15,7 +15,10 @@ export const showPopup = (e, targetFromRelocate) => {
   if (e) {
     target = e.target;
     //Если клик активному попапу, то ничего не делать
-    if (target.closest(".popup_active")) {
+    if (
+      target.closest(".popup_active") ||
+      target.closest(".product-card__button-submit")
+    ) {
       return;
     }
 
