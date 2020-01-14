@@ -308,6 +308,13 @@ var hidePopup = function hidePopup() {
 
   if (currentPopup) {
     currentPopup.classList.remove("popup_active");
+    var mobileOuter = document.querySelector(".js-mobile-outer");
+
+    if (mobileOuter) {
+      mobileOuter.remove();
+      document.body.style.overflow = "";
+    }
+
     setTimeout(function () {
       currentPopup.remove();
     }, 300);
@@ -337,13 +344,18 @@ var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) 
     popup.size = "tablet-desktop";
   } else {
     //Иначе Mobile
-    document.body.append(popup); //получить высоту и ширину окна
+    var mobileOuter = document.createElement("div");
+    mobileOuter.classList.add("js-mobile-outer");
+    mobileOuter.style.top = window.pageYOffset + "px";
+    mobileOuter.append(popup);
+    document.body.append(mobileOuter); //получить высоту и ширину окна
 
     var windowHeight = document.documentElement.clientHeight;
     var windowWidth = document.documentElement.clientWidth;
     popup.style.left = (windowWidth - popup.offsetWidth) / 2 + "px";
-    popup.style.top = (windowHeight - popup.offsetHeight) / 2 + window.pageYOffset + "px";
+    popup.style.top = (windowHeight - popup.offsetHeight) / 2 + "px";
     popup.size = "mobile";
+    document.body.style.overflow = "hidden";
   }
 
   return popup;
@@ -453,7 +465,7 @@ var _productCardTemplate = require("./productCardTemplate");
 
 //Шаблон формы заказа продукта, основанный на интерполяции строк
 var orderFormTemplate = function orderFormTemplate(productData) {
-  var formPartOneHTML = "<form class=\"form\">\n      <div class=\"columns-wrapper\">\n        <div class=\"form__button-close\">\n          <button class=\"button-close-icon\">\n            \u0417\u0430\u043A\u0440\u044B\u0442\u044C\n          </button>\n        </div>\n        <div class=\"columns-row\">\n          <div class=\"column column_s-2 column_m-3 column_l-7\">\n            \n            <div class=\"form__section\">\n              <div class=\"form__input-main-contacts\">\n                <h1 class=\"heading heading_level-1\">\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430</h1>\n                <h4 class=\"heading heading_level-4\">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E</h4>\n                <div class=\"form__input-text\">\n                  <input class=\"input-text js-input-required\" type=\"text\" name=\"fullName\" placeholder=\"\u0424\u0418\u041E\" value></input>\n                </div>\n                <div class=\"form__input-text\">\n                  <input class=\"input-text js-input-required\" type=\"text\" name=\"email\" placeholder=\"\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430\" value></input>\n                </div>\n              </div> \n           \n              <div class=\"form__input-tel\">\n                <input class=\"input-tel input-tel_country-code\" type=\"text\" name=\"countryCode\" value=\"+7\"\n                  readonly></input>\n                <input class=\"input-tel input-tel_operator-code js-input-required\" type=\"text\" name=\"operatorCode\" placeholder=\"\u041A\u043E\u0434\"></input>\n                <input class=\"input-tel input-tel_number js-input-required\" type=\"text\" name=\"telNumber\" placeholder=\"\u041D\u043E\u043C\u0435\u0440\"></input>\n              </div>\n            </div>\n\n            <div class=\"form__section\">  \n              <h4 class=\"heading heading_level-4\">\u0421\u043F\u043E\u0441\u043E\u0431 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430</h4>\n              <div class=\"form__delivery-method\">\n\n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"selfPickup\" id=\"selfPickup\"></input> \n                  <label class=\"radio-button-sqared__label\" for=\"selfPickup\">\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437</label>\n                </div>\n                \n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"deliviryPickup\" id=\"deliveryPickup\" checked></input>\n                  <label class=\"radio-button-sqared__label\" for=\"deliveryPickup\">\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430</label>\n                </div>\n              \n              </div>\n            </div>\n\n            <div class=\"form__section\">\n              <div class=\"form__delivery-address\">\n                <h4 class=\"heading heading_level-4\">\u0410\u0434\u0440\u0435\u0441</h4>\n                <div class=\"select\">\n                  <input class=\"input-select\" name=\"cityLocataion\" placeholder=\"\u0413\u043E\u0440\u043E\u0434\" inputmode=\"none\" type=\"text\">\n                  </input>\n                </div>\n                <div class=\"form__textarea\">\n                  <textarea type=\"textarea\" class=\"textarea\" placeholder=\"\u0410\u0434\u0440\u0435\u0441\"\n                  name=\"addressExpaned\"></textarea>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__payment-methods\">\n                <h4 class=\"heading heading_level-4\">\u041E\u043F\u043B\u0430\u0442\u0430</h4>\n\n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentOnline\"\n                    id=\"paymentOnline\" checked></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentOnline\">\u041E\u043D\u043B\u0430\u0439\u043D-\u043E\u043F\u043B\u0430\u0442\u0430</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCash\"\n                    id=\"paymentCash\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCash\">\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCard\"\n                    id=\"paymentCard\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCard\">\u041A\u0430\u0440\u0442\u043E\u0439 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438</label>\n                </div>\n    \n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__notification\">\n                <h4 class=\"heading heading_level-4\">\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</h4>\n\n                <div class=\"checkbox\">\n                  <input class=\"checkbox__box\" type=\"checkbox\" name=\"smsNotification\" value id=\"smsNotification\"></input>\n                  <label class=\"label\" for=\"smsNotification\">\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C SMS \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</label>\n                </div>\n\n              </div>\n            </div>\n\n            <input class=\"button-submit form__button-submit\" type=\"submit\" value=\"\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437\"></input>\n            \n          </div>";
+  var formPartOneHTML = "<form class=\"form\">\n      <div class=\"columns-wrapper\">\n        <div class=\"form__button-close\">\n          <button class=\"button-close-icon\">\n            \u0417\u0430\u043A\u0440\u044B\u0442\u044C\n          </button>\n        </div>\n        <div class=\"columns-row\">\n          <div class=\"column column_s-2 column_m-3 column_l-7\">\n            \n            <div class=\"form__section\">\n              <div class=\"form__input-main-contacts\">\n                <h1 class=\"heading heading_level-1\">\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430</h1>\n                <h4 class=\"heading heading_level-4\">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E</h4>\n                <div class=\"form__input-text\">\n                  <input class=\"input-text js-input-required\" type=\"text\" name=\"fullName\" placeholder=\"\u0424\u0418\u041E\" autocomplete=\"off\" value></input>\n                </div>\n                <div class=\"form__input-text\">\n                  <input class=\"input-text js-input-required\" type=\"text\" name=\"email\" placeholder=\"\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430\" autocomplete=\"off\" value></input>\n                </div>\n              </div> \n           \n              <div class=\"form__input-tel\">\n                <input class=\"input-tel input-tel_country-code\" type=\"text\" name=\"countryCode\" value=\"+7\"\n                  readonly></input>\n                <input class=\"input-tel input-tel_operator-code js-input-required\" type=\"text\" name=\"operatorCode\" placeholder=\"\u041A\u043E\u0434\" autocomplete=\"off\"></input>\n                <input class=\"input-tel input-tel_number js-input-required\" type=\"text\" name=\"telNumber\" placeholder=\"\u041D\u043E\u043C\u0435\u0440\" autocomplete=\"off\"></input>\n              </div>\n            </div>\n\n            <div class=\"form__section\">  \n              <h4 class=\"heading heading_level-4\">\u0421\u043F\u043E\u0441\u043E\u0431 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430</h4>\n              <div class=\"form__delivery-method\">\n\n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"selfPickup\" id=\"selfPickup\"></input> \n                  <label class=\"radio-button-sqared__label\" for=\"selfPickup\">\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437</label>\n                </div>\n                \n                <div class=\"form__radio-button\">\n                  <input class=\"radio-button-sqared radio-button-sqared__button\" type=\"radio\" name=\"deliveryMethod\"\n                  value=\"deliviryPickup\" id=\"deliveryPickup\" checked></input>\n                  <label class=\"radio-button-sqared__label\" for=\"deliveryPickup\">\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430</label>\n                </div>\n              \n              </div>\n            </div>\n\n            <div class=\"form__section\">\n              <div class=\"form__delivery-address\">\n                <h4 class=\"heading heading_level-4\">\u0410\u0434\u0440\u0435\u0441</h4>\n                <div class=\"select\">\n                  <input class=\"input-select\" name=\"cityLocataion\" placeholder=\"\u0413\u043E\u0440\u043E\u0434\" inputmode=\"none\" type=\"text\" autocomplete=\"off\">\n                  </input>\n                </div>\n                <div class=\"form__textarea\">\n                  <textarea type=\"textarea\" class=\"textarea\" placeholder=\"\u0410\u0434\u0440\u0435\u0441\"\n                  name=\"addressExpaned\"></textarea>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__payment-methods\">\n                <h4 class=\"heading heading_level-4\">\u041E\u043F\u043B\u0430\u0442\u0430</h4>\n\n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentOnline\"\n                    id=\"paymentOnline\" checked></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentOnline\">\u041E\u043D\u043B\u0430\u0439\u043D-\u043E\u043F\u043B\u0430\u0442\u0430</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCash\"\n                    id=\"paymentCash\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCash\">\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438</label>\n                </div>\n    \n                <div class=\"form__payment-method\">\n                  <input class=\"radio-button-circle\" type=\"radio\" name=\"paymentMethod\" value=\"paymentCard\"\n                    id=\"paymentCard\"></input>\n                  <label class=\"radio-button-\u0441ircle__label\" for=\"paymentCard\">\u041A\u0430\u0440\u0442\u043E\u0439 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438</label>\n                </div>\n    \n              </div>\n            </div>\n            \n            <div class=\"form__section\">\n              <div class=\"form__notification\">\n                <h4 class=\"heading heading_level-4\">\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</h4>\n\n                <div class=\"checkbox\">\n                  <input class=\"checkbox__box\" type=\"checkbox\" name=\"smsNotification\" value id=\"smsNotification\"></input>\n                  <label class=\"label\" for=\"smsNotification\">\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C SMS \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F</label>\n                </div>\n\n              </div>\n            </div>\n\n            <input class=\"button-submit form__button-submit\" type=\"submit\" value=\"\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437\"></input>\n            \n          </div>";
   var formPartTwoHTML = "<div class=\"column column_s-2 column_m-3 column_l-5\">\n              <div class=\"form__product-card\">";
   var productCardHTML = (0, _productCardTemplate.productCardTemplate)(productData, true);
   var formPartThreeHTML = "</div>\n           </div>         \n        </div>\n    </form> ";
@@ -534,9 +546,13 @@ exports.shutDownSelect = void 0;
 
 //скрывает options-container открытого селектора
 var shutDownSelect = function shutDownSelect() {
-  document.querySelector(".select").classList.remove("select_active");
-  document.querySelector(".input-select").disabled = "";
-  document.querySelector(".options-container").remove();
+  var optionsContainer = document.querySelector(".options-container");
+
+  if (optionsContainer) {
+    document.querySelector(".select").classList.remove("select_active");
+    document.querySelector(".input-select").disabled = "";
+    optionsContainer.remove();
+  }
 };
 
 exports.shutDownSelect = shutDownSelect;
@@ -1813,6 +1829,7 @@ function () {
         this.errors = [];
       } else {
         this.removeInvalid(field);
+        (0, _validationError.removeValidationError)(field);
       }
     } //Отладочная функция - выводит текущие ошибки в консоль
 
@@ -1910,17 +1927,14 @@ var inputHandler = function inputHandler(input) {
 
     if (!input.touched) {
       input.touched = true;
-    } //убрать ошибки валидации при очередном наборе
+    }
 
-
-    (0, _validationError.removeValidationError)(input);
+    input.validation.checkValidities(input);
   }); //Назначить обработчик ухода с поля input
 
   input.addEventListener("blur", function (e) {
-    //если с полем уже работали, то при уходе проверить поле на ошибки и отобразить их пользователю
-    if (input.touched) {
-      input.validation.checkValidities(input);
-    }
+    //убрать ошибки валидации при фокусе
+    (0, _validationError.removeValidationError)(input);
   });
 };
 
@@ -1974,16 +1988,12 @@ var textareaHandler = function textareaHandler(textarea) {
     } //Провести проверку вводимого пользователем значения
 
 
-    textarea.validation.checkValidities(textarea); //если были показаны ошибки валидации,то убрать при очередном наборе
-
-    (0, _validationError.removeValidationError)(textarea);
+    textarea.validation.checkValidities(textarea);
   }); //Назначить обработчик ухода с поля textarea
 
   textarea.addEventListener("blur", function (e) {
-    //если с полем уже работали, то при уходе проверить поле на ошибки и отобразить их пользователю
-    if (textarea.touched) {
-      textarea.validation.checkValidities(textarea);
-    }
+    //убрать ошибки валидации при фокусе
+    (0, _validationError.removeValidationError)(textarea);
   });
 };
 
@@ -2009,7 +2019,30 @@ var textareaOrderForm = function textareaOrderForm() {
 };
 
 exports.textareaOrderForm = textareaOrderForm;
-},{"./textareaHandler":"js/textarea/textareaHandler.js"}],"js/orderForm/prepareToSubmit.js":[function(require,module,exports) {
+},{"./textareaHandler":"js/textarea/textareaHandler.js"}],"js/radio/radioOrderForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.radioOrderForm = void 0;
+
+//Обработать radio-buttons на форме заказа
+var radioOrderForm = function radioOrderForm() {
+  var radioBtns = document.querySelectorAll('input[name="deliveryMethod"]');
+  radioBtns.forEach(function (radioBtn) {
+    radioBtn.addEventListener("click", function () {
+      if (radioBtn.checked) {
+        //скрыть секцию адрес доставки
+        var deliveryAddressSection = document.querySelector(".form__delivery-address");
+        deliveryAddressSection.classList.toggle("form__delivery-address_hide");
+      }
+    });
+  });
+};
+
+exports.radioOrderForm = radioOrderForm;
+},{}],"js/orderForm/prepareToSubmit.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2034,7 +2067,9 @@ var prepareToSubmit = function prepareToSubmit(optData) {
     }
   }
 
-  if (textarea.validation.isInvalid) {
+  var deliveryAddressSection = document.querySelector(".form__delivery-address");
+
+  if (!deliveryAddressSection.classList.contains("form__delivery-address_hide") && textarea.validation.isInvalid) {
     //Указать, что расширенный адрес не прошёл валидацию
     textarea.touched = true;
     textarea.validation.checkValidities(textarea);
@@ -2084,9 +2119,13 @@ var _hideOrderForm = require("./hideOrderForm");
 
 var _selectTowns = require("../select/selectTowns");
 
+var _shutDownSelect = require("../select/shutDownSelect");
+
 var _inputsOrderForm = require("../input/inputsOrderForm");
 
 var _textareaOrderForm = require("../textarea/textareaOrderForm");
+
+var _radioOrderForm = require("../radio/radioOrderForm");
 
 var _prepareToSubmit = require("./prepareToSubmit");
 
@@ -2099,10 +2138,11 @@ exports.successSubmitForm = successSubmitForm;
 
 var orderForm = function orderForm(productData) {
   //показать форму заказа
-  (0, _showOrderForm.showOrderForm)(productData); //назначить обработчик клика по области вне формы
+  (0, _showOrderForm.showOrderForm)(productData); //назначить обработчик клика по области формы
 
   var orderForm = document.querySelector(".orderForm");
-  orderForm.addEventListener("click", _hideOrderForm.hideOrderForm); //назначить обработчик клика по кнопке "Закрыть", чтобы скрывать форму
+  orderForm.addEventListener("click", _hideOrderForm.hideOrderForm);
+  orderForm.addEventListener("click", _shutDownSelect.shutDownSelect); //назначить обработчик клика по кнопке "Закрыть", чтобы скрывать форму
 
   document.querySelector(".button-close-icon").addEventListener("click", _hideOrderForm.hideOrderForm); //назначить обработчик события успешной отправки формы
 
@@ -2110,7 +2150,9 @@ var orderForm = function orderForm(productData) {
 
   var select = (0, _selectTowns.selectTowns)(); //обработать и получить все необходимые для формы inputs
 
-  var inputs = (0, _inputsOrderForm.inputsOrderForm)(); //обработать и получить обязательное к заполнению textarea для ввода адреса
+  var inputs = (0, _inputsOrderForm.inputsOrderForm)(); //обработать требуемые radio button
+
+  (0, _radioOrderForm.radioOrderForm)(); //обработать и получить обязательное к заполнению textarea для ввода адреса
 
   var textarea = (0, _textareaOrderForm.textareaOrderForm)(); //назначать обработчик клика на кнопку "оформить заказ"
 
@@ -2131,7 +2173,7 @@ var orderForm = function orderForm(productData) {
 };
 
 exports.orderForm = orderForm;
-},{"./showOrderForm":"js/orderForm/showOrderForm.js","./hideOrderForm":"js/orderForm/hideOrderForm.js","../select/selectTowns":"js/select/selectTowns.js","../input/inputsOrderForm":"js/input/inputsOrderForm.js","../textarea/textareaOrderForm":"js/textarea/textareaOrderForm.js","./prepareToSubmit":"js/orderForm/prepareToSubmit.js"}],"js/popup/relocatePopup.js":[function(require,module,exports) {
+},{"./showOrderForm":"js/orderForm/showOrderForm.js","./hideOrderForm":"js/orderForm/hideOrderForm.js","../select/selectTowns":"js/select/selectTowns.js","../select/shutDownSelect":"js/select/shutDownSelect.js","../input/inputsOrderForm":"js/input/inputsOrderForm.js","../textarea/textareaOrderForm":"js/textarea/textareaOrderForm.js","../radio/radioOrderForm":"js/radio/radioOrderForm.js","./prepareToSubmit":"js/orderForm/prepareToSubmit.js"}],"js/popup/relocatePopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2323,7 +2365,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36096" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62508" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -41,7 +41,8 @@ body {
   color: #333;
 }
 ::-webkit-scrollbar {
-  width: 0px;
+  display: none;
+  -webkit-appearance: none;
 }
 a {
   color: #609fcf;
@@ -698,8 +699,7 @@ a:focus {
 .product-card__image-container {
   font-size: 0;
   position: relative;
-  width: 212px;
-  height: 212px;
+  min-height: 212px;
   margin: 0 auto 10px auto;
 }
 @media (min-width: 1000px) {
@@ -1052,6 +1052,9 @@ a:focus {
 .form__delivery-method {
   display: flex;
 }
+.form__delivery-address_hide {
+  display: none;
+}
 .form__textarea {
   position: relative;
   margin-top: 10px;
@@ -1326,6 +1329,16 @@ a:focus {
   .popup-container__button-close {
     display: none;
   }
+}
+.js-mobile-outer {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.js-mobile-outer__popup {
+  position: relative;
 }
 
 
