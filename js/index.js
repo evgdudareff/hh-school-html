@@ -1,2 +1,3 @@
-import "./grid";
-import "./slider";
+import "./dev/grid";
+import "./slider/slider";
+import "./popup/popup";

@@ -37,15 +37,15 @@
 .input-tel {
   .default-input();
 
-  &__country-code {
+  &_country-code {
     width: 38px;
   }
 
-  &__operator-code {
+  &_operator-code {
     width: 62px;
   }
 
-  &__number {
+  &_number {
     width: 100%;
   }
 
@@ -57,4 +57,34 @@
   &:required {
     border-color: @color-red;
   }
+}
+
+.input {
+  &_invalid {
+    border-color: @color-red;
+  }
+}
+
+.input-select {
+  .default-input();
+  padding: 9px 30px 9px 10px;
+  background-color: @color-light-1;
+  caret-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  -webkit-text-fill-color: @color-dark-1;
+  opacity: 1; /* required on iOS */
+}
+
+::-webkit-input-placeholder {
+  color: @color-dark-1; /* Chrome, Safari, Opera */
+}
+::-moz-placeholder {
+  color: @color-dark-1; /* Firefox */
+}
+:-ms-input-placeholder {
+  color: @color-dark-1; /* IE */
 }
