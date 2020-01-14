@@ -2311,6 +2311,7 @@ var showPopup = function showPopup(e, targetFromRelocate) {
         size.addEventListener("click", function () {
           //если выбрнан размер, то разблокировать кнопку заказа
           var submitButton = document.querySelector(".product-card__button-submit");
+          if (size.classList.contains("label_disabled")) return;
           submitButton.classList.remove("button-submit_disabled");
           submitButton.disabled = false; //сохранить выбранный пользователем размер
           //для последующего отображения в форме
@@ -2389,7 +2390,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5293" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6910" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
