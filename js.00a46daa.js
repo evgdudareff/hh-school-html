@@ -2074,8 +2074,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.prepareToSubmit = void 0;
 
-var _orderForm = require("./orderForm");
-
 var prepareToSubmit = function prepareToSubmit(optData) {
   var productData = optData.productData,
       inputs = optData.inputs,
@@ -2089,7 +2087,8 @@ var prepareToSubmit = function prepareToSubmit(optData) {
       inputs[i].validation.checkValidities(inputs[i]);
       return;
     }
-  }
+  } //Проверить, показывается ли секция с адресом (если нет, то не обрабывать эти данные)
+
 
   var deliveryAddressSection = document.querySelector(".form__delivery-address");
 
@@ -2129,7 +2128,7 @@ var prepareToSubmit = function prepareToSubmit(optData) {
 };
 
 exports.prepareToSubmit = prepareToSubmit;
-},{"./orderForm":"js/orderForm/orderForm.js"}],"js/orderForm/orderForm.js":[function(require,module,exports) {
+},{}],"js/orderForm/orderForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2390,7 +2389,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6910" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8351" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
