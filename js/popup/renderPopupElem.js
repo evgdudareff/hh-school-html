@@ -1,3 +1,5 @@
+import { touchHandler } from "../common/touchHandler";
+
 //Рендерит и возвращает элемент попапа согласно данным о продукте
 
 export const renderPopupElem = (popupHTML, coords, insertTarget) => {
@@ -30,6 +32,8 @@ export const renderPopupElem = (popupHTML, coords, insertTarget) => {
     popup.size = "mobile";
 
     document.body.style.overflow = "hidden";
+    //для ios необходимо превентить события скролла (для попапа на mobile)
+    document.addEventListener("touchmove", touchHandler, { passive: false });
   }
 
   return popup;

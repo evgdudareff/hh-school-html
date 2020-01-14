@@ -1,3 +1,5 @@
+import { touchHandler } from "../common/touchHandler";
+
 export const hidePopup = () => {
   const currentPopup = document.querySelector(".popup_active");
 
@@ -8,6 +10,8 @@ export const hidePopup = () => {
     if (mobileOuter) {
       mobileOuter.remove();
       document.body.style.overflow = "";
+      //для ios необходимо превентить события скролла (для попапа на mobile)
+      document.removeEventListener("touchmove", touchHandler);
     }
 
     setTimeout(() => {

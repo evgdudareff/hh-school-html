@@ -78,6 +78,7 @@ export const showPopup = (e, targetFromRelocate) => {
             const submitButton = document.querySelector(
               ".product-card__button-submit"
             );
+            if (size.classList.contains("label_disabled")) return;
             submitButton.classList.remove("button-submit_disabled");
             submitButton.disabled = false;
 

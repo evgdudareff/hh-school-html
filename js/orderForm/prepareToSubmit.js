@@ -1,5 +1,3 @@
-import { successSubmitForm } from "./orderForm";
-
 export const prepareToSubmit = optData => {
   const { productData, inputs, textarea } = optData;
 
@@ -14,6 +12,7 @@ export const prepareToSubmit = optData => {
     }
   }
 
+  //Проверить, показывается ли секция с адресом (если нет, то не обрабывать эти данные)
   const deliveryAddressSection = document.querySelector(
     ".form__delivery-address"
   );
