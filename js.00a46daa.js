@@ -303,6 +303,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.touchHandler = void 0;
 
+//для ios необходимо превентить события скролла (для попапа на mobile)
 var touchHandler = function touchHandler(e) {
   e.preventDefault();
 };
@@ -327,7 +328,8 @@ var hidePopup = function hidePopup() {
 
     if (mobileOuter) {
       mobileOuter.remove();
-      document.body.style.overflow = "";
+      document.body.style.overflow = ""; //для ios необходимо превентить события скролла (для попапа на mobile)
+
       document.removeEventListener("touchmove", _touchHandler.touchHandler);
     }
 
@@ -373,7 +375,8 @@ var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) 
     popup.style.left = (windowWidth - popup.offsetWidth) / 2 + "px";
     popup.style.top = (windowHeight - popup.offsetHeight) / 2 + "px";
     popup.size = "mobile";
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden"; //для ios необходимо превентить события скролла (для попапа на mobile)
+
     document.addEventListener("touchmove", _touchHandler.touchHandler, {
       passive: false
     });
@@ -2386,7 +2389,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3945" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5293" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
