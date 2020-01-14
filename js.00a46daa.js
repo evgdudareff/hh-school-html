@@ -295,13 +295,28 @@ var productCardPopupTemplate = function productCardPopupTemplate(productData) {
 };
 
 exports.productCardPopupTemplate = productCardPopupTemplate;
-},{"./productCardTemplate":"js/templates/productCardTemplate.js"}],"js/popup/hidePopup.js":[function(require,module,exports) {
+},{"./productCardTemplate":"js/templates/productCardTemplate.js"}],"js/common/touchHandler.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.touchHandler = void 0;
+
+var touchHandler = function touchHandler(e) {
+  e.preventDefault();
+};
+
+exports.touchHandler = touchHandler;
+},{}],"js/popup/hidePopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.hidePopup = void 0;
+
+var _touchHandler = require("../common/touchHandler");
 
 var hidePopup = function hidePopup() {
   var currentPopup = document.querySelector(".popup_active");
@@ -313,6 +328,7 @@ var hidePopup = function hidePopup() {
     if (mobileOuter) {
       mobileOuter.remove();
       document.body.style.overflow = "";
+      document.removeEventListener("touchmove", _touchHandler.touchHandler);
     }
 
     setTimeout(function () {
@@ -322,21 +338,7 @@ var hidePopup = function hidePopup() {
 };
 
 exports.hidePopup = hidePopup;
-},{}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getDocumentHeight = void 0;
-
-var getDocumentHeight = function getDocumentHeight() {
-  var documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
-  return documentHeight;
-};
-
-exports.getDocumentHeight = getDocumentHeight;
-},{}],"js/popup/renderPopupElem.js":[function(require,module,exports) {
+},{"../common/touchHandler":"js/common/touchHandler.js"}],"js/popup/renderPopupElem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -344,7 +346,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderPopupElem = void 0;
 
-var _getDocumentHeight = require("../common/getDocumentHeight");
+var _touchHandler = require("../common/touchHandler");
 
 //Рендерит и возвращает элемент попапа согласно данным о продукте
 var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) {
@@ -362,7 +364,6 @@ var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) 
     //Иначе Mobile
     var mobileOuter = document.createElement("div");
     mobileOuter.classList.add("js-mobile-outer");
-    mobileOuter.style.height = (0, _getDocumentHeight.getDocumentHeight)() + "px";
     mobileOuter.style.top = window.pageYOffset + "px";
     mobileOuter.append(popup);
     document.body.append(mobileOuter); //получить высоту и ширину окна
@@ -373,13 +374,16 @@ var renderPopupElem = function renderPopupElem(popupHTML, coords, insertTarget) 
     popup.style.top = (windowHeight - popup.offsetHeight) / 2 + "px";
     popup.size = "mobile";
     document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", _touchHandler.touchHandler, {
+      passive: false
+    });
   }
 
   return popup;
 };
 
 exports.renderPopupElem = renderPopupElem;
-},{"../common/getDocumentHeight":"js/common/getDocumentHeight.js"}],"js/popup/getPopupCoords.js":[function(require,module,exports) {
+},{"../common/touchHandler":"js/common/touchHandler.js"}],"js/popup/getPopupCoords.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -427,6 +431,20 @@ var getPopupCoords = function getPopupCoords() {
 };
 
 exports.getPopupCoords = getPopupCoords;
+},{}],"js/common/getDocumentHeight.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getDocumentHeight = void 0;
+
+var getDocumentHeight = function getDocumentHeight() {
+  var documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+  return documentHeight;
+};
+
+exports.getDocumentHeight = getDocumentHeight;
 },{}],"js/orderForm/renderOrderForm.js":[function(require,module,exports) {
 "use strict";
 
@@ -2368,7 +2386,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2927" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3945" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
