@@ -15,7 +15,7 @@ export const productCardTemplate = (productData, formStyle = false) => {
         
         <img
           class="product-card__image"
-          src="${productData.image}"
+          src="images/${productData.image}"
           alt="${productData.name}"/>
          
           ${
