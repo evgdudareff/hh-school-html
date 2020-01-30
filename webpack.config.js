@@ -46,16 +46,11 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: [
-              "@babel/preset-env",
-              {
-                targets: "> 0.25%, not dead, ie 11"
-              }
+              [ "@babel/preset-env", { targets: "> 0.25%, not dead, ie 11" } ]
             ]
           }
         }
-      }
-    ],
-    rules: [
+      },
       {
         //работа с less - css
         test: /\.less$/,
