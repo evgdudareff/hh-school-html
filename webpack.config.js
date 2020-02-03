@@ -13,22 +13,18 @@ const isProduction = !isDevelopment;
 
 //Функция оптимизации
 const optimize = () => {
-  const config = {};
+  if (!isProduction) return {};
 
   //если production, то минимизация css и js соответственно
-  if (isProduction) {
-    config.minimizer = [
-      new OptimizeCssAssetsPlugin(),
-      new TerserWebpackPlugin()
-    ];
-  }
+  const config = {};
+  config.minimizer = [new OptimizeCssAssetsPlugin(), new TerserWebpackPlugin()];
   return config;
 };
 
 module.exports = {
-  devtool: "source-map", //связывает минимизированный и собранный код с исходным
+  devtool: isDevelopment ? "source-map" : "", //связывает минимизированный и собранный код с исходным
   context: path.resolve(__dirname, "src"), //относительный путь
-  mode: "development", //режим работы webpack по умолчанию
+  mode: "production", //режим работы webpack по умолчанию
   entry: ["@babel/polyfill", "./js/index.js"], //точка входа
   output: {
     //выходной файл
@@ -46,7 +42,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: [
-              [ "@babel/preset-env", { targets: "> 0.25%, not dead, ie 11" } ]
+              ["@babel/preset-env", { targets: "> 0.25%, not dead, ie 11" }]
             ]
           }
         }
